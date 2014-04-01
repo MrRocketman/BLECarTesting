@@ -24,6 +24,12 @@
 		1AC395DB18EB78F600B30E4B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1AC395D918EB78F600B30E4B /* InfoPlist.strings */; };
 		1AC395DD18EB78F600B30E4B /* BLECarTestingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395DC18EB78F600B30E4B /* BLECarTestingTests.m */; };
 		1AC395E718EB7B3800B30E4B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395E618EB7B3800B30E4B /* CoreBluetooth.framework */; };
+		1AC395EA18EB805A00B30E4B /* UARTPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395E918EB805A00B30E4B /* UARTPeripheral.m */; };
+		1AC395F418EB80CF00B30E4B /* CBUUID+StringExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395ED18EB80CF00B30E4B /* CBUUID+StringExtraction.m */; };
+		1AC395F518EB80CF00B30E4B /* NSData+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395EF18EB80CF00B30E4B /* NSData+hex.m */; };
+		1AC395F618EB80CF00B30E4B /* NSString+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395F118EB80CF00B30E4B /* NSString+hex.m */; };
+		1AC395F718EB80CF00B30E4B /* UITextView+lineCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395F318EB80CF00B30E4B /* UITextView+lineCount.m */; };
+		1AC395FA18EB826C00B30E4B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395F918EB826C00B30E4B /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +66,17 @@
 		1AC395DA18EB78F600B30E4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1AC395DC18EB78F600B30E4B /* BLECarTestingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLECarTestingTests.m; sourceTree = "<group>"; };
 		1AC395E618EB7B3800B30E4B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		1AC395E818EB805A00B30E4B /* UARTPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UARTPeripheral.h; sourceTree = "<group>"; };
+		1AC395E918EB805A00B30E4B /* UARTPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UARTPeripheral.m; sourceTree = "<group>"; };
+		1AC395EC18EB80CF00B30E4B /* CBUUID+StringExtraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBUUID+StringExtraction.h"; sourceTree = "<group>"; };
+		1AC395ED18EB80CF00B30E4B /* CBUUID+StringExtraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBUUID+StringExtraction.m"; sourceTree = "<group>"; };
+		1AC395EE18EB80CF00B30E4B /* NSData+hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+hex.h"; sourceTree = "<group>"; };
+		1AC395EF18EB80CF00B30E4B /* NSData+hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+hex.m"; sourceTree = "<group>"; };
+		1AC395F018EB80CF00B30E4B /* NSString+hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+hex.h"; sourceTree = "<group>"; };
+		1AC395F118EB80CF00B30E4B /* NSString+hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+hex.m"; sourceTree = "<group>"; };
+		1AC395F218EB80CF00B30E4B /* UITextView+lineCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+lineCount.h"; sourceTree = "<group>"; };
+		1AC395F318EB80CF00B30E4B /* UITextView+lineCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+lineCount.m"; sourceTree = "<group>"; };
+		1AC395F918EB826C00B30E4B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AC395FA18EB826C00B30E4B /* QuartzCore.framework in Frameworks */,
 				1AC395E718EB7B3800B30E4B /* CoreBluetooth.framework in Frameworks */,
 				1AC395AE18EB78F600B30E4B /* CoreGraphics.framework in Frameworks */,
 				1AC395B018EB78F600B30E4B /* UIKit.framework in Frameworks */,
@@ -109,6 +127,7 @@
 		1AC395AA18EB78F600B30E4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1AC395F918EB826C00B30E4B /* QuartzCore.framework */,
 				1AC395E618EB7B3800B30E4B /* CoreBluetooth.framework */,
 				1AC395AB18EB78F600B30E4B /* Foundation.framework */,
 				1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */,
@@ -129,6 +148,8 @@
 				1AC395C418EB78F600B30E4B /* MNCarBLEViewController.m */,
 				1AC395C618EB78F600B30E4B /* MNSecondViewController.h */,
 				1AC395C718EB78F600B30E4B /* MNSecondViewController.m */,
+				1AC395F818EB80D400B30E4B /* Categories */,
+				1AC395EB18EB805F00B30E4B /* Bluetooth */,
 				1AC395C918EB78F600B30E4B /* Images.xcassets */,
 				1AC395B218EB78F600B30E4B /* Supporting Files */,
 			);
@@ -162,6 +183,30 @@
 				1AC395D918EB78F600B30E4B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1AC395EB18EB805F00B30E4B /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				1AC395E818EB805A00B30E4B /* UARTPeripheral.h */,
+				1AC395E918EB805A00B30E4B /* UARTPeripheral.m */,
+			);
+			name = Bluetooth;
+			sourceTree = "<group>";
+		};
+		1AC395F818EB80D400B30E4B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				1AC395EC18EB80CF00B30E4B /* CBUUID+StringExtraction.h */,
+				1AC395ED18EB80CF00B30E4B /* CBUUID+StringExtraction.m */,
+				1AC395EE18EB80CF00B30E4B /* NSData+hex.h */,
+				1AC395EF18EB80CF00B30E4B /* NSData+hex.m */,
+				1AC395F018EB80CF00B30E4B /* NSString+hex.h */,
+				1AC395F118EB80CF00B30E4B /* NSString+hex.m */,
+				1AC395F218EB80CF00B30E4B /* UITextView+lineCount.h */,
+				1AC395F318EB80CF00B30E4B /* UITextView+lineCount.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,9 +309,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AC395B818EB78F600B30E4B /* main.m in Sources */,
+				1AC395F618EB80CF00B30E4B /* NSString+hex.m in Sources */,
+				1AC395EA18EB805A00B30E4B /* UARTPeripheral.m in Sources */,
 				1AC395C818EB78F600B30E4B /* MNSecondViewController.m in Sources */,
+				1AC395F718EB80CF00B30E4B /* UITextView+lineCount.m in Sources */,
+				1AC395F418EB80CF00B30E4B /* CBUUID+StringExtraction.m in Sources */,
 				1AC395C518EB78F600B30E4B /* MNCarBLEViewController.m in Sources */,
 				1AC395BC18EB78F600B30E4B /* MNAppDelegate.m in Sources */,
+				1AC395F518EB80CF00B30E4B /* NSData+hex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
