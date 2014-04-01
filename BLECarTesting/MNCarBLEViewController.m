@@ -193,6 +193,9 @@
 {
     NSLog(@"HW Revision: %@", string);
     
+    // Print to the device to confirm operation
+    [currentPeripheral writeString:@"Test from James's Code"];
+    
     //Bail if we aren't in the process of connecting
     if (currentAlertView == nil)
     {
