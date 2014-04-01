@@ -103,6 +103,31 @@
     [bluetoothManager cancelPeripheralConnection:currentPeripheral.peripheral];
 }
 
+#pragma mark UIAlertView delegate methods
+
+
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // The only button in our alert views is cancel, no need to check button index
+    
+    if (connectionStatus == ConnectionStatusConnected)
+    {
+        [self disconnect];
+    }
+    else if (connectionStatus == ConnectionStatusScanning)
+    {
+        [bluetoothManager stopScan];
+    }
+    
+    connectionStatus = ConnectionStatusDisconnected;
+    
+    currentAlertView = nil;
+    
+    //[self enableConnectionButtons:YES];
+    
+    //alert dismisses automatically @ return
+}
+
 #pragma mark CBCentralManagerDelegate
 
 
