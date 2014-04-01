@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 JamesAdams. All rights reserved.
 //
 
-#import "MNFirstViewController.h"
+#import "MNCarBLEViewController.h"
 
-@interface MNFirstViewController ()
+@interface MNCarBLEViewController ()
 
 @end
 
-@implementation MNFirstViewController
+@implementation MNCarBLEViewController
 
 - (void)viewDidLoad
 {

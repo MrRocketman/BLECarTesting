@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MNFirstViewController : UIViewController
+@interface MNCarBLEViewController : UIViewController
 
 @end
