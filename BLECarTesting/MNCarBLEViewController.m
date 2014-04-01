@@ -44,20 +44,32 @@
     if(self.connectionStatus == ConnectionStatusDisconnected)
     {
         // connect to the client here
+        connectionStatus = ConnectionStatusScanning;
+        
+        //[self enableConnectionButtons:NO];
+        
+        [self scanForPeripherals];
+        currentAlertView = [[UIAlertView alloc]initWithTitle:@"Scanning …"
+                                                     message:nil
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                           otherButtonTitles:nil];
+        [currentAlertView show];
         
         // also change the button text here
+        self.connectDisconnectButton.titleLabel.text = @"Scanning";
     }
     else if(self.connectionStatus == ConnectionStatusScanning)
     {
-        // connect to the client here
-        
-        // also change the button text here
+        // Do nothing
     }
     else if(self.connectionStatus == ConnectionStatusConnected)
     {
-        // connect to the client here
+        // Disconnect from the client here
+        [self disconnect];
         
         // also change the button text here
+        self.connectDisconnectButton.titleLabel.text = @"Connect";
     }
 }
 
@@ -92,12 +104,14 @@
     //Connect
     currentPeripheral = [[UARTPeripheral alloc] initWithPeripheral:peripheral delegate:self];
     [bluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey: [NSNumber numberWithBool:YES]}];
+    
+    // also change the button text here
+    self.connectDisconnectButton.titleLabel.text = @"Disconnect";
 }
 
 - (void)disconnect
 {
     //Disconnect Bluetooth LE device
-    
     connectionStatus = ConnectionStatusDisconnected;
     
     [bluetoothManager cancelPeripheralConnection:currentPeripheral.peripheral];
