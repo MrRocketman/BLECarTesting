@@ -40,6 +40,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color
+{
+    // Print the string to the 'console'
+    NSString *appendString = @"\n"; //each message appears on new line
+    NSAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", string, appendString] attributes: @{NSForegroundColorAttributeName : color}];
+    NSMutableAttributedString *newASCIIText = [[NSMutableAttributedString alloc] initWithAttributedString:self.receivedTextView.attributedText];
+    [newASCIIText appendAttributedString:attrString];
+    self.receivedTextView.attributedText = newASCIIText;
+}
+
+- (void)writeDebugStringToConsole:(NSString *)string
+{
+    [self writeDebugStringToConsole:string color:[UIColor blackColor]];
+}
+
 - (void)writeStringToArduino:(NSString *)string
 {
     if(string != nil)
@@ -102,12 +117,18 @@
     [self.sendTextField endEditing:YES];
 }
 
+- (IBAction)clearTextViewButtonPress:(id)sender
+{
+    self.receivedTextView.attributedText = [[NSAttributedString alloc] initWithString:@"" attributes:nil];
+}
+
 #pragma mark My Bluetooth Methods
 
 - (void)scanForPeripherals
 {
     //Look for available Bluetooth LE devices
     NSLog(@"Scanning for BLE devices");
+    [self writeDebugStringToConsole:@"Scanning for BLE devices"];
     // Change the button text here
     [self.connectDisconnectButton setTitle:@"Scanning For BLE..." forState:UIControlStateNormal];
     
@@ -168,6 +189,7 @@
 - (void)centralManager:(CBCentralManager*)central didDiscoverPeripheral:(CBPeripheral*)peripheral advertisementData:(NSDictionary*)advertisementData RSSI:(NSNumber*)RSSI
 {
     NSLog(@"Did discover peripheral %@", peripheral.name);
+    [self writeDebugStringToConsole:[NSString stringWithFormat:@"Discovered: %@", peripheral.name]];
     
     [bluetoothManager stopScan];
     
@@ -187,6 +209,7 @@
         else
         {
             NSLog(@"Did connect peripheral %@", peripheral.name);
+            [self writeDebugStringToConsole:[NSString stringWithFormat:@"Connected To: %@", peripheral.name] color:[UIColor greenColor]];
             [currentPeripheral didConnect];
         }
     }
@@ -196,6 +219,7 @@
 - (void)centralManager:(CBCentralManager*)central didDisconnectPeripheral:(CBPeripheral*)peripheral error:(NSError*)error
 {
     NSLog(@"Did disconnect peripheral %@", peripheral.name);
+    [self writeDebugStringToConsole:[NSString stringWithFormat:@"Disconnected From: %@", peripheral.name] color:[UIColor redColor]];
     
     //respond to disconnected
     [self peripheralDidDisconnect];
@@ -254,7 +278,7 @@
             }
         }
         
-        UIColor *color = [UIColor redColor];
+        UIColor *color = [UIColor orangeColor];
         NSString *appendString = @"\n"; //each message appears on new line
         
         //Update ASCII text
@@ -279,6 +303,9 @@
     if (connectionStatus == ConnectionStatusConnected)
     {
         NSLog(@"BLE peripheral has disconnected");
+        
+        // Change the button text here
+        [self.connectDisconnectButton setTitle:@"Connect To BLE" forState:UIControlStateNormal];
     }
     
     connectionStatus = ConnectionStatusDisconnected;
