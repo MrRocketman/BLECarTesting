@@ -40,6 +40,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Private Methods
+
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color
 {
     // Print the string to the 'console'
@@ -91,7 +93,7 @@
     }
 }
 
-#pragma Button Actions
+#pragma mark - Button Actions
 
 - (IBAction)connectDisconnectButtonPress:(id)sender
 {
@@ -124,7 +126,23 @@
     self.receivedTextView.attributedText = [[NSAttributedString alloc] initWithString:@"" attributes:nil];
 }
 
-#pragma mark My Bluetooth Methods
+#pragma mark - UITextFieldDelegateMethods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.sendTextField)
+    {
+        // 'Press the send button' when you hit enter
+        [self sendButtonPress:self.sendButton];
+        
+        [textField resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
+
+#pragma mark - My Bluetooth Methods
 
 - (void)scanForPeripherals
 {
@@ -171,7 +189,7 @@
     [self.connectDisconnectButton setTitle:@"Connect To BLE" forState:UIControlStateNormal];
 }
 
-#pragma mark CBCentralManagerDelegate
+#pragma mark - CBCentralManagerDelegate
 
 
 - (void)centralManagerDidUpdateState:(CBCentralManager*)central
@@ -232,7 +250,7 @@
     }
 }
 
-#pragma mark UARTPeripheralDelegate
+#pragma mark - UARTPeripheralDelegate
 
 //Once hardware revision string is read, connection to Bluefruit is complete
 - (void)didReadHardwareRevisionString:(NSString*)string

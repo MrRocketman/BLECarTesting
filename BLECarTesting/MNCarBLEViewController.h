@@ -17,7 +17,7 @@ typedef enum
     ConnectionStatusConnected,
 } ConnectionStatus;
 
-@interface MNCarBLEViewController : UIViewController <CBCentralManagerDelegate, UARTPeripheralDelegate>
+@interface MNCarBLEViewController : UIViewController <CBCentralManagerDelegate, UARTPeripheralDelegate, UITextFieldDelegate>
 {
     
 }
