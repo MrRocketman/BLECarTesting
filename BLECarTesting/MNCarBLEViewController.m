@@ -32,6 +32,9 @@
     
     bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     connectionStatus = ConnectionStatusDisconnected;
+    
+    // also change the button text here
+    self.connectDisconnectButton.titleLabel.text = @"Connect To BLE";
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,7 +63,7 @@
         [currentAlertView show];
         
         // also change the button text here
-        self.connectDisconnectButton.titleLabel.text = @"Scanning";
+        self.connectDisconnectButton.titleLabel.text = @"Scanning For BLE";
     }
     else if(self.connectionStatus == ConnectionStatusScanning)
     {
@@ -70,9 +73,6 @@
     {
         // Disconnect from the client here
         [self disconnect];
-        
-        // also change the button text here
-        self.connectDisconnectButton.titleLabel.text = @"Connect";
     }
 }
 
@@ -116,6 +116,9 @@
     connectionStatus = ConnectionStatusDisconnected;
     
     [bluetoothManager cancelPeripheralConnection:currentPeripheral.peripheral];
+    
+    // also change the button text here
+    self.connectDisconnectButton.titleLabel.text = @"Connect To BLE";
 }
 
 #pragma mark UIAlertView delegate methods
@@ -207,8 +210,9 @@
 - (void)didReadHardwareRevisionString:(NSString*)string
 {
     NSLog(@"HW Revision: %@", string);
-    // also change the button text here
-    self.connectDisconnectButton.titleLabel.text = @"Disconnect";
+    
+    // Change the button text here
+    self.connectDisconnectButton.titleLabel.text = @"Disconnect From BLE";
     
     // Print to the device to confirm operation
     [currentPeripheral writeString:@"Test from James"];
