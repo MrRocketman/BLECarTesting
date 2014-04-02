@@ -29,6 +29,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    connectionStatus = ConnectionStatusDisconnected;
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,6 +81,7 @@
 - (void)scanForPeripherals
 {
     //Look for available Bluetooth LE devices
+    NSLog(@"Scanning for BLE devices");
     
     //skip scanning if UART is already connected
     NSArray *connectedPeripherals = [bluetoothManager retrieveConnectedPeripheralsWithServices:@[UARTPeripheral.uartServiceUUID]];
@@ -104,9 +108,6 @@
     //Connect
     currentPeripheral = [[UARTPeripheral alloc] initWithPeripheral:peripheral delegate:self];
     [bluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey: [NSNumber numberWithBool:YES]}];
-    
-    // also change the button text here
-    self.connectDisconnectButton.titleLabel.text = @"Disconnect";
 }
 
 - (void)disconnect
@@ -206,6 +207,8 @@
 - (void)didReadHardwareRevisionString:(NSString*)string
 {
     NSLog(@"HW Revision: %@", string);
+    // also change the button text here
+    self.connectDisconnectButton.titleLabel.text = @"Disconnect";
     
     // Print to the device to confirm operation
     [currentPeripheral writeString:@"Test from James's Code"];
