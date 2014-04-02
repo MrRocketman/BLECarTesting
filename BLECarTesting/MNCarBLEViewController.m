@@ -23,7 +23,7 @@
 
 @implementation MNCarBLEViewController
 
-@synthesize connectionStatus, connectDisconnectButton;
+@synthesize connectionStatus, connectDisconnectButton, sendButton, sendTextField, receivedTextView;
 
 - (void)viewDidLoad
 {
@@ -38,6 +38,40 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)writeStringToArduino:(NSString *)string
+{
+    if(string != nil)
+    {
+        // Print the string to the 'console'
+        UIColor *color = [UIColor blueColor];
+        NSString *appendString = @"\n"; //each message appears on new line
+        NSAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", string, appendString] attributes: @{NSForegroundColorAttributeName : color}];
+        NSMutableAttributedString *newASCIIText = [[NSMutableAttributedString alloc] initWithAttributedString:self.receivedTextView.attributedText];
+        [newASCIIText appendAttributedString:attrString];
+        self.receivedTextView.attributedText = newASCIIText;
+        
+        // Break the string up into 20 char lengths if it's too long
+        if(string.length > 0)
+        {
+            do
+            {
+                int lastCharIndex = (int)string.length;
+                int substringIndex = lastCharIndex;
+                if(lastCharIndex > 20)
+                {
+                    substringIndex = 20;
+                }
+                
+                NSString *stringToWrite = [string substringToIndex:substringIndex];
+                [currentPeripheral writeString:stringToWrite];
+                NSString *newString = [string substringFromIndex:substringIndex];
+                string = newString;
+                
+            } while(string.length > 0);
+        }
+    }
 }
 
 #pragma Button Actions
@@ -61,6 +95,13 @@
     }
 }
 
+- (IBAction)sendButtonPress:(id)sender
+{
+    [self writeStringToArduino:self.sendTextField.text];
+    self.sendTextField.text = @"";
+    [self.sendTextField endEditing:YES];
+}
+
 #pragma mark My Bluetooth Methods
 
 - (void)scanForPeripherals
@@ -68,7 +109,7 @@
     //Look for available Bluetooth LE devices
     NSLog(@"Scanning for BLE devices");
     // Change the button text here
-    [self.connectDisconnectButton setTitle:@"Scanning For BLE" forState:UIControlStateNormal];
+    [self.connectDisconnectButton setTitle:@"Scanning For BLE..." forState:UIControlStateNormal];
     
     //skip scanning if UART is already connected
     NSArray *connectedPeripherals = [bluetoothManager retrieveConnectedPeripheralsWithServices:@[UARTPeripheral.uartServiceUUID]];
@@ -176,7 +217,7 @@
     [self.connectDisconnectButton setTitle:@"Disconnect From BLE" forState:UIControlStateNormal];
     
     // Print to the device to confirm operation
-    [currentPeripheral writeString:@"Test from James"];
+    [self sendButtonPress:self.sendButton];
     
     connectionStatus = ConnectionStatusConnected;
 }
@@ -196,7 +237,32 @@
     
     if (connectionStatus == ConnectionStatusConnected || connectionStatus == ConnectionStatusScanning)
     {
-        // Do something here
+        //convert data to string & replace characters we can't display
+        int dataLength = (int)newData.length;
+        uint8_t data[dataLength];
+        
+        [newData getBytes:&data length:dataLength];
+        
+        for (int i = 0; i<dataLength; i++) {
+            
+            if ((data[i] <= 0x1f) || (data[i] >= 0x80)) {    //null characters
+                if ((data[i] != 0x9) && //0x9 == TAB
+                    (data[i] != 0xa) && //0xA == NL
+                    (data[i] != 0xd)) { //0xD == CR
+                    data[i] = 0xA9;
+                }
+            }
+        }
+        
+        UIColor *color = [UIColor redColor];
+        NSString *appendString = @"\n"; //each message appears on new line
+        
+        //Update ASCII text
+        //UIFont *consoleFont = [self.receivedTextView font];
+        NSAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", uartString, appendString] attributes: @{NSForegroundColorAttributeName : color}];
+        NSMutableAttributedString *newASCIIText = [[NSMutableAttributedString alloc] initWithAttributedString:self.receivedTextView.attributedText];
+        [newASCIIText appendAttributedString:attrString];
+        self.receivedTextView.attributedText = newASCIIText;
     }
 }
 

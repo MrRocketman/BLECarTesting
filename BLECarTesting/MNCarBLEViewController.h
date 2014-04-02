@@ -23,8 +23,13 @@ typedef enum
 }
 
 - (IBAction)connectDisconnectButtonPress:(id)sender;
+- (IBAction)sendButtonPress:(id)sender;
 
 @property(nonatomic, assign) ConnectionStatus connectionStatus;
+
 @property(strong, nonatomic) IBOutlet UIButton *connectDisconnectButton;
+@property(strong, nonatomic) IBOutlet UIButton *sendButton;
+@property(strong, nonatomic) IBOutlet UITextField *sendTextField;
+@property(strong, nonatomic) IBOutlet UITextView *receivedTextView;
 
 @end
