@@ -32,6 +32,10 @@
     
     bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     connectionStatus = ConnectionStatusDisconnected;
+    
+    // Disable the send button if we aren't connected
+    [self.sendButton setEnabled:NO];
+    [self.sendTextField setEnabled:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -263,6 +267,10 @@
     // Change the button text here
     [self.connectDisconnectButton setTitle:@"Disconnect From BLE" forState:UIControlStateNormal];
     
+    // Enable the send button if we aren't connected
+    [self.sendButton setEnabled:YES];
+    [self.sendTextField setEnabled:YES];
+    
     // Print to the device to confirm operation
     [self sendButtonPress:self.sendButton];
     
@@ -315,6 +323,10 @@
     {
         [self uartDidEncounterError:@"Peripheral disconnected"];
     }*/
+    
+    // Disable the send button if we aren't connected
+    [self.sendButton setEnabled:NO];
+    [self.sendTextField setEnabled:NO];
     
     // If status was connected, then disconnect was unexpected by the user
     if (connectionStatus == ConnectionStatusConnected)
