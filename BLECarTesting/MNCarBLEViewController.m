@@ -71,6 +71,9 @@
         // Print the string to the 'console'
         [self writeDebugStringToConsole:string color:[UIColor blueColor]];
         
+        // Append a '\n' to the string so the Arduino knows the command has finished
+        string = [NSString stringWithFormat:@"%@\n", string];
+        
         // Break the string up into 20 char lengths if it's too long
         if(string.length > 0)
         {
