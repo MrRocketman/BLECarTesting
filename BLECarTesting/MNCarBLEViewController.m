@@ -32,9 +32,6 @@
     
     bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     connectionStatus = ConnectionStatusDisconnected;
-    
-    // also change the button text here
-    self.connectDisconnectButton.titleLabel.text = @"Connect To BLE";
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,19 +48,7 @@
     {
         // connect to the client here
         connectionStatus = ConnectionStatusScanning;
-        
-        //[self enableConnectionButtons:NO];
-        
         [self scanForPeripherals];
-        currentAlertView = [[UIAlertView alloc]initWithTitle:@"Scanning …"
-                                                     message:nil
-                                                    delegate:self
-                                           cancelButtonTitle:@"Cancel"
-                                           otherButtonTitles:nil];
-        [currentAlertView show];
-        
-        // also change the button text here
-        self.connectDisconnectButton.titleLabel.text = @"Scanning For BLE";
     }
     else if(self.connectionStatus == ConnectionStatusScanning)
     {
@@ -82,6 +67,8 @@
 {
     //Look for available Bluetooth LE devices
     NSLog(@"Scanning for BLE devices");
+    // Change the button text here
+    [self.connectDisconnectButton setTitle:@"Scanning For BLE" forState:UIControlStateNormal];
     
     //skip scanning if UART is already connected
     NSArray *connectedPeripherals = [bluetoothManager retrieveConnectedPeripheralsWithServices:@[UARTPeripheral.uartServiceUUID]];
@@ -98,10 +85,9 @@
     }
 }
 
+//Connect Bluetooth LE device
 - (void)connectPeripheral:(CBPeripheral*)peripheral
 {
-    //Connect Bluetooth LE device
-    
     //Clear off any pending connections
     [bluetoothManager cancelPeripheralConnection:peripheral];
     
@@ -117,33 +103,8 @@
     
     [bluetoothManager cancelPeripheralConnection:currentPeripheral.peripheral];
     
-    // also change the button text here
-    self.connectDisconnectButton.titleLabel.text = @"Connect To BLE";
-}
-
-#pragma mark UIAlertView delegate methods
-
-
-- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    // The only button in our alert views is cancel, no need to check button index
-    
-    if (connectionStatus == ConnectionStatusConnected)
-    {
-        [self disconnect];
-    }
-    else if (connectionStatus == ConnectionStatusScanning)
-    {
-        [bluetoothManager stopScan];
-    }
-    
-    connectionStatus = ConnectionStatusDisconnected;
-    
-    currentAlertView = nil;
-    
-    //[self enableConnectionButtons:YES];
-    
-    //alert dismisses automatically @ return
+    // Change the button text here
+    [self.connectDisconnectButton setTitle:@"Connect To BLE" forState:UIControlStateNormal];
 }
 
 #pragma mark CBCentralManagerDelegate
@@ -212,73 +173,17 @@
     NSLog(@"HW Revision: %@", string);
     
     // Change the button text here
-    self.connectDisconnectButton.titleLabel.text = @"Disconnect From BLE";
+    [self.connectDisconnectButton setTitle:@"Disconnect From BLE" forState:UIControlStateNormal];
     
     // Print to the device to confirm operation
     [currentPeripheral writeString:@"Test from James"];
     
-    //Bail if we aren't in the process of connecting
-    if (currentAlertView == nil)
-    {
-        return;
-    }
-    
     connectionStatus = ConnectionStatusConnected;
-    
-    //Load appropriate view controller …
-    
-    //Pin I/O mode
-    /*if (_connectionMode == ConnectionModePinIO) {
-        self.pinIoViewController = [[PinIOViewController alloc]initWithDelegate:self];
-        _pinIoViewController.navigationItem.rightBarButtonItem = infoBarButton;
-        [_pinIoViewController didConnect];
-    }
-    
-    //UART mode
-    else if (_connectionMode == ConnectionModeUART){
-        self.uartViewController = [[UARTViewController alloc]initWithDelegate:self];
-        _uartViewController.navigationItem.rightBarButtonItem = infoBarButton;
-        [_uartViewController didConnect];
-    }
-    
-    //Push appropriate viewcontroller onto the navcontroller
-    UIViewController *vc = nil;
-    
-    if (_connectionMode == ConnectionModePinIO)
-        vc = _pinIoViewController;
-    
-    else if (_connectionMode == ConnectionModeUART)
-        vc = _uartViewController;
-    
-    if (vc != nil){
-        [_navController pushViewController:vc animated:YES];
-    }
-    
-    else
-        NSLog(@"CONNECTED WITH NO CONNECTION MODE SET!");*/
-    
-    //Dismiss Alert view & update main view
-    [currentAlertView dismissWithClickedButtonIndex:-1 animated:NO];
-    
-    currentAlertView = nil;
 }
 
 - (void)uartDidEncounterError:(NSString*)error
 {
-    //Dismiss "scanning …" alert view if shown
-    if (currentAlertView != nil)
-    {
-        [currentAlertView dismissWithClickedButtonIndex:0 animated:NO];
-    }
-    
-    //Display error alert
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error"
-                                                   message:error
-                                                  delegate:nil
-                                         cancelButtonTitle:@"OK"
-                                         otherButtonTitles:nil];
-    
-    [alert show];
+    NSLog(@"uart Error!!!!:%@", error);
 }
 
 //Data incoming from UART peripheral
@@ -291,57 +196,33 @@
     
     if (connectionStatus == ConnectionStatusConnected || connectionStatus == ConnectionStatusScanning)
     {
-        //UART
-        /*if (_connectionMode == ConnectionModeUART) {
-            //send data to UART Controller
-            [_uartViewController receiveData:newData];
-        }
-        
-        //Pin I/O
-        else if (_connectionMode == ConnectionModePinIO){
-            //send data to PIN IO Controller
-            [_pinIoViewController receiveData:newData];
-        }*/
+        // Do something here
     }
 }
 
 //respond to device disconnecting
 - (void)peripheralDidDisconnect
 {
-    // If we were in the process of scanning/connecting, dismiss alert
+    /*// If we were in the process of scanning/connecting, dismiss alert
     if (currentAlertView != nil)
     {
         [self uartDidEncounterError:@"Peripheral disconnected"];
-    }
+    }*/
     
-    // If status was connected, then disconnect was unexpected by the user, show alert
-    //UIViewController *topVC = [_navController topViewController];
-    if (connectionStatus == ConnectionStatusConnected) //&& ([topVC isMemberOfClass:[PinIOViewController class]] || [topVC isMemberOfClass:[UARTViewController class]]))
+    // If status was connected, then disconnect was unexpected by the user
+    if (connectionStatus == ConnectionStatusConnected)
     {
-        //return to main view
-        //[_navController popToRootViewControllerAnimated:YES];
-        
-        //display disconnect alert
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Disconnected"
-                                                       message:@"BLE peripheral has disconnected"
-                                                      delegate:nil
-                                             cancelButtonTitle:@"OK"
-                                             otherButtonTitles: nil];
-        
-        [alert show];
+        NSLog(@"BLE peripheral has disconnected");
     }
     
     connectionStatus = ConnectionStatusDisconnected;
-    
-    //make reconnection available after short delay
-    //[self performSelector:@selector(enableConnectionButtons) withObject:nil afterDelay:1.0f];
 }
 
 //Respond to system's bluetooth disabled
 - (void)alertBluetoothPowerOff
 {
-    NSString *title     = @"Bluetooth Power";
-    NSString *message   = @"You must turn on Bluetooth in Settings in order to connect to a device";
+    NSString *title = @"Bluetooth Power";
+    NSString *message = @"You must turn on Bluetooth in Settings in order to connect to a device";
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
 }
