@@ -48,6 +48,13 @@
     NSMutableAttributedString *newASCIIText = [[NSMutableAttributedString alloc] initWithAttributedString:self.receivedTextView.attributedText];
     [newASCIIText appendAttributedString:attrString];
     self.receivedTextView.attributedText = newASCIIText;
+    
+    // Scroll to the bottom
+    CGPoint bottomOffset = CGPointMake(0, self.receivedTextView.contentSize.height - self.receivedTextView.bounds.size.height);
+    if (bottomOffset.y > 0)
+    {
+        [self.receivedTextView setContentOffset:bottomOffset animated:YES];
+    }
 }
 
 - (void)writeDebugStringToConsole:(NSString *)string
@@ -60,12 +67,7 @@
     if(string != nil)
     {
         // Print the string to the 'console'
-        UIColor *color = [UIColor blueColor];
-        NSString *appendString = @"\n"; //each message appears on new line
-        NSAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", string, appendString] attributes: @{NSForegroundColorAttributeName : color}];
-        NSMutableAttributedString *newASCIIText = [[NSMutableAttributedString alloc] initWithAttributedString:self.receivedTextView.attributedText];
-        [newASCIIText appendAttributedString:attrString];
-        self.receivedTextView.attributedText = newASCIIText;
+        [self writeDebugStringToConsole:string color:[UIColor blueColor]];
         
         // Break the string up into 20 char lengths if it's too long
         if(string.length > 0)
@@ -278,15 +280,9 @@
             }
         }
         
-        UIColor *color = [UIColor orangeColor];
-        NSString *appendString = @"\n"; //each message appears on new line
         
-        //Update ASCII text
-        //UIFont *consoleFont = [self.receivedTextView font];
-        NSAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", uartString, appendString] attributes: @{NSForegroundColorAttributeName : color}];
-        NSMutableAttributedString *newASCIIText = [[NSMutableAttributedString alloc] initWithAttributedString:self.receivedTextView.attributedText];
-        [newASCIIText appendAttributedString:attrString];
-        self.receivedTextView.attributedText = newASCIIText;
+        // Write the received text to the 'console'
+        [self writeDebugStringToConsole:uartString color:[UIColor orangeColor]];
     }
 }
 
