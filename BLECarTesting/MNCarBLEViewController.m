@@ -211,7 +211,7 @@
     self.connectDisconnectButton.titleLabel.text = @"Disconnect";
     
     // Print to the device to confirm operation
-    [currentPeripheral writeString:@"Test from James's Code"];
+    [currentPeripheral writeString:@"Test from James"];
     
     //Bail if we aren't in the process of connecting
     if (currentAlertView == nil)
@@ -282,7 +282,8 @@
 {
     //Debug
     NSString *hexString = [newData hexRepresentationWithSpaces:YES];
-    NSLog(@"Received: %@", hexString);
+    NSString *uartString = [[NSString alloc] initWithData:newData encoding:NSUTF8StringEncoding];
+    NSLog(@"Received: %@ hex:%@", uartString, hexString);
     
     if (connectionStatus == ConnectionStatusConnected || connectionStatus == ConnectionStatusScanning)
     {
