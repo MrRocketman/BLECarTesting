@@ -133,6 +133,11 @@
     self.receivedTextView.attributedText = [[NSAttributedString alloc] initWithString:@"" attributes:nil];
 }
 
+- (IBAction)doSomethingWithCarButtonPress:(id)sender
+{
+    [self writeStringToArduino:@"C100 S2"];
+}
+
 #pragma mark - UITextFieldDelegateMethods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
