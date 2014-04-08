@@ -34,8 +34,7 @@
     connectionStatus = ConnectionStatusDisconnected;
     
     // Disable the send button if we aren't connected
-    [self.sendButton setEnabled:NO];
-    [self.sendTextField setEnabled:NO];
+    [self enableUIFeatures:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,6 +44,15 @@
 }
 
 #pragma mark - Private Methods
+
+- (void)enableUIFeatures:(BOOL)state
+{
+    [self.sendButton setEnabled:state];
+    [self.sendTextField setEnabled:state];
+    [self.doSomethingWithCarOffButton setEnabled:state];
+    [self.doSomethingWithCarOnButton setEnabled:state];
+    [self.doSomethingWithCarOn2Button setEnabled:state];
+}
 
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color
 {
@@ -133,9 +141,19 @@
     self.receivedTextView.attributedText = [[NSAttributedString alloc] initWithString:@"" attributes:nil];
 }
 
-- (IBAction)doSomethingWithCarButtonPress:(id)sender
+- (IBAction)doSomethingWithCarOnButtonPress:(id)sender
 {
-    [self writeStringToArduino:@"C100 S2"];
+    [self writeStringToArduino:@"C101 S2"];
+}
+
+- (IBAction)doSomethingWithCarOn2ButtonPress:(id)sender
+{
+    [self writeStringToArduino:@"C101 S1"];
+}
+
+- (IBAction)doSomethingWithCarOffButtonPress:(id)sender
+{
+    [self writeStringToArduino:@"C101 S0"];
 }
 
 #pragma mark - UITextFieldDelegateMethods
@@ -273,8 +291,7 @@
     [self.connectDisconnectButton setTitle:@"Disconnect From BLE" forState:UIControlStateNormal];
     
     // Enable the send button if we aren't connected
-    [self.sendButton setEnabled:YES];
-    [self.sendTextField setEnabled:YES];
+    [self enableUIFeatures:YES];
     
     // Print to the device to confirm operation
     [self sendButtonPress:self.sendButton];
@@ -330,8 +347,7 @@
     }*/
     
     // Disable the send button if we aren't connected
-    [self.sendButton setEnabled:NO];
-    [self.sendTextField setEnabled:NO];
+    [self enableUIFeatures:NO];
     
     // If status was connected, then disconnect was unexpected by the user
     if (connectionStatus == ConnectionStatusConnected)

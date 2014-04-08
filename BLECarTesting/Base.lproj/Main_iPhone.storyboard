@@ -23,28 +23,28 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" id="26r-Qz-Tfv">
-                                <rect key="frame" x="0.0" y="283" width="320" height="214"/>
+                                <rect key="frame" x="0.0" y="310" width="320" height="187"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Console" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7XG-nV-gj8">
-                                <rect key="frame" x="20" y="249" width="115" height="21"/>
+                                <rect key="frame" x="20" y="276" width="115" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send To Arduino" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nce-DV-6Wd">
-                                <rect key="frame" x="20" y="147" width="136" height="21"/>
+                                <rect key="frame" x="20" y="184" width="136" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Test From James" borderStyle="roundedRect" minimumFontSize="17" id="ttA-cj-nd7">
-                                <rect key="frame" x="20" y="176" width="226" height="30"/>
+                                <rect key="frame" x="20" y="213" width="226" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -54,7 +54,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6gf-UD-OdC">
-                                <rect key="frame" x="254" y="176" width="46" height="30"/>
+                                <rect key="frame" x="254" y="213" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Send">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,17 +64,37 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5Ly-nI-mRA">
-                                <rect key="frame" x="132" y="83" width="74" height="30"/>
+                                <rect key="frame" x="103" y="58" width="114" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Headlights">
+                                <state key="normal" title="Headlights High">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="doSomethingWithCarButtonPress:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="WEb-49-WNm"/>
+                                    <action selector="doSomethingWithCarOnButtonPress:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="RRU-X1-qSO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="P9r-6y-Rwh">
+                                <rect key="frame" x="103" y="134" width="114" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Headlights Off">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doSomethingWithCarOffButtonPress:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="BmP-cf-cZ1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hqC-u6-Kns">
+                                <rect key="frame" x="103" y="96" width="114" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Headlights Mid">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="doSomethingWithCarOn2ButtonPress:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="xJv-Y9-enO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9UR-M8-yuu">
-                                <rect key="frame" x="254" y="245" width="46" height="30"/>
+                                <rect key="frame" x="254" y="272" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Clear">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -90,7 +110,9 @@
                     <connections>
                         <outlet property="clearTextViewButton" destination="9UR-M8-yuu" id="OPo-20-03T"/>
                         <outlet property="connectDisconnectButton" destination="9sE-5i-cjB" id="qxN-Fn-RZO"/>
-                        <outlet property="doSomethingWithCarButton" destination="5Ly-nI-mRA" id="s8o-cf-LAj"/>
+                        <outlet property="doSomethingWithCarOffButton" destination="P9r-6y-Rwh" id="Izg-Hc-W7f"/>
+                        <outlet property="doSomethingWithCarOn2Button" destination="hqC-u6-Kns" id="Y1l-KX-g5y"/>
+                        <outlet property="doSomethingWithCarOnButton" destination="5Ly-nI-mRA" id="POc-rW-iIJ"/>
                         <outlet property="receivedTextView" destination="26r-Qz-Tfv" id="481-BV-zkf"/>
                         <outlet property="sendButton" destination="6gf-UD-OdC" id="s4s-gY-gY1"/>
                         <outlet property="sendTextField" destination="ttA-cj-nd7" id="n2Y-tS-B7V"/>

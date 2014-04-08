@@ -25,7 +25,9 @@ typedef enum
 - (IBAction)connectDisconnectButtonPress:(id)sender;
 - (IBAction)sendButtonPress:(id)sender;
 - (IBAction)clearTextViewButtonPress:(id)sender;
-- (IBAction)doSomethingWithCarButtonPress:(id)sender;
+- (IBAction)doSomethingWithCarOnButtonPress:(id)sender;
+- (IBAction)doSomethingWithCarOn2ButtonPress:(id)sender;
+- (IBAction)doSomethingWithCarOffButtonPress:(id)sender;
 
 @property(nonatomic, assign) ConnectionStatus connectionStatus;
 
@@ -34,6 +36,8 @@ typedef enum
 @property(strong, nonatomic) IBOutlet UITextField *sendTextField;
 @property(strong, nonatomic) IBOutlet UITextView *receivedTextView;
 @property(strong, nonatomic) IBOutlet UIButton *clearTextViewButton;
-@property(strong, nonatomic) IBOutlet UIButton *doSomethingWithCarButton;
+@property(strong, nonatomic) IBOutlet UIButton *doSomethingWithCarOnButton;
+@property(strong, nonatomic) IBOutlet UIButton *doSomethingWithCarOn2Button;
+@property(strong, nonatomic) IBOutlet UIButton *doSomethingWithCarOffButton;
 
 @end
