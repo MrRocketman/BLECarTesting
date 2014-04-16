@@ -16,6 +16,8 @@
     CBCentralManager *bluetoothManager;
     UARTPeripheral *currentPeripheral;
     UIAlertView *currentAlertView;
+    
+    NSMutableString *bufferToWriteToArduino;
 }
 
 @end
@@ -23,7 +25,7 @@
 
 @implementation MNCarBLEViewController
 
-@synthesize connectionStatus, connectDisconnectButton, sendButton, sendTextField, receivedTextView;
+@synthesize connectionStatus, sendButton, sendTextField, consoleTextView;
 
 - (void)viewDidLoad
 {
@@ -32,9 +34,10 @@
     
     bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     connectionStatus = ConnectionStatusDisconnected;
+    bufferToWriteToArduino = [[NSMutableString alloc] init];
     
     // Disable the send button if we aren't connected
-    [self enableUIFeatures:NO];
+    //[self enableUIFeatures:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,16 +62,14 @@
     // Print the string to the 'console'
     NSString *appendString = @"\n"; //each message appears on new line
     NSAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", string, appendString] attributes: @{NSForegroundColorAttributeName : color}];
-    NSMutableAttributedString *newASCIIText = [[NSMutableAttributedString alloc] initWithAttributedString:self.receivedTextView.attributedText];
+    NSMutableAttributedString *newASCIIText = [[NSMutableAttributedString alloc] initWithAttributedString:self.consoleTextView.attributedText];
     [newASCIIText appendAttributedString:attrString];
-    self.receivedTextView.attributedText = newASCIIText;
+    self.consoleTextView.attributedText = newASCIIText;
     
     // Scroll to the bottom
-    CGPoint bottomOffset = CGPointMake(0, self.receivedTextView.contentSize.height - self.receivedTextView.bounds.size.height);
-    if (bottomOffset.y > 0)
-    {
-        [self.receivedTextView setContentOffset:bottomOffset animated:YES];
-    }
+    CGPoint p = [self.consoleTextView contentOffset];
+    [self.consoleTextView setContentOffset:p animated:NO];
+    [self.consoleTextView scrollRangeToVisible:NSMakeRange([self.consoleTextView.text length], 0)];
 }
 
 - (void)writeDebugStringToConsole:(NSString *)string
@@ -80,54 +81,77 @@
 {
     if(string != nil)
     {
-        // Print the string to the 'console'
-        [self writeDebugStringToConsole:string color:[UIColor blueColor]];
-        
+        // Add the string to our buffer
+        [bufferToWriteToArduino appendString:string];
         // Append a '\n' to the string so the Arduino knows the command has finished
-        string = [NSString stringWithFormat:@"%@\n", string];
+        [bufferToWriteToArduino appendString:@"\n"];
         
-        // Break the string up into 20 char lengths if it's too long
-        if(string.length > 0)
+        // Print the string to the 'console'
+        [self writeDebugStringToConsole:bufferToWriteToArduino color:[UIColor blueColor]];
+        
+        // Handle the connecting to, writing, and disconnecting from the BLE UART device
+        [self writeArduinoBuffer:nil];
+    }
+}
+
+- (void)writeArduinoBuffer:(NSTimer *)timer
+{
+    // If we have data in our buffer, try to write it
+    if(bufferToWriteToArduino.length > 0)
+    {
+        // Connect to the BLE device if we aren't already
+        if(connectionStatus == ConnectionStatusDisconnected)
         {
+            // Connect to the BLE
+            [self scanForPeripherals];
+        }
+        
+        // If we are connected, write the data
+        if(connectionStatus == ConnectionStatusConnected)
+        {
+            // Break the string up into 20 char lengths if it's too long
             do
             {
-                int lastCharIndex = (int)string.length;
+                int lastCharIndex = (int)bufferToWriteToArduino.length;
                 int substringIndex = lastCharIndex;
                 if(lastCharIndex > 20)
                 {
                     substringIndex = 20;
                 }
                 
-                NSString *stringToWrite = [string substringToIndex:substringIndex];
+                // Write the string
+                NSString *stringToWrite = [bufferToWriteToArduino substringToIndex:substringIndex];
                 [currentPeripheral writeString:stringToWrite];
-                NSString *newString = [string substringFromIndex:substringIndex];
-                string = newString;
                 
-            } while(string.length > 0);
+                // Print the string to the 'console'
+                [self writeDebugStringToConsole:stringToWrite];
+                
+                // Delete the written data from the buffer
+                NSRange writtenStringRange;
+                writtenStringRange.location = 0;
+                writtenStringRange.length = substringIndex;
+                [bufferToWriteToArduino deleteCharactersInRange:writtenStringRange];
+                
+            } while(bufferToWriteToArduino.length > 0);
+        }
+        // We aren't connected yet so try writing the data again in a bit
+        else
+        {
+            [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(writeArduinoBuffer:) userInfo:nil repeats:NO];
+        }
+    }
+    
+    // Disconnect from the BLE once the buffer is empty
+    if(bufferToWriteToArduino.length == 0)
+    {
+        if(connectionStatus != ConnectionStatusDisconnected)
+        {
+            [self disconnect];
         }
     }
 }
 
 #pragma mark - Button Actions
-
-- (IBAction)connectDisconnectButtonPress:(id)sender
-{
-    if(self.connectionStatus == ConnectionStatusDisconnected)
-    {
-        // connect to the client here
-        connectionStatus = ConnectionStatusScanning;
-        [self scanForPeripherals];
-    }
-    else if(self.connectionStatus == ConnectionStatusScanning)
-    {
-        // Do nothing
-    }
-    else if(self.connectionStatus == ConnectionStatusConnected)
-    {
-        // Disconnect from the client here
-        [self disconnect];
-    }
-}
 
 - (IBAction)sendButtonPress:(id)sender
 {
@@ -138,7 +162,7 @@
 
 - (IBAction)clearTextViewButtonPress:(id)sender
 {
-    self.receivedTextView.attributedText = [[NSAttributedString alloc] initWithString:@"" attributes:nil];
+    self.consoleTextView.attributedText = [[NSAttributedString alloc] initWithString:@"" attributes:nil];
 }
 
 - (IBAction)doSomethingWithCarOnButtonPress:(id)sender
@@ -177,19 +201,25 @@
 - (void)scanForPeripherals
 {
     //Look for available Bluetooth LE devices
+    connectionStatus = ConnectionStatusScanning;
     NSLog(@"Scanning for BLE devices");
     [self writeDebugStringToConsole:@"Scanning for BLE devices"];
-    // Change the button text here
-    [self.connectDisconnectButton setTitle:@"Scanning For BLE..." forState:UIControlStateNormal];
     
-    //skip scanning if UART is already connected
+    // skip scanning if UART is already connected
     NSArray *connectedPeripherals = [bluetoothManager retrieveConnectedPeripheralsWithServices:@[UARTPeripheral.uartServiceUUID]];
     if ([connectedPeripherals count] > 0)
     {
+#pragma mark !!! Maybe delete this code
         //connect to first peripheral in array
-        [self connectPeripheral:[connectedPeripherals objectAtIndex:0]];
+        CBPeripheral *peripheral = [connectedPeripherals objectAtIndex:0];
+        
+        //Clear off any pending connections
+        [bluetoothManager cancelPeripheralConnection:peripheral];
+        
+        //Connect
+        currentPeripheral = [[UARTPeripheral alloc] initWithPeripheral:peripheral delegate:self];
+        [bluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey: [NSNumber numberWithBool:YES]}];
     }
-    
     else
     {
         [bluetoothManager scanForPeripheralsWithServices:@[UARTPeripheral.uartServiceUUID]
@@ -197,26 +227,12 @@
     }
 }
 
-//Connect Bluetooth LE device
-- (void)connectPeripheral:(CBPeripheral*)peripheral
-{
-    //Clear off any pending connections
-    [bluetoothManager cancelPeripheralConnection:peripheral];
-    
-    //Connect
-    currentPeripheral = [[UARTPeripheral alloc] initWithPeripheral:peripheral delegate:self];
-    [bluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey: [NSNumber numberWithBool:YES]}];
-}
-
 - (void)disconnect
 {
-    //Disconnect Bluetooth LE device
+    // Disconnect Bluetooth LE device
     connectionStatus = ConnectionStatusDisconnected;
     
     [bluetoothManager cancelPeripheralConnection:currentPeripheral.peripheral];
-    
-    // Change the button text here
-    [self.connectDisconnectButton setTitle:@"Connect To BLE" forState:UIControlStateNormal];
 }
 
 #pragma mark - CBCentralManagerDelegate
@@ -226,13 +242,11 @@
 {
     if (central.state == CBCentralManagerStatePoweredOn)
     {
-        
-        //respond to powered on
+        // respond to bluetooth powered on
     }
     else if (central.state == CBCentralManagerStatePoweredOff)
     {
-        
-        //respond to powered off
+        // respond to bluetooth powered off
     }
 }
 
@@ -243,7 +257,12 @@
     
     [bluetoothManager stopScan];
     
-    [self connectPeripheral:peripheral];
+    //Clear off any pending connections
+    [bluetoothManager cancelPeripheralConnection:peripheral];
+    
+    //Connect
+    currentPeripheral = [[UARTPeripheral alloc] initWithPeripheral:peripheral delegate:self];
+    [bluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey: [NSNumber numberWithBool:YES]}];
 }
 
 
@@ -259,7 +278,7 @@
         else
         {
             NSLog(@"Did connect peripheral %@", peripheral.name);
-            [self writeDebugStringToConsole:[NSString stringWithFormat:@"Connected To: %@", peripheral.name] color:[UIColor greenColor]];
+            [self writeDebugStringToConsole:[NSString stringWithFormat:@"Connecting To: %@", peripheral.name]];
             [currentPeripheral didConnect];
         }
     }
@@ -271,8 +290,12 @@
     NSLog(@"Did disconnect peripheral %@", peripheral.name);
     [self writeDebugStringToConsole:[NSString stringWithFormat:@"Disconnected From: %@", peripheral.name] color:[UIColor redColor]];
     
-    //respond to disconnected
-    [self peripheralDidDisconnect];
+    // If status was connected, then disconnect was unexpected by the user
+    if (connectionStatus == ConnectionStatusConnected)
+    {
+        NSLog(@"BLE peripheral has disconnected");
+    }
+    connectionStatus = ConnectionStatusDisconnected;
     
     if ([currentPeripheral.peripheral isEqual:peripheral])
     {
@@ -282,21 +305,19 @@
 
 #pragma mark - UARTPeripheralDelegate
 
-//Once hardware revision string is read, connection to Bluefruit is complete
+// Once hardware revision string is read, connection to Bluefruit is complete
 - (void)didReadHardwareRevisionString:(NSString*)string
 {
     NSLog(@"HW Revision: %@", string);
     
-    // Change the button text here
-    [self.connectDisconnectButton setTitle:@"Disconnect From BLE" forState:UIControlStateNormal];
-    
     // Enable the send button if we aren't connected
-    [self enableUIFeatures:YES];
+    //[self enableUIFeatures:YES];
     
     // Print to the device to confirm operation
-    [self sendButtonPress:self.sendButton];
+    //[self sendButtonPress:self.sendButton];
     
     connectionStatus = ConnectionStatusConnected;
+    [self writeDebugStringToConsole:@"Connected!" color:[UIColor greenColor]];
 }
 
 - (void)uartDidEncounterError:(NSString*)error
@@ -304,7 +325,7 @@
     NSLog(@"uart Error!!!!:%@", error);
 }
 
-//Data incoming from UART peripheral
+// Data incoming from UART peripheral
 - (void)didReceiveData:(NSData*)newData
 {
     //Debug
@@ -314,7 +335,7 @@
     
     if (connectionStatus == ConnectionStatusConnected || connectionStatus == ConnectionStatusScanning)
     {
-        //convert data to string & replace characters we can't display
+        // convert data to string & replace characters we can't display
         int dataLength = (int)newData.length;
         uint8_t data[dataLength];
         
@@ -331,37 +352,12 @@
             }
         }
         
-        
         // Write the received text to the 'console'
         [self writeDebugStringToConsole:uartString color:[UIColor orangeColor]];
     }
 }
 
-//respond to device disconnecting
-- (void)peripheralDidDisconnect
-{
-    /*// If we were in the process of scanning/connecting, dismiss alert
-    if (currentAlertView != nil)
-    {
-        [self uartDidEncounterError:@"Peripheral disconnected"];
-    }*/
-    
-    // Disable the send button if we aren't connected
-    [self enableUIFeatures:NO];
-    
-    // If status was connected, then disconnect was unexpected by the user
-    if (connectionStatus == ConnectionStatusConnected)
-    {
-        NSLog(@"BLE peripheral has disconnected");
-        
-        // Change the button text here
-        [self.connectDisconnectButton setTitle:@"Connect To BLE" forState:UIControlStateNormal];
-    }
-    
-    connectionStatus = ConnectionStatusDisconnected;
-}
-
-//Respond to system's bluetooth disabled
+// Respond to system's bluetooth disabled
 - (void)alertBluetoothPowerOff
 {
     NSString *title = @"Bluetooth Power";
@@ -370,11 +366,11 @@
     [alertView show];
 }
 
-//Respond to unsuccessful connection
+// Respond to unsuccessful connection
 - (void)alertFailedConnection
 {
-    NSString *title     = @"Unable to connect";
-    NSString *message   = @"Please check power & wiring,\nthen reset your Arduino";
+    NSString *title = @"Unable to connect";
+    NSString *message = @"Please check power & wiring,\nthen reset your Arduino";
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
 }
