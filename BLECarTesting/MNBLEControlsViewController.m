@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 JamesAdams. All rights reserved.
 //
 
-#import "MNSecondViewController.h"
+#import "MNBLEControlsViewController.h"
 
-@interface MNSecondViewController ()
+@interface MNBLEControlsViewController ()
 
 @end
 
-@implementation MNSecondViewController
+@implementation MNBLEControlsViewController
 
 - (void)viewDidLoad
 {

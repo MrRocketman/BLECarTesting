@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 JamesAdams. All rights reserved.
 //
 
-#import "MNCarBLEViewController.h"
+#import "MNBLEConsoleViewController.h"
 
 
-@implementation MNCarBLEViewController
+@implementation MNBLEConsoleViewController
 
 @synthesize sendButton, sendTextField, consoleTextView;
 

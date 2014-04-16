@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MNSecondViewController : UIViewController
+@interface MNBLEControlsViewController : UIViewController
 
 @end
