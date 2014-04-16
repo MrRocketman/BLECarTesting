@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AA718BE18FF4795002C19C8 /* MNBluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA718BD18FF4795002C19C8 /* MNBluetoothManager.m */; };
 		1AC395AC18EB78F600B30E4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AB18EB78F600B30E4B /* Foundation.framework */; };
 		1AC395AE18EB78F600B30E4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */; };
 		1AC395B018EB78F600B30E4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AF18EB78F600B30E4B /* UIKit.framework */; };
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1AA718BC18FF4795002C19C8 /* MNBluetoothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNBluetoothManager.h; sourceTree = "<group>"; };
+		1AA718BD18FF4795002C19C8 /* MNBluetoothManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNBluetoothManager.m; sourceTree = "<group>"; };
 		1AC395A818EB78F600B30E4B /* BLECarTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLECarTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC395AB18EB78F600B30E4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -105,6 +108,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1AA718BF18FF4C25002C19C8 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				1AC395BD18EB78F600B30E4B /* Main_iPhone.storyboard */,
+				1AC395C018EB78F600B30E4B /* Main_iPad.storyboard */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		1AA718C018FF4C32002C19C8 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1AC395C318EB78F600B30E4B /* MNCarBLEViewController.h */,
+				1AC395C418EB78F600B30E4B /* MNCarBLEViewController.m */,
+				1AC395C618EB78F600B30E4B /* MNSecondViewController.h */,
+				1AC395C718EB78F600B30E4B /* MNSecondViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		1AC3959F18EB78F600B30E4B = {
 			isa = PBXGroup;
 			children = (
@@ -142,12 +165,10 @@
 			children = (
 				1AC395BA18EB78F600B30E4B /* MNAppDelegate.h */,
 				1AC395BB18EB78F600B30E4B /* MNAppDelegate.m */,
-				1AC395C318EB78F600B30E4B /* MNCarBLEViewController.h */,
-				1AC395C418EB78F600B30E4B /* MNCarBLEViewController.m */,
-				1AC395C618EB78F600B30E4B /* MNSecondViewController.h */,
-				1AC395C718EB78F600B30E4B /* MNSecondViewController.m */,
-				1AC395BD18EB78F600B30E4B /* Main_iPhone.storyboard */,
-				1AC395C018EB78F600B30E4B /* Main_iPad.storyboard */,
+				1AA718BC18FF4795002C19C8 /* MNBluetoothManager.h */,
+				1AA718BD18FF4795002C19C8 /* MNBluetoothManager.m */,
+				1AA718C018FF4C32002C19C8 /* ViewControllers */,
+				1AA718BF18FF4C25002C19C8 /* Interface */,
 				1AC395F818EB80D400B30E4B /* Categories */,
 				1AC395EB18EB805F00B30E4B /* Bluetooth */,
 				1AC395C918EB78F600B30E4B /* Images.xcassets */,
@@ -311,6 +332,7 @@
 				1AC395B818EB78F600B30E4B /* main.m in Sources */,
 				1AC395F618EB80CF00B30E4B /* NSString+hex.m in Sources */,
 				1AC395EA18EB805A00B30E4B /* UARTPeripheral.m in Sources */,
+				1AA718BE18FF4795002C19C8 /* MNBluetoothManager.m in Sources */,
 				1AC395C818EB78F600B30E4B /* MNSecondViewController.m in Sources */,
 				1AC395F718EB80CF00B30E4B /* UITextView+lineCount.m in Sources */,
 				1AC395F418EB80CF00B30E4B /* CBUUID+StringExtraction.m in Sources */,

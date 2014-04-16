@@ -1,20 +1,20 @@
 //
-//  MNFirstViewController.m
+//  MNBluetoothManager.m
 //  BLECarTesting
 //
-//  Created by James Adams on 4/1/14.
+//  Created by James Adams on 4/16/14.
 //  Copyright (c) 2014 JamesAdams. All rights reserved.
 //
 
-#import "MNCarBLEViewController.h"
-#import <QuartzCore/QuartzCore.h>
+#import "MNBluetoothManager.h"
 #import "NSString+hex.h"
 #import "NSData+hex.h"
 
-@interface MNCarBLEViewController ()
+@interface MNBluetoothManager()
 {
     CBCentralManager *bluetoothManager;
     UARTPeripheral *currentPeripheral;
+    ConnectionStatus connectionStatus;
     UIAlertView *currentAlertView;
     
     NSMutableString *bufferToWriteToArduino;
@@ -23,41 +23,37 @@
 @end
 
 
-@implementation MNCarBLEViewController
+@implementation MNBluetoothManager
 
-@synthesize connectionStatus, sendButton, sendTextField, consoleTextView;
+@synthesize consoleDelegate;
 
-- (void)viewDidLoad
+#pragma mark - Public Methods
+
++ (id)sharedBluetoothManager
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    static MNBluetoothManager *sharedMyModel = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedMyModel = [[self alloc] init];
+    });
     
-    bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-    connectionStatus = ConnectionStatusDisconnected;
-    bufferToWriteToArduino = [[NSMutableString alloc] init];
+    return sharedMyModel;
 }
 
-- (void)didReceiveMemoryWarning
+- (id)init
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if(self = [super init])
+    {
+        bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        connectionStatus = ConnectionStatusDisconnected;
+        bufferToWriteToArduino = [[NSMutableString alloc] init];
+    }
+    return self;
 }
-
-#pragma mark - Private Methods
 
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color
 {
-    // Print the string to the 'console'
-    NSString *appendString = @"\n"; //each message appears on new line
-    NSAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", string, appendString] attributes: @{NSForegroundColorAttributeName : color}];
-    NSMutableAttributedString *newASCIIText = [[NSMutableAttributedString alloc] initWithAttributedString:self.consoleTextView.attributedText];
-    [newASCIIText appendAttributedString:attrString];
-    self.consoleTextView.attributedText = newASCIIText;
-    
-    // Scroll to the bottom
-    CGPoint p = [self.consoleTextView contentOffset];
-    [self.consoleTextView setContentOffset:p animated:NO];
-    [self.consoleTextView scrollRangeToVisible:NSMakeRange([self.consoleTextView.text length], 0)];
+    [[self consoleDelegate] writeDebugStringToConsole:string color:color];
 }
 
 - (void)writeDebugStringToConsole:(NSString *)string
@@ -81,6 +77,8 @@
         [self writeArduinoBuffer:nil];
     }
 }
+
+#pragma mark - Private Methods
 
 - (void)writeArduinoBuffer:(NSTimer *)timer
 {
@@ -139,51 +137,6 @@
     }
 }
 
-#pragma mark - Button Actions
-
-- (IBAction)sendButtonPress:(id)sender
-{
-    [self writeStringToArduino:self.sendTextField.text];
-    self.sendTextField.text = @"";
-    [self.sendTextField endEditing:YES];
-}
-
-- (IBAction)clearTextViewButtonPress:(id)sender
-{
-    self.consoleTextView.attributedText = [[NSAttributedString alloc] initWithString:@"" attributes:nil];
-}
-
-- (IBAction)doSomethingWithCarOnButtonPress:(id)sender
-{
-    [self writeStringToArduino:@"C101 S2"];
-}
-
-- (IBAction)doSomethingWithCarOn2ButtonPress:(id)sender
-{
-    [self writeStringToArduino:@"C101 S1"];
-}
-
-- (IBAction)doSomethingWithCarOffButtonPress:(id)sender
-{
-    [self writeStringToArduino:@"C101 S0"];
-}
-
-#pragma mark - UITextFieldDelegateMethods
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    if (textField == self.sendTextField)
-    {
-        // 'Press the send button' when you hit enter
-        [self sendButtonPress:self.sendButton];
-        
-        [textField resignFirstResponder];
-        return NO;
-    }
-    
-    return YES;
-}
-
 #pragma mark - My Bluetooth Methods
 
 - (void)scanForPeripherals
@@ -211,7 +164,7 @@
     else
     {
         [bluetoothManager scanForPeripheralsWithServices:@[UARTPeripheral.uartServiceUUID]
-                                   options:@{CBCentralManagerScanOptionAllowDuplicatesKey: [NSNumber numberWithBool:NO]}];
+                                                 options:@{CBCentralManagerScanOptionAllowDuplicatesKey: [NSNumber numberWithBool:NO]}];
     }
 }
 
@@ -356,5 +309,6 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
 }
+
 
 @end

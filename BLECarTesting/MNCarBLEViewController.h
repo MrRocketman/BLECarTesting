@@ -9,26 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "UARTPeripheral.h"
+#import "MNBluetoothManager.h"
 
-typedef enum
-{
-    ConnectionStatusDisconnected = 0,
-    ConnectionStatusScanning,
-    ConnectionStatusConnected,
-} ConnectionStatus;
-
-@interface MNCarBLEViewController : UIViewController <CBCentralManagerDelegate, UARTPeripheralDelegate, UITextFieldDelegate>
-{
-    
-}
+@interface MNCarBLEViewController : UIViewController <UITextFieldDelegate, MNBluetoothManagerConsoleDelegate>
 
 - (IBAction)sendButtonPress:(id)sender;
 - (IBAction)clearTextViewButtonPress:(id)sender;
 - (IBAction)doSomethingWithCarOnButtonPress:(id)sender;
 - (IBAction)doSomethingWithCarOn2ButtonPress:(id)sender;
 - (IBAction)doSomethingWithCarOffButtonPress:(id)sender;
-
-@property(nonatomic, assign) ConnectionStatus connectionStatus;
 
 @property(strong, nonatomic) IBOutlet UIButton *sendButton;
 @property(strong, nonatomic) IBOutlet UITextField *sendTextField;
