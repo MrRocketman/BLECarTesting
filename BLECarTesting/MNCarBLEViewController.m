@@ -35,9 +35,6 @@
     bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     connectionStatus = ConnectionStatusDisconnected;
     bufferToWriteToArduino = [[NSMutableString alloc] init];
-    
-    // Disable the send button if we aren't connected
-    //[self enableUIFeatures:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,15 +44,6 @@
 }
 
 #pragma mark - Private Methods
-
-- (void)enableUIFeatures:(BOOL)state
-{
-    [self.sendButton setEnabled:state];
-    [self.sendTextField setEnabled:state];
-    [self.doSomethingWithCarOffButton setEnabled:state];
-    [self.doSomethingWithCarOnButton setEnabled:state];
-    [self.doSomethingWithCarOn2Button setEnabled:state];
-}
 
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color
 {
@@ -309,12 +297,6 @@
 - (void)didReadHardwareRevisionString:(NSString*)string
 {
     NSLog(@"HW Revision: %@", string);
-    
-    // Enable the send button if we aren't connected
-    //[self enableUIFeatures:YES];
-    
-    // Print to the device to confirm operation
-    //[self sendButtonPress:self.sendButton];
     
     connectionStatus = ConnectionStatusConnected;
     [self writeDebugStringToConsole:@"Connected!" color:[UIColor greenColor]];
