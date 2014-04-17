@@ -11,7 +11,7 @@
 #import "UARTPeripheral.h"
 #import "MNBluetoothManager.h"
 
-@interface MNBLEConsoleViewController : UIViewController <UITextFieldDelegate, MNBluetoothManagerConsoleDelegate>
+@interface MNBLETerminalViewController : UIViewController <UITextFieldDelegate, MNBluetoothManagerConsoleDelegate>
 
 - (IBAction)sendButtonPress:(id)sender;
 - (IBAction)clearTextViewButtonPress:(id)sender;

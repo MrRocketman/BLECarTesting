@@ -16,7 +16,7 @@
 		1AC395BC18EB78F600B30E4B /* MNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395BB18EB78F600B30E4B /* MNAppDelegate.m */; };
 		1AC395BF18EB78F600B30E4B /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AC395BD18EB78F600B30E4B /* Main_iPhone.storyboard */; };
 		1AC395C218EB78F600B30E4B /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AC395C018EB78F600B30E4B /* Main_iPad.storyboard */; };
-		1AC395C518EB78F600B30E4B /* MNBLEConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395C418EB78F600B30E4B /* MNBLEConsoleViewController.m */; };
+		1AC395C518EB78F600B30E4B /* MNBLETerminalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395C418EB78F600B30E4B /* MNBLETerminalViewController.m */; };
 		1AC395C818EB78F600B30E4B /* MNBLEControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395C718EB78F600B30E4B /* MNBLEControlsViewController.m */; };
 		1AC395CA18EB78F600B30E4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AC395C918EB78F600B30E4B /* Images.xcassets */; };
 		1AC395D118EB78F600B30E4B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395D018EB78F600B30E4B /* XCTest.framework */; };
@@ -58,8 +58,8 @@
 		1AC395BB18EB78F600B30E4B /* MNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNAppDelegate.m; sourceTree = "<group>"; };
 		1AC395BE18EB78F600B30E4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		1AC395C118EB78F600B30E4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		1AC395C318EB78F600B30E4B /* MNBLEConsoleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNBLEConsoleViewController.h; sourceTree = "<group>"; };
-		1AC395C418EB78F600B30E4B /* MNBLEConsoleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNBLEConsoleViewController.m; sourceTree = "<group>"; };
+		1AC395C318EB78F600B30E4B /* MNBLETerminalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNBLETerminalViewController.h; sourceTree = "<group>"; };
+		1AC395C418EB78F600B30E4B /* MNBLETerminalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNBLETerminalViewController.m; sourceTree = "<group>"; };
 		1AC395C618EB78F600B30E4B /* MNBLEControlsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNBLEControlsViewController.h; sourceTree = "<group>"; };
 		1AC395C718EB78F600B30E4B /* MNBLEControlsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNBLEControlsViewController.m; sourceTree = "<group>"; };
 		1AC395C918EB78F600B30E4B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -120,8 +120,8 @@
 		1AA718C018FF4C32002C19C8 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1AC395C318EB78F600B30E4B /* MNBLEConsoleViewController.h */,
-				1AC395C418EB78F600B30E4B /* MNBLEConsoleViewController.m */,
+				1AC395C318EB78F600B30E4B /* MNBLETerminalViewController.h */,
+				1AC395C418EB78F600B30E4B /* MNBLETerminalViewController.m */,
 				1AC395C618EB78F600B30E4B /* MNBLEControlsViewController.h */,
 				1AC395C718EB78F600B30E4B /* MNBLEControlsViewController.m */,
 			);
@@ -336,7 +336,7 @@
 				1AC395C818EB78F600B30E4B /* MNBLEControlsViewController.m in Sources */,
 				1AC395F718EB80CF00B30E4B /* UITextView+lineCount.m in Sources */,
 				1AC395F418EB80CF00B30E4B /* CBUUID+StringExtraction.m in Sources */,
-				1AC395C518EB78F600B30E4B /* MNBLEConsoleViewController.m in Sources */,
+				1AC395C518EB78F600B30E4B /* MNBLETerminalViewController.m in Sources */,
 				1AC395BC18EB78F600B30E4B /* MNAppDelegate.m in Sources */,
 				1AC395F518EB80CF00B30E4B /* NSData+hex.m in Sources */,
 			);

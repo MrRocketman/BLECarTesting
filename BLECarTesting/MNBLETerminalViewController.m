@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 JamesAdams. All rights reserved.
 //
 
-#import "MNBLEConsoleViewController.h"
+#import "MNBLETerminalViewController.h"
 
 
-@implementation MNBLEConsoleViewController
+@implementation MNBLETerminalViewController
 
 @synthesize sendButton, sendTextField, consoleTextView;
 
