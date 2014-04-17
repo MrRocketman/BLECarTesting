@@ -6,13 +6,11 @@ For Ethan
 ##ToDo
 
 - Terminal Tab
-    -
 
 - Controls Tab
-    -Retain segments state?
+    - Retain segments state?
 
 - Fancy Tab
-    -
 
 - Other
-    -iPad interface
+    - iPad interface
