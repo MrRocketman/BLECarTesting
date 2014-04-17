@@ -27,6 +27,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Private Methods
+
+- (void)scrollToBottom
+{
+    // Scroll to the bottom
+    CGPoint p = [self.consoleTextView contentOffset];
+    [self.consoleTextView setContentOffset:p animated:NO];
+    [self.consoleTextView scrollRangeToVisible:NSMakeRange([self.consoleTextView.text length], 0)];
+}
+
 #pragma mark - Button Actions
 
 - (IBAction)sendButtonPress:(id)sender
@@ -39,21 +49,6 @@
 - (IBAction)clearTextViewButtonPress:(id)sender
 {
     self.consoleTextView.attributedText = [[NSAttributedString alloc] initWithString:@"" attributes:nil];
-}
-
-- (IBAction)doSomethingWithCarOnButtonPress:(id)sender
-{
-    [[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:@"C101 S2"];
-}
-
-- (IBAction)doSomethingWithCarOn2ButtonPress:(id)sender
-{
-    [[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:@"C101 S1"];
-}
-
-- (IBAction)doSomethingWithCarOffButtonPress:(id)sender
-{
-    [[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:@"C101 S0"];
 }
 
 #pragma mark - UITextFieldDelegateMethods
@@ -83,10 +78,8 @@
     [newASCIIText appendAttributedString:attrString];
     self.consoleTextView.attributedText = newASCIIText;
     
-    // Scroll to the bottom
-    CGPoint p = [self.consoleTextView contentOffset];
-    [self.consoleTextView setContentOffset:p animated:NO];
-    [self.consoleTextView scrollRangeToVisible:NSMakeRange([self.consoleTextView.text length], 0)];
+    // Scroll the textView
+    [self scrollToBottom];
 }
 
 @end

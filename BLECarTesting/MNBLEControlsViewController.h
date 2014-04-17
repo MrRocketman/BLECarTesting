@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MNBLEControlsViewController : UIViewController
+@interface MNBLEControlsViewController : UIViewController <UIScrollViewDelegate>
+
+@property(strong, nonatomic) IBOutlet UIScrollView *scrollView;
+
+// Controls properties
+@property(strong, nonatomic) IBOutlet UISegmentedControl *headlightsSegmentedControl;
+
+// Controls Actions
+- (IBAction)headlightsSegmentedControlChange:(id)sender;
 
 @end
