@@ -3,18 +3,16 @@ BLECarTesting
 
 For Ethan
 
-****** ToDo ******
+##ToDo
 
 - Terminal Tab
---
+    -
 
 - Controls Tab
--- Retain segments state?
+    -Retain segments state?
 
 - Fancy Tab
---
+    -
 
 - Other
--- iPad interface
-
-****** End ToDo ******
+    -iPad interface
