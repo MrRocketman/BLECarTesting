@@ -295,7 +295,7 @@
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"twoSegmentsCell" forIndexPath:indexPath];
     }
-    else if([[commandDictionaryForCell objectForKey:@"baseCommand"] isEqualToString:@"C251"])
+    else if([[commandDictionaryForCell objectForKey:@"numberOfStates"] integerValue] > 3)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"segmentBelowLabelCell" forIndexPath:indexPath];
     }
@@ -319,7 +319,7 @@
     {
         return 82;
     }
-    else if([[commandDictionaryForCell objectForKey:@"baseCommand"] isEqualToString:@"C251"])
+    else if([[commandDictionaryForCell objectForKey:@"numberOfStates"] integerValue] > 3)
     {
         return 82;
     }
