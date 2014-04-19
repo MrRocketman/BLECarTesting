@@ -7,12 +7,16 @@
 //
 
 #import "MNAppDelegate.h"
+#import "MNBluetoothManager.h"
 
 @implementation MNAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    // Make the bluetooth manager object so it will connect to the arduino
+    [MNBluetoothManager sharedBluetoothManager];
+    
     return YES;
 }
 							

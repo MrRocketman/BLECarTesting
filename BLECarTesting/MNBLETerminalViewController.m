@@ -72,7 +72,9 @@
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color
 {
     // Print the string to the 'console'
-    NSString *appendString = @"\n"; //each message appears on new line
+    NSRange endOfLineRange = [string rangeOfString:@"\n"];
+    //each message appears on new line
+    NSString *appendString = (endOfLineRange.location == NSNotFound ? @"\n" : @"");
     NSAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@%@", string, appendString] attributes: @{NSForegroundColorAttributeName : color}];
     NSMutableAttributedString *newASCIIText = [[NSMutableAttributedString alloc] initWithAttributedString:self.consoleTextView.attributedText];
     [newASCIIText appendAttributedString:attrString];

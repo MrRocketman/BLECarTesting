@@ -47,6 +47,9 @@
         bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         connectionStatus = ConnectionStatusDisconnected;
         bufferToWriteToArduino = [[NSMutableString alloc] init];
+        
+        // Search for and connect to the arduino. Give the BL a second to boot up
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(scanForPeripherals) userInfo:nil repeats:NO];
     }
     return self;
 }
@@ -110,7 +113,7 @@
                 [currentPeripheral writeString:stringToWrite];
                 
                 // Print the string to the 'console'
-                [self writeDebugStringToConsole:stringToWrite];
+                //[self writeDebugStringToConsole:stringToWrite];
                 
                 // Delete the written data from the buffer
                 NSRange writtenStringRange;
@@ -124,15 +127,6 @@
         else
         {
             [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(writeArduinoBuffer:) userInfo:nil repeats:NO];
-        }
-    }
-    
-    // Disconnect from the BLE once the buffer is empty
-    if(bufferToWriteToArduino.length == 0)
-    {
-        if(connectionStatus != ConnectionStatusDisconnected)
-        {
-            [self disconnect];
         }
     }
 }
