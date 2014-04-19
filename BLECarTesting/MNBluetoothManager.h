@@ -24,6 +24,7 @@ typedef enum
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color;
 @end
 
+
 // Main interface
 @interface MNBluetoothManager : NSObject <CBCentralManagerDelegate, UARTPeripheralDelegate>
 
@@ -32,6 +33,8 @@ typedef enum
 
 // Console Delegate declaration
 @property(strong, nonatomic) id <MNBluetoothManagerConsoleDelegate> consoleDelegate;
+@property(readonly, nonatomic) NSArray *commandSectionNames;
+@property(readonly, nonatomic) NSArray *commandSectionDictionaryArrays;
 
 // Public methods
 - (void)writeStringToArduino:(NSString *)string;
