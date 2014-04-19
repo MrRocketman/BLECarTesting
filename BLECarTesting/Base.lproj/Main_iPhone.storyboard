@@ -84,7 +84,7 @@
             </objects>
             <point key="canvasLocation" x="612" y="-136"/>
         </scene>
-        <!--View Controller - Item-->
+        <!--View Controller - Car-->
         <scene sceneID="4x4-dr-CeZ">
             <objects>
                 <viewController id="NaU-Q9-n4d" sceneMemberID="viewController">
@@ -115,7 +115,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="tO1-Cj-Kgv"/>
+                    <tabBarItem key="tabBarItem" title="Car" id="tO1-Cj-Kgv"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DeG-mv-rCP" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -10,6 +10,7 @@
 		1AA718BE18FF4795002C19C8 /* MNBluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA718BD18FF4795002C19C8 /* MNBluetoothManager.m */; };
 		1AA718C318FF6158002C19C8 /* MNBLEControlsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA718C218FF6158002C19C8 /* MNBLEControlsTableViewController.m */; };
 		1AA718C618FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA718C518FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.m */; };
+		1AA718D019022D94002C19C8 /* MNCarIgnitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AA718CF19022D94002C19C8 /* MNCarIgnitionViewController.m */; };
 		1AC395AC18EB78F600B30E4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AB18EB78F600B30E4B /* Foundation.framework */; };
 		1AC395AE18EB78F600B30E4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */; };
 		1AC395B018EB78F600B30E4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AF18EB78F600B30E4B /* UIKit.framework */; };
@@ -51,6 +52,8 @@
 		1AA718C218FF6158002C19C8 /* MNBLEControlsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNBLEControlsTableViewController.m; sourceTree = "<group>"; };
 		1AA718C418FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNBLEControlsSegmentsTableViewCell.h; sourceTree = "<group>"; };
 		1AA718C518FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNBLEControlsSegmentsTableViewCell.m; sourceTree = "<group>"; };
+		1AA718CE19022D94002C19C8 /* MNCarIgnitionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCarIgnitionViewController.h; sourceTree = "<group>"; };
+		1AA718CF19022D94002C19C8 /* MNCarIgnitionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCarIgnitionViewController.m; sourceTree = "<group>"; };
 		1AC395A818EB78F600B30E4B /* BLECarTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLECarTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC395AB18EB78F600B30E4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -127,6 +130,8 @@
 				1AC395C418EB78F600B30E4B /* MNBLETerminalViewController.m */,
 				1AA718C118FF6158002C19C8 /* MNBLEControlsTableViewController.h */,
 				1AA718C218FF6158002C19C8 /* MNBLEControlsTableViewController.m */,
+				1AA718CE19022D94002C19C8 /* MNCarIgnitionViewController.h */,
+				1AA718CF19022D94002C19C8 /* MNCarIgnitionViewController.m */,
 				1AA718C718FF61B6002C19C8 /* Table Cells */,
 			);
 			name = ViewControllers;
@@ -349,6 +354,7 @@
 				1AA718BE18FF4795002C19C8 /* MNBluetoothManager.m in Sources */,
 				1AC395F718EB80CF00B30E4B /* UITextView+lineCount.m in Sources */,
 				1AC395F418EB80CF00B30E4B /* CBUUID+StringExtraction.m in Sources */,
+				1AA718D019022D94002C19C8 /* MNCarIgnitionViewController.m in Sources */,
 				1AC395C518EB78F600B30E4B /* MNBLETerminalViewController.m in Sources */,
 				1AC395BC18EB78F600B30E4B /* MNAppDelegate.m in Sources */,
 				1AA718C618FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.m in Sources */,
