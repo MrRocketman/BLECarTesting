@@ -10,4 +10,8 @@
 
 @interface MNCarIgnitionViewController : UIViewController
 
+@property(strong, nonatomic) IBOutlet UIButton *ignitionButton;
+
+- (IBAction)ignitionButtonPress:(id)sender;
+
 @end

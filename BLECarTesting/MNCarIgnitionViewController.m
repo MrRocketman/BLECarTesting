@@ -35,6 +35,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)ignitionButtonPress:(id)sender
+{
+    self.ignitionButton.highlighted = !self.ignitionButton.highlighted;
+}
+
 /*
 #pragma mark - Navigation
 
