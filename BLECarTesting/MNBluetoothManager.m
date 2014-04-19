@@ -285,7 +285,6 @@
         self.commandSectionDictionaryArrays = @[section1Dictionaries, section2Dictionaries, section3Dictionaries, section4Dictionaries, section5Dictionaries];
         
         // Search for and connect to the arduino. Give the BL a second to boot up
-        //[self scanForPeripherals];
         [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(scanForPeripherals) userInfo:nil repeats:NO];
     }
     return self;
@@ -473,6 +472,9 @@
     {
         [currentPeripheral didDisconnect];
     }
+    
+    // We want to be connected, try reconnecting
+    [self scanForPeripherals];
 }
 
 #pragma mark - UARTPeripheralDelegate
