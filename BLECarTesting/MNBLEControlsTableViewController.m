@@ -45,23 +45,23 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [[[MNBluetoothManager sharedBluetoothManager] commandSectionDictionaryArrays] count];
+    return [[MNBluetoothManager commandSectionDictionaryArrays] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[[MNBluetoothManager sharedBluetoothManager] commandSectionDictionaryArrays] objectAtIndex:section] count];
+    return [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:section] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[[MNBluetoothManager sharedBluetoothManager] commandSectionNames] objectAtIndex:section];
+    return [[MNBluetoothManager commandSectionNames] objectAtIndex:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *commandDictionaryForCell = [[[[MNBluetoothManager sharedBluetoothManager] commandSectionDictionaryArrays] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSDictionary *commandDictionaryForCell = [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
     MNBLEControlsSegmentsTableViewCell *cell;
     if([commandDictionaryForCell objectForKey:@"factoryCommand"] != nil)
@@ -86,7 +86,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *commandDictionaryForCell = [[[[MNBluetoothManager sharedBluetoothManager] commandSectionDictionaryArrays] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSDictionary *commandDictionaryForCell = [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
     if([commandDictionaryForCell objectForKey:@"factoryCommand"] != nil)
     {
@@ -104,7 +104,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *commandDictionaryForCell = [[[[MNBluetoothManager sharedBluetoothManager] commandSectionDictionaryArrays] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSDictionary *commandDictionaryForCell = [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
     if([commandDictionaryForCell objectForKey:@"factoryCommand"] != nil)
     {

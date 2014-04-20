@@ -30,11 +30,11 @@ typedef enum
 
 // Singleton instance declaration
 + (id)sharedBluetoothManager;
++ (NSArray *)commandSectionNames;
++ (NSArray *)commandSectionDictionaryArrays;
 
 // Console Delegate declaration
 @property(strong, nonatomic) id <MNBluetoothManagerConsoleDelegate> consoleDelegate;
-@property(readonly, nonatomic) NSArray *commandSectionNames;
-@property(readonly, nonatomic) NSArray *commandSectionDictionaryArrays;
 
 // Public methods
 - (void)writeStringToArduino:(NSString *)string;
