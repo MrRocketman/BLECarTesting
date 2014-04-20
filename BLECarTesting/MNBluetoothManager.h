@@ -10,6 +10,20 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "UARTPeripheral.h"
 
+
+// A Command is an NSDictionary like this:
+/*NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
+                              @"C154", @"baseCommand",
+                              @2, @"numberOfStates",
+                              @[@"Off", @"On"], @"stateLabels",
+                              @"S", @"stateCommand",
+                              @"F", @"factoryCommand",
+                              @"Under Dash", @"title",
+                              @"Interior Lights", @"category",
+                              nil];*/
+
+// A commandCategory is an NSString. It comes from the 'category' key of the command
+
 // Connection status enum
 typedef enum
 {
@@ -29,15 +43,32 @@ typedef enum
 @interface MNBluetoothManager : NSObject <CBCentralManagerDelegate, UARTPeripheralDelegate>
 
 // Singleton instance declaration
-+ (id)sharedBluetoothManager;
-+ (NSArray *)commandSectionNames;
-+ (NSArray *)commandSectionDictionaryArrays;
-+ (void)sectionAndIndexForCommandTitle:(NSString *)title section:(int *)section index:(int *)index;
++ (MNBluetoothManager *)sharedBluetoothManager;
 
 // Console Delegate declaration
 @property(strong, nonatomic) id <MNBluetoothManagerConsoleDelegate> consoleDelegate;
 
 // Public methods
+// CommandCategories
+- (NSArray *)commandCategories;
+- (NSArray *)commandCategoriesMatchingSearchString:(NSString *)string;
+- (NSDictionary *)commandCategoryMatchingSearchString:(NSString *)string;
+- (int)indexOfCommandCategory:(NSString *)string;
+- (int)commandCategoriesCount;
+
+// All Commands
+- (NSArray *)commandDictionariesArray;
+
+// Specific Commands
+- (int)indexOfCommandWithTitle:(NSString *)title;
+- (NSDictionary *)commandForCommandTitle:(NSString *)title;
+
+// Categories of commands
+- (NSArray *)commandsForCategory:(NSString *)category;
+- (NSDictionary *)commandForCategory:(NSString *)category atIndex:(int)index;
+- (int)commandsCountForCategory:(NSString *)category;
+
+// BLE
 - (void)writeStringToArduino:(NSString *)string;
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color;
 - (void)writeDebugStringToConsole:(NSString *)string;

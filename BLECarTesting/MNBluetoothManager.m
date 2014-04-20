@@ -20,6 +20,9 @@
     NSMutableString *bufferToWriteToArduino;
 }
 
+@property(readwrite, nonatomic) NSArray *commandDictionariesArray;
+@property(readwrite, nonatomic) NSArray *commandCategories;
+
 @end
 
 
@@ -27,9 +30,9 @@
 
 @synthesize consoleDelegate;
 
-#pragma mark - Public Methods
+#pragma mark - Init Methods
 
-+ (id)sharedBluetoothManager
++ (MNBluetoothManager *)sharedBluetoothManager
 {
     static MNBluetoothManager *sharedMyModel = nil;
     static dispatch_once_t onceToken;
@@ -40,302 +43,6 @@
     return sharedMyModel;
 }
 
-+ (NSArray *)commandSectionNames
-{
-    static NSArray *commandSectionNames;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        commandSectionNames = @[@"Ignition", @"Controls", @"Exterior Lights", @"Interior Lights", @"Miscellaneous"];
-    });
-    
-    return commandSectionNames;
-}
-
-+ (NSArray *)commandSectionDictionaryArrays
-{
-    static NSDictionary *section1Dictionary1;
-    static NSArray *section1Dictionaries;
-    
-    static NSDictionary *section2Dictionary1;
-    static NSDictionary *section2Dictionary2;
-    static NSDictionary *section2Dictionary3;
-    static NSDictionary *section2Dictionary4;
-    static NSDictionary *section2Dictionary5;
-    static NSDictionary *section2Dictionary6;
-    static NSDictionary *section2Dictionary7;
-    static NSDictionary *section2Dictionary8;
-    static NSDictionary *section2Dictionary9;
-    static NSArray *section2Dictionaries;
-    
-    static NSDictionary *section3Dictionary1;
-    static NSDictionary *section3Dictionary2;
-    static NSDictionary *section3Dictionary3;
-    static NSDictionary *section3Dictionary4;
-    static NSDictionary *section3Dictionary5;
-    static NSDictionary *section3Dictionary6;
-    static NSDictionary *section3Dictionary7;
-    static NSArray *section3Dictionaries;
-    
-    static NSDictionary *section4Dictionary1;
-    static NSDictionary *section4Dictionary2;
-    static NSDictionary *section4Dictionary3;
-    static NSDictionary *section4Dictionary4;
-    static NSDictionary *section4Dictionary5;
-    static NSArray *section4Dictionaries;
-    
-    static NSDictionary *section5Dictionary1;
-    static NSDictionary *section5Dictionary2;
-    static NSDictionary *section5Dictionary3;
-    static NSDictionary *section5Dictionary4;
-    static NSArray *section5Dictionaries;
-    
-    static NSArray *commandSectionDictionaryArrays;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        // Ignition
-        section1Dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C00", @"baseCommand",
-                               @3, @"numberOfStates",
-                               @[@"Off", @"Battery", @"Start"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Ignition", @"title",
-                               @"Ignition", @"category",
-                               nil];
-        section1Dictionaries = @[section1Dictionary1];
-        
-        // Controls
-        section2Dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C50", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Lock", @"Unlock"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Door Locks", @"title",
-                               @"Controls", @"category",
-                               nil];
-        section2Dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C51", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Close", @"Open"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Trunk", @"title",
-                               @"Controls", @"category",
-                               nil];
-        section2Dictionary3 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C52", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Top", @"Bottom"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Left Window", @"title",
-                               @"Controls", @"category",
-                               nil];
-        section2Dictionary4 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C53", @"baseCommand",
-                               @3, @"numberOfStates",
-                               @[@"Stop", @"Up", @"Down"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Left Window", @"title",
-                               @"Controls", @"category",
-                               nil];
-        section2Dictionary5 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C54", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Top", @"Bottom"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Right Window", @"title",
-                               @"Controls", @"category",
-                               nil];
-        
-        section2Dictionary6 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C55", @"baseCommand",
-                               @3, @"numberOfStates",
-                               @[@"Stop", @"Up", @"Down"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Right Window", @"title",
-                               @"Controls", @"category",
-                               nil];
-        section2Dictionary7 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C56", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Top", @"Bottom"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Both Windows", @"title",
-                               @"Controls", @"category",
-                               nil];
-        section2Dictionary8 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C57", @"baseCommand",
-                               @3, @"numberOfStates",
-                               @[@"Stop", @"Up", @"Down"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Both Windows", @"title",
-                               @"Controls", @"category",
-                               nil];
-        section2Dictionary9 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C58", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Close", @"Open",], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Exhause Cutouts", @"title",
-                               @"Controls", @"category",
-                               nil];
-        section2Dictionaries = @[section2Dictionary1, section2Dictionary2, section2Dictionary3, section2Dictionary4, section2Dictionary5, section2Dictionary6, section2Dictionary7, section2Dictionary8, section2Dictionary9];
-        
-        // Exterior Lights
-        section3Dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C100", @"baseCommand",
-                               @3, @"numberOfStates",
-                               @[@"Off", @"Low", @"High"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Headlights", @"title",
-                               @"Exterior Lights", @"category",
-                               nil];
-        section3Dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C101", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Fog", @"title",
-                               @"Exterior Lights", @"category",
-                               nil];
-        section3Dictionary3 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C106", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"L", @"stateCommand",
-                               @"Emergency Flashers", @"title",
-                               @"Exterior Lights", @"category",
-                               nil];
-        section3Dictionary4 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C102", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Park", @"title",
-                               @"Exterior Lights", @"category",
-                               nil];
-        section3Dictionary5 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C103", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Backup", @"title",
-                               @"Exterior Lights", @"category",
-                               nil];
-        section3Dictionary6 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C104", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Tail Night", @"title",
-                               @"Exterior Lights", @"category",
-                               nil];
-        section3Dictionary7 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C105", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"License Plate", @"title",
-                               @"Exterior Lights", @"category",
-                               nil];
-        section3Dictionaries = @[section3Dictionary1, section3Dictionary2, section3Dictionary3, section3Dictionary4, section3Dictionary5, section3Dictionary6, section3Dictionary7];
-        
-        // Interior Lights
-        section4Dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C150", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"F", @"factoryCommand",
-                               @"Left Pillar", @"title",
-                               @"Interior Lights", @"category",
-                               nil];
-        section4Dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C151", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"F", @"factoryCommand",
-                               @"Right Pillar", @"title",
-                               @"Interior Lights", @"category",
-                               nil];
-        section4Dictionary3 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C152", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"F", @"factoryCommand",
-                               @"Center Console", @"title",
-                               @"Interior Lights", @"category",
-                               nil];
-        section4Dictionary4 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C153", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"F", @"factoryCommand",
-                               @"Dome", @"title",
-                               @"Interior Lights", @"category",
-                               nil];
-        section4Dictionary5 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C154", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"F", @"factoryCommand",
-                               @"Under Dash", @"title",
-                               @"Interior Lights", @"category",
-                               nil];
-        section4Dictionaries = @[section4Dictionary1, section4Dictionary2, section4Dictionary3, section4Dictionary4, section4Dictionary5];
-        
-        // Miscellaneous
-        section5Dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C200", @"baseCommand",
-                               @3, @"numberOfStates",
-                               @[@"Slow", @"Medium", @"Fast"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Turn Signal Speed", @"title",
-                               @"Miscellaneous", @"category",
-                               nil];
-        section5Dictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C201", @"baseCommand",
-                               @5, @"numberOfStates",
-                               @[@"Basic", @"Sequence", @"Chase", @"-Sequence", @"OneByOne"], @"stateLabels",
-                               @"S", @"stateCommand",
-                               @"Turn Signal Patterns", @"title",
-                               @"Miscellaneous", @"category",
-                               nil];
-        section5Dictionary3 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C202", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"L", @"stateCommand",
-                               @"Assitive Lighting", @"title",
-                               @"Miscellaneous", @"category",
-                               nil];
-        section5Dictionary4 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C203", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"L", @"stateCommand",
-                               @"Automatic Lighting", @"title",
-                               @"Miscellaneous", @"category",
-                               nil];
-        section5Dictionaries = @[section5Dictionary1, section5Dictionary2, section5Dictionary3, section5Dictionary4];
-        
-        commandSectionDictionaryArrays = @[section1Dictionaries, section2Dictionaries, section3Dictionaries, section4Dictionaries, section5Dictionaries];
-    });
-    
-    return commandSectionDictionaryArrays;
-}
-
-+ (void)sectionAndIndexForCommandTitle:(NSString *)title section:(int *)section index:(int *)index
-{
-    NSPredicate *filter = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title CONTAINS[c] '%@'", title]];
-    
-    NSArray *filteredCommands = [[self commandSectionDictionaryArrays] filteredArrayUsingPredicate:filter];
-}
-
 - (id)init
 {
     if(self = [super init])
@@ -344,11 +51,315 @@
         connectionStatus = ConnectionStatusDisconnected;
         bufferToWriteToArduino = [[NSMutableString alloc] init];
         
+        // Ignition
+        NSDictionary *dictionary1 = @{@"baseCommand" : @"C00",
+                                     @"numberOfStates" : @3,
+                                     @"stateLabels" : @[@"Off", @"Battery", @"Start"],
+                                     @"stateCommand" : @"S",
+                                     @"title" : @"Ignition",
+                                     @"category" : @"Ignition"};
+        
+        // Controls
+        NSDictionary *dictionary2 = @{@"baseCommand" : @"C50",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Lock", @"Unlock"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Door Locks",
+                                      @"category" : @"Controls"};
+        NSDictionary *dictionary3 = @{@"baseCommand" : @"C51",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Close", @"Open"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Trunk",
+                                      @"category" : @"Controls"};
+        NSDictionary *dictionary4 = @{@"baseCommand" : @"C52",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Top", @"Bottom"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Left Window",
+                                      @"category" : @"Controls"};
+        NSDictionary *dictionary5 = @{@"baseCommand" : @"C53",
+                                      @"numberOfStates" : @3,
+                                      @"stateLabels" : @[@"Stop", @"Up", @"Down"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Left Window",
+                                      @"category" : @"Controls"};
+        NSDictionary *dictionary6 = @{@"baseCommand" : @"C54",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Top", @"Bottom"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Right Window",
+                                      @"category" : @"Controls"};
+        NSDictionary *dictionary7 = @{@"baseCommand" : @"C55",
+                                      @"numberOfStates" : @3,
+                                      @"stateLabels" : @[@"Stop", @"Up", @"Down"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Right Window",
+                                      @"category" : @"Controls"};
+        NSDictionary *dictionary8 = @{@"baseCommand" : @"C56",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Top", @"Bottom"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Both Windows",
+                                      @"category" : @"Controls"};
+        NSDictionary *dictionary9 = @{@"baseCommand" : @"C57",
+                                      @"numberOfStates" : @3,
+                                      @"stateLabels" : @[@"Stop", @"Up", @"Down"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Both Windows",
+                                      @"category" : @"Controls"};
+        NSDictionary *dictionary10 = @{@"baseCommand" : @"C58",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Close", @"Open"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Exhaust Cutouts",
+                                      @"category" : @"Controls"};
+        
+        // Exterior Lights
+        NSDictionary *dictionary11 = @{@"baseCommand" : @"C100",
+                                      @"numberOfStates" : @3,
+                                      @"stateLabels" : @[@"Off", @"Low", @"High"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Headlights",
+                                      @"category" : @"Exterior Lights"};
+        NSDictionary *dictionary12 = @{@"baseCommand" : @"C101",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Off", @"On"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Fog",
+                                      @"category" : @"Exterior Lights"};
+        NSDictionary *dictionary13 = @{@"baseCommand" : @"C106",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Off", @"On"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Emergency Flahsers",
+                                      @"category" : @"Exterior Lights"};
+        NSDictionary *dictionary14 = @{@"baseCommand" : @"C102",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Off", @"On"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Parking",
+                                      @"category" : @"Exterior Lights"};
+        NSDictionary *dictionary15 = @{@"baseCommand" : @"C103",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Off", @"On"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Backup",
+                                      @"category" : @"Exterior Lights"};
+        NSDictionary *dictionary16 = @{@"baseCommand" : @"C104",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Off", @"On"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Tail Dims",
+                                      @"category" : @"Exterior Lights"};
+        NSDictionary *dictionary17 = @{@"baseCommand" : @"C105",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Off", @"On"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"License Plate",
+                                      @"category" : @"Exterior Lights"};
+        
+        // Interior Lights
+        NSDictionary *dictionary18 = @{@"baseCommand" : @"C150",
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Close", @"Open"],
+                                       @"stateCommand" : @"S",
+                                       @"factoryCommand" : @"F",
+                                       @"title" : @"Left Pillar",
+                                       @"category" : @"Interior Lights"};
+        NSDictionary *dictionary19 = @{@"baseCommand" : @"C151",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Close", @"Open"],
+                                      @"stateCommand" : @"S",
+                                       @"factoryCommand" : @"F",
+                                      @"title" : @"Right Pillar",
+                                      @"category" : @"Interior Lights"};
+        NSDictionary *dictionary20 = @{@"baseCommand" : @"C152",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Close", @"Open"],
+                                      @"stateCommand" : @"S",
+                                       @"factoryCommand" : @"F",
+                                      @"title" : @"Center Console",
+                                      @"category" : @"Interior Lights"};
+        NSDictionary *dictionary21 = @{@"baseCommand" : @"C153",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Close", @"Open"],
+                                      @"stateCommand" : @"S",
+                                       @"factoryCommand" : @"F",
+                                      @"title" : @"Dome",
+                                      @"category" : @"Interior Lights"};
+        NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Close", @"Open"],
+                                      @"stateCommand" : @"S",
+                                       @"factoryCommand" : @"F",
+                                      @"title" : @"Under Dash",
+                                      @"category" : @"Interior Lights"};
+        
+        // Miscellaneous
+        NSDictionary *dictionary23 = @{@"baseCommand" : @"C200",
+                                      @"numberOfStates" : @3,
+                                      @"stateLabels" : @[@"Slow", @"Medium", @"Fast"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Turn Signal Speed",
+                                      @"category" : @"Miscellaneous"};
+        NSDictionary *dictionary24 = @{@"baseCommand" : @"C201",
+                                      @"numberOfStates" : @5,
+                                      @"stateLabels" : @[@"Basic", @"Sequence", @"Chase", @"-Sequence", @"OneByOne"],
+                                      @"stateCommand" : @"S",
+                                      @"title" : @"Turn Signal Patterns",
+                                      @"category" : @"Miscellaneous"};
+        NSDictionary *dictionary25 = @{@"baseCommand" : @"C202",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Off", @"On"],
+                                      @"stateCommand" : @"L",
+                                      @"title" : @"Assistive Lighting",
+                                      @"category" : @"Miscellaneous"};
+        NSDictionary *dictionary26 = @{@"baseCommand" : @"C203",
+                                      @"numberOfStates" : @2,
+                                      @"stateLabels" : @[@"Off", @"On"],
+                                      @"stateCommand" : @"A",
+                                      @"title" : @"Automatic Lighting",
+                                      @"category" : @"Miscellaneous"};
+        
+        self.commandDictionariesArray = @[dictionary1, dictionary2, dictionary3, dictionary4, dictionary5, dictionary6, dictionary7, dictionary8, dictionary9, dictionary10, dictionary11, dictionary12, dictionary13, dictionary14, dictionary15, dictionary16, dictionary17, dictionary18, dictionary19, dictionary20, dictionary21, dictionary22, dictionary23, dictionary24, dictionary25, dictionary26];
+        
+        // Set this here because the ordering of the array is not guaranteed. Thus we can't do this calculation every time someone asks for it. Otherwise the data we would be sending them would be all over the place.
+        //self.commandCategories = [self.commandDictionariesArray valueForKeyPath:@"distinctUnionOfObjects.category"];
+        
+        // Determine the command categories
+        NSMutableArray *unique = [NSMutableArray array];
+        NSMutableSet *processed = [NSMutableSet set];
+        for(int i = 0; i < self.commandDictionariesArray.count; i ++)
+        {
+            NSString *category = self.commandDictionariesArray[i][@"category"];
+            if ([processed containsObject:category] == NO)
+            {
+                [unique addObject:category];
+                [processed addObject:category];
+            }
+        }
+        self.commandCategories = (NSArray *)unique;
+        
         // Search for and connect to the arduino. Give the BL a second to boot up
         [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(scanForPeripherals) userInfo:nil repeats:NO];
     }
     return self;
 }
+
+#pragma mark - Command Methods
+
+- (NSArray *)commandCategories
+{
+    return _commandCategories;
+}
+
+- (NSArray *)commandCategoriesMatchingSearchString:(NSString *)string
+{
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", string];
+    
+    NSArray *filteredCategories = [self.commandCategories filteredArrayUsingPredicate:filter];
+    
+    return filteredCategories;
+}
+
+- (NSDictionary *)commandCategoryMatchingSearchString:(NSString *)string
+{
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", string];
+    
+    NSArray *filteredCategories = [self.commandCategories filteredArrayUsingPredicate:filter];
+    
+    if([filteredCategories count] > 0)
+    {
+        return filteredCategories[0];
+    }
+    
+    return nil;
+}
+
+- (int)indexOfCommandCategory:(NSString *)string
+{
+    NSDictionary *category = [self commandCategoryMatchingSearchString:string];
+    
+    if(category != nil)
+    {
+        NSUInteger categoryIndex = [self.commandCategories indexOfObject:category];
+        if(categoryIndex != NSNotFound)
+        {
+            return (int)categoryIndex;
+        }
+    }
+    
+    return -1;
+}
+
+- (int)commandCategoriesCount
+{
+    return (int)[[self commandCategories] count];
+}
+
+- (NSArray *)commandDictionariesArray
+{
+    return _commandDictionariesArray;
+}
+
+- (int)indexOfCommandWithTitle:(NSString *)title;
+{
+    NSDictionary *command = [self commandForCommandTitle:title];
+    
+    if(command != nil)
+    {
+        NSUInteger commandIndex = [self.commandDictionariesArray indexOfObject:command];
+        if(commandIndex != NSNotFound)
+        {
+            return (int)commandIndex;
+        }
+    }
+    
+    return -1;
+}
+
+- (NSDictionary *)commandForCommandTitle:(NSString *)title
+{
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"title CONTAINS[cd] %@", title];
+    
+    NSArray *filteredCommands = [self.commandDictionariesArray filteredArrayUsingPredicate:filter];
+    
+    if([filteredCommands count] > 0)
+    {
+        return filteredCommands[0];
+    }
+    
+    return nil;
+}
+
+- (NSArray *)commandsForCategory:(NSString *)category
+{
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"category CONTAINS[cd] %@", category];
+    
+    NSArray *filteredCommands = [self.commandDictionariesArray filteredArrayUsingPredicate:filter];
+    
+    if([filteredCommands count] > 0)
+    {
+        return filteredCommands;
+    }
+    
+    return nil;
+}
+
+- (NSDictionary *)commandForCategory:(NSString *)category atIndex:(int)index
+{
+    return [[self commandsForCategory:category] objectAtIndex:index];
+}
+
+- (int)commandsCountForCategory:(NSString *)category
+{
+    NSArray *filteredCommands = [self commandsForCategory:category];
+    
+    return (int)[filteredCommands count];
+}
+
+#pragma mark - BLE Methods
 
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color
 {

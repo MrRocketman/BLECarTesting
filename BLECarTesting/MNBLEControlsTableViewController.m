@@ -10,6 +10,11 @@
 #import "MNBLEControlsSegmentsTableViewCell.h"
 #import "MNBluetoothManager.h"
 
+@interface MNBLEControlsTableViewController()
+
+@end
+
+
 @implementation MNBLEControlsTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -17,7 +22,6 @@
     self = [super initWithStyle:style];
     if (self)
     {
-        
         
     }
     return self;
@@ -45,23 +49,26 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [[MNBluetoothManager commandSectionDictionaryArrays] count];
+    return [[MNBluetoothManager sharedBluetoothManager] commandCategoriesCount];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:section] count];
+    NSString *category = [[[MNBluetoothManager sharedBluetoothManager] commandCategories] objectAtIndex:section];
+    return [[MNBluetoothManager sharedBluetoothManager] commandsCountForCategory:category];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[MNBluetoothManager commandSectionNames] objectAtIndex:section];
+    NSString *category = [[[MNBluetoothManager sharedBluetoothManager] commandCategories] objectAtIndex:section];
+    return category;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *commandDictionaryForCell = [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSString *category = [[[MNBluetoothManager sharedBluetoothManager] commandCategories] objectAtIndex:indexPath.section];
+    NSDictionary *commandDictionaryForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
     
     MNBLEControlsSegmentsTableViewCell *cell;
     if([commandDictionaryForCell objectForKey:@"factoryCommand"] != nil)
@@ -85,7 +92,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *commandDictionaryForCell = [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSString *category = [[[MNBluetoothManager sharedBluetoothManager] commandCategories] objectAtIndex:indexPath.section];
+    NSDictionary *commandDictionaryForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
     
     if([commandDictionaryForCell objectForKey:@"factoryCommand"] != nil)
     {
@@ -103,7 +111,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *commandDictionaryForCell = [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSString *category = [[[MNBluetoothManager sharedBluetoothManager] commandCategories] objectAtIndex:indexPath.section];
+    NSDictionary *commandDictionaryForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
     
     if([commandDictionaryForCell objectForKey:@"factoryCommand"] != nil)
     {

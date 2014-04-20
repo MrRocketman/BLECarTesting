@@ -11,11 +11,9 @@
 #import "MNCarToggleTableViewCell.h"
 
 @interface MNCarSwitchSettingsTableViewController ()
-{
-    int interiorLightsSection;
-}
 
 @end
+
 
 @implementation MNCarSwitchSettingsTableViewController
 
@@ -37,17 +35,6 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    interiorLightsSection = -1;
-    NSArray *commandSectionNames = [MNBluetoothManager commandSectionNames];
-    for(int i = 0; i < [commandSectionNames count]; i ++)
-    {
-        NSRange lightRange = [commandSectionNames[i] rangeOfString:@"Interior Lights"];
-        if(lightRange.location != NSNotFound)
-        {
-            interiorLightsSection = i;
-        }
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -67,7 +54,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:interiorLightsSection] count];
+    return [[MNBluetoothManager sharedBluetoothManager] commandsCountForCategory:@"Interior Lights"];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -77,11 +64,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *commandSectionDictionaryArrays = [MNBluetoothManager commandSectionDictionaryArrays];
-    
     MNCarToggleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell" forIndexPath:indexPath];
     
-    cell.label.text = [[[commandSectionDictionaryArrays objectAtIndex:interiorLightsSection] objectAtIndex:indexPath.row] objectForKey:@"title"];
+    NSDictionary *command = [[[MNBluetoothManager sharedBluetoothManager] commandsForCategory:@"Interior Lights"] objectAtIndex:indexPath.row];
+    cell.label.text = [command objectForKey:@"title"];
     
     return cell;
 }

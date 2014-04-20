@@ -106,19 +106,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary *command;
+    
     if(indexPath.section == LIGHTS_SECTION)
     {
         MNCarToggleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell" forIndexPath:indexPath];
         
-        // Configure the cell...
         if(indexPath.row == AUTO_LIGHTING_ROW)
         {
-            cell.label.text = [[[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:4] objectAtIndex:3] objectForKey:@"title"];
+            command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Automatic Lighting"];
+            
         }
         else if(indexPath.row == ASSITIVE_LIGHTING_ROW)
         {
-            cell.label.text = [[[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:4] objectAtIndex:2] objectForKey:@"title"];
+            command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Assistive Lighting"];
         }
+        
+        // Configure the cell...
+        cell.label.text = [command objectForKey:@"title"];
         
         return cell;
     }
@@ -128,8 +133,10 @@
         {
             MNCarSegmentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SegmentsCell" forIndexPath:indexPath];
             
+            command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Speed"];
+            
             // Configure the cell...
-            [cell setCommandDictionary:[[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:4] objectAtIndex:0]];
+            [cell setCommandDictionary:command];
             
             return cell;
         }

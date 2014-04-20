@@ -12,10 +12,8 @@
 #import "MNBLEControlsSegmentsTableViewCell.h"
 
 @interface MNCarLightsTableViewController ()
-{
-    int indexesOfLightSections[10];
-    int numberOfLightsSections;
-}
+
+@property(readwrite, nonatomic) NSArray *lightCategories;
 
 @end
 
@@ -40,16 +38,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSArray *commandSectionNames = [MNBluetoothManager commandSectionNames];
-    for(int i = 0; i < [commandSectionNames count]; i ++)
-    {
-        NSRange lightRange = [commandSectionNames[i] rangeOfString:@"Light"];
-        if(lightRange.location != NSNotFound)
-        {
-            indexesOfLightSections[numberOfLightsSections] = i;
-            numberOfLightsSections ++;
-        }
-    }
+    self.lightCategories = [[MNBluetoothManager sharedBluetoothManager] commandCategoriesMatchingSearchString:@"Light"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,46 +52,41 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return numberOfLightsSections;
+    return [self.lightCategories count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSArray *commandSectionDictionaryArrays = [MNBluetoothManager commandSectionDictionaryArrays];
-    
-    int commandSectionIndex = indexesOfLightSections[section];
-    
-    return [commandSectionDictionaryArrays[commandSectionIndex] count];
+    return [[MNBluetoothManager sharedBluetoothManager] commandsCountForCategory:self.lightCategories[section]];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    int commandSectionIndex = indexesOfLightSections[section];
-    
-    return [[MNBluetoothManager commandSectionNames] objectAtIndex:commandSectionIndex];
+    return self.lightCategories[section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *commandSectionDictionaryArrays = [MNBluetoothManager commandSectionDictionaryArrays];
-    int commandSectionIndex = indexesOfLightSections[indexPath.section];
+    NSString *category = [self.lightCategories objectAtIndex:indexPath.section];
+    NSDictionary *commandDictionaryForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
     
-    if([[[[commandSectionDictionaryArrays objectAtIndex:commandSectionIndex] objectAtIndex:indexPath.row] objectForKey:@"title"] isEqualToString:@"Headlights"])
+    // Headlights needs a special cell
+    if([[commandDictionaryForCell objectForKey:@"title"] isEqualToString:@"Headlights"])
     {
         MNBLEControlsSegmentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"segmentsCell" forIndexPath:indexPath];
-        NSDictionary *commandDictionaryForCell = [[commandSectionDictionaryArrays objectAtIndex:commandSectionIndex] objectAtIndex:indexPath.row];
         
         [cell setCommandDictionary:commandDictionaryForCell];
         
         return cell;
     }
+    // All other cells are ToggleCells
     else
     {
         MNCarToggleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell" forIndexPath:indexPath];
         
         // Configure the cell...
-        cell.label.text = [[[commandSectionDictionaryArrays objectAtIndex:commandSectionIndex] objectAtIndex:indexPath.row] objectForKey:@"title"];
+        cell.label.text = [commandDictionaryForCell objectForKey:@"title"];
         
         return cell;
     }

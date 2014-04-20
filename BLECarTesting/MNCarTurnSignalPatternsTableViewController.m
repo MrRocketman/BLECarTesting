@@ -10,14 +10,12 @@
 #import "MNBluetoothManager.h"
 
 @interface MNCarTurnSignalPatternsTableViewController ()
-{
-    int miscellaneousSection;
-    int turnSignalPatternIndex;
-}
 
 @property(readwrite, nonatomic) NSIndexPath *previouslySelectedIndexPath;
+@property(readwrite, nonatomic) NSDictionary *turnSignalPatternsCommand;
 
 @end
+
 
 @implementation MNCarTurnSignalPatternsTableViewController
 
@@ -40,26 +38,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    miscellaneousSection = -1;
-    NSArray *commandSectionNames = [MNBluetoothManager commandSectionNames];
-    for(int i = 0; i < [commandSectionNames count]; i ++)
-    {
-        NSRange lightRange = [commandSectionNames[i] rangeOfString:@"Miscellaneous"];
-        if(lightRange.location != NSNotFound)
-        {
-            miscellaneousSection = i;
-        }
-    }
-    
-    NSArray *miscellaneousCommandDictionaries = [[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:miscellaneousSection];
-    for(int i = 0; i < [miscellaneousCommandDictionaries count]; i ++)
-    {
-        NSRange lightRange = [miscellaneousCommandDictionaries[i] rangeOfString:@"Turn Signal Patterns"];
-        if(lightRange.location != NSNotFound)
-        {
-            turnSignalPatternIndex = i;
-        }
-    }
+    self.turnSignalPatternsCommand = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Patterns"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +58,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:miscellaneousSection] objectAtIndex:turnSignalPatternIndex] objectForKey:@"numberOfStates"] integerValue];
+    return [[self.turnSignalPatternsCommand objectForKey:@"numberOfStates"] integerValue];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,7 +66,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // Configure the cell...
-    cell.textLabel.text = [[[[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:miscellaneousSection] objectAtIndex:turnSignalPatternIndex] objectForKey:@"stateLabels"] objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[self.turnSignalPatternsCommand objectForKey:@"stateLabels"] objectAtIndex:indexPath.row];
     
     return cell;
 }
