@@ -7,8 +7,11 @@
 //
 
 #import "MNCarTurnSignalPatternsTableViewController.h"
+#import "MNBluetoothManager.h"
 
 @interface MNCarTurnSignalPatternsTableViewController ()
+
+@property(readwrite, nonatomic) NSIndexPath *previouslySelectedIndexPath;
 
 @end
 
@@ -44,28 +47,35 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [[[[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:4] objectAtIndex:1] objectForKey:@"numberOfStates"] integerValue];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     // Configure the cell...
+    cell.textLabel.text = [[[[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:4] objectAtIndex:1] objectForKey:@"stateLabels"] objectAtIndex:indexPath.row];
     
     return cell;
 }
-*/
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
+    [[tableView cellForRowAtIndexPath:self.previouslySelectedIndexPath] setAccessoryType:UITableViewCellAccessoryNone];
+    
+    self.previouslySelectedIndexPath = indexPath;
+    
+#pragma mark TODO: Segue back to the settings view here
+}
 
 /*
 // Override to support conditional editing of the table view.
