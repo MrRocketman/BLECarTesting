@@ -79,7 +79,6 @@
     
     // Give the cell its data
     [cell setCommandDictionary:commandDictionaryForCell];
-    [cell updateCell];
     
     return cell;
 }

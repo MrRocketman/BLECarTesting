@@ -18,6 +18,8 @@
 		1AB9EDDE19035B5100F4FC42 /* MNCarSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDDD19035B5100F4FC42 /* MNCarSettingsTableViewController.m */; };
 		1AB9EDE119035B8200F4FC42 /* MNCarTurnSignalPatternsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDE019035B8200F4FC42 /* MNCarTurnSignalPatternsTableViewController.m */; };
 		1AB9EDE419035BBC00F4FC42 /* MNCarSwitchSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDE319035BBC00F4FC42 /* MNCarSwitchSettingsTableViewController.m */; };
+		1AB9EDE8190364E800F4FC42 /* MNCarToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDE7190364E800F4FC42 /* MNCarToggleTableViewCell.m */; };
+		1AB9EDEC19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDEB19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m */; };
 		1AC395AC18EB78F600B30E4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AB18EB78F600B30E4B /* Foundation.framework */; };
 		1AC395AE18EB78F600B30E4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */; };
 		1AC395B018EB78F600B30E4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AF18EB78F600B30E4B /* UIKit.framework */; };
@@ -75,6 +77,10 @@
 		1AB9EDE019035B8200F4FC42 /* MNCarTurnSignalPatternsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCarTurnSignalPatternsTableViewController.m; sourceTree = "<group>"; };
 		1AB9EDE219035BBC00F4FC42 /* MNCarSwitchSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCarSwitchSettingsTableViewController.h; sourceTree = "<group>"; };
 		1AB9EDE319035BBC00F4FC42 /* MNCarSwitchSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCarSwitchSettingsTableViewController.m; sourceTree = "<group>"; };
+		1AB9EDE6190364E800F4FC42 /* MNCarToggleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCarToggleTableViewCell.h; sourceTree = "<group>"; };
+		1AB9EDE7190364E800F4FC42 /* MNCarToggleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCarToggleTableViewCell.m; sourceTree = "<group>"; };
+		1AB9EDEA19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCarSegmentsTableViewCell.h; sourceTree = "<group>"; };
+		1AB9EDEB19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCarSegmentsTableViewCell.m; sourceTree = "<group>"; };
 		1AC395A818EB78F600B30E4B /* BLECarTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLECarTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC395AB18EB78F600B30E4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -158,8 +164,8 @@
 		1AA718C718FF61B6002C19C8 /* Table Cells */ = {
 			isa = PBXGroup;
 			children = (
-				1AA718C418FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.h */,
-				1AA718C518FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.m */,
+				1AB9EDEE19036B9600F4FC42 /* Controls Tab Cells */,
+				1AB9EDED19036B8F00F4FC42 /* Car Tab Cells */,
 			);
 			name = "Table Cells";
 			sourceTree = "<group>";
@@ -201,6 +207,26 @@
 				1AB9EDE319035BBC00F4FC42 /* MNCarSwitchSettingsTableViewController.m */,
 			);
 			name = "Car Tab";
+			sourceTree = "<group>";
+		};
+		1AB9EDED19036B8F00F4FC42 /* Car Tab Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1AB9EDE6190364E800F4FC42 /* MNCarToggleTableViewCell.h */,
+				1AB9EDE7190364E800F4FC42 /* MNCarToggleTableViewCell.m */,
+				1AB9EDEA19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.h */,
+				1AB9EDEB19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m */,
+			);
+			name = "Car Tab Cells";
+			sourceTree = "<group>";
+		};
+		1AB9EDEE19036B9600F4FC42 /* Controls Tab Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1AA718C418FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.h */,
+				1AA718C518FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.m */,
+			);
+			name = "Controls Tab Cells";
 			sourceTree = "<group>";
 		};
 		1AC3959F18EB78F600B30E4B = {
@@ -420,7 +446,9 @@
 				1AA718D019022D94002C19C8 /* MNCarIgnitionViewController.m in Sources */,
 				1AB9EDD519035AD100F4FC42 /* MNCarWindowsViewController.m in Sources */,
 				1AC395C518EB78F600B30E4B /* MNBLETerminalViewController.m in Sources */,
+				1AB9EDEC19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m in Sources */,
 				1AB9EDDB19035B3500F4FC42 /* MNCarLightsTableViewController.m in Sources */,
+				1AB9EDE8190364E800F4FC42 /* MNCarToggleTableViewCell.m in Sources */,
 				1AC395BC18EB78F600B30E4B /* MNAppDelegate.m in Sources */,
 				1AB9EDE119035B8200F4FC42 /* MNCarTurnSignalPatternsTableViewController.m in Sources */,
 				1AA718C618FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.m in Sources */,

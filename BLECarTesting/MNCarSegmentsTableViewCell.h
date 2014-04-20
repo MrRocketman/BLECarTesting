@@ -1,10 +1,12 @@
 //
-//  MNBLEControlsSegmentsTableViewCell.h
+//  MNCarSegmentsTableViewCell.h
 //  BLECarTesting
 //
-//  Created by James Adams on 4/16/14.
+//  Created by James Adams on 4/19/14.
 //  Copyright (c) 2014 JamesAdams. All rights reserved.
 //
+
+#import <UIKit/UIKit.h>
 
 // Example of a command dictionary
 /*NSDictionary *section5Command4 = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -16,17 +18,11 @@
                                   @"Dome", @"title",
                                   nil];*/
 
-#import <UIKit/UIKit.h>
-
-@interface MNBLEControlsSegmentsTableViewCell : UITableViewCell
+@interface MNCarSegmentsTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl2;
 @property (strong, nonatomic) IBOutlet UILabel *label;
 
 @property(strong, nonatomic) NSDictionary *commandDictionary;
-
-- (IBAction)segmentedControlValueChanged:(id)sender;
-- (IBAction)segmentedControl2ValueChanged:(id)sender;
 
 @end

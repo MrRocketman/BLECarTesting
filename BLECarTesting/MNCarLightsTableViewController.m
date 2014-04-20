@@ -7,8 +7,15 @@
 //
 
 #import "MNCarLightsTableViewController.h"
+#import "MNBluetoothManager.h"
+#import "MNCarToggleTableViewCell.h"
+#import "MNBLEControlsSegmentsTableViewCell.h"
 
 @interface MNCarLightsTableViewController ()
+{
+    int indexesOfLightSections[10];
+    int numberOfLightsSections;
+}
 
 @end
 
@@ -44,25 +51,64 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    numberOfLightsSections = 0;
+    NSArray *commandSectionNames = [MNBluetoothManager commandSectionNames];
+    for(int i = 0; i < [commandSectionNames count]; i ++)
+    {
+        NSRange lightRange = [commandSectionNames[i] rangeOfString:@"Light"];
+        if(lightRange.location != NSNotFound)
+        {
+            indexesOfLightSections[numberOfLightsSections] = i;
+            numberOfLightsSections ++;
+        }
+    }
+    
+    return numberOfLightsSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    NSArray *commandSectionDictionaryArrays = [MNBluetoothManager commandSectionDictionaryArrays];
+    
+    int commandSectionIndex = indexesOfLightSections[section];
+    
+    return [commandSectionDictionaryArrays[commandSectionIndex] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    int commandSectionIndex = indexesOfLightSections[section];
+    
+    return [[MNBluetoothManager commandSectionNames] objectAtIndex:commandSectionIndex];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"toggleCell" forIndexPath:indexPath];
+    NSArray *commandSectionDictionaryArrays = [MNBluetoothManager commandSectionDictionaryArrays];
+    int commandSectionIndex = indexesOfLightSections[indexPath.section];
     
-    // Configure the cell...
+    if([[[[commandSectionDictionaryArrays objectAtIndex:commandSectionIndex] objectAtIndex:indexPath.row] objectForKey:@"title"] isEqualToString:@"Headlights"])
+    {
+        MNBLEControlsSegmentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"segmentsCell" forIndexPath:indexPath];
+        NSDictionary *commandDictionaryForCell = [[commandSectionDictionaryArrays objectAtIndex:commandSectionIndex] objectAtIndex:indexPath.row];
+        
+        [cell setCommandDictionary:commandDictionaryForCell];
+        
+        return cell;
+    }
+    else
+    {
+        MNCarToggleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell" forIndexPath:indexPath];
+        
+        // Configure the cell...
+        cell.label.text = [[[commandSectionDictionaryArrays objectAtIndex:commandSectionIndex] objectAtIndex:indexPath.row] objectForKey:@"title"];
+        
+        return cell;
+    }
     
-    return cell;
+    return nil;
 }
 
 /*
