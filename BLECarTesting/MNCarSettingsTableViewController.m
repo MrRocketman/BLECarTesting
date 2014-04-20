@@ -7,6 +7,25 @@
 //
 
 #import "MNCarSettingsTableViewController.h"
+#import "MNBluetoothManager.h"
+#import "MNCarToggleTableViewCell.h"
+#import "MNCarSegmentsTableViewCell.h"
+
+#define NUMBER_OF_SECTIONS 3
+#define LIGHTS_SECTION 0
+#define TURN_SIGNAL_SECTION 1
+#define SWITCH_SETTINGS_SECTION 2
+
+#define NUMBER_OF_ROWS_IN_LIGHTS_SECTION 2
+#define AUTO_LIGHTING_ROW 0
+#define ASSITIVE_LIGHTING_ROW 1
+
+#define NUMBER_OF_ROWS_IN_TURN_SIGNAL_SECTION 2
+#define TURN_SIGNAL_SPEED_ROW 0
+#define TURN_SIGNAL_PATTERN_ROW 1
+
+#define NUMBER_OF_ROWS_IN_SWITCH_SETTINGS_SECTION 1
+#define SWITCH_SETTINGS_ROW 0
 
 @interface MNCarSettingsTableViewController ()
 
@@ -44,28 +63,95 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return NUMBER_OF_SECTIONS;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
+    if(section == LIGHTS_SECTION)
+    {
+        return NUMBER_OF_ROWS_IN_LIGHTS_SECTION;
+    }
+    else if(section == TURN_SIGNAL_SECTION)
+    {
+        return NUMBER_OF_ROWS_IN_TURN_SIGNAL_SECTION;
+    }
+    else if(section == SWITCH_SETTINGS_SECTION)
+    {
+        return NUMBER_OF_ROWS_IN_SWITCH_SETTINGS_SECTION;
+    }
+    
     return 0;
 }
 
-/*
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if(section == LIGHTS_SECTION)
+    {
+        return @"Lighting";
+    }
+    else if(section == TURN_SIGNAL_SECTION)
+    {
+        return @"Turn Signal";
+    }
+    else if(section == SWITCH_SETTINGS_SECTION)
+    {
+        return @"Switch-Lighting";
+    }
+    
+    return @"";
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    if(indexPath.section == LIGHTS_SECTION)
+    {
+        MNCarToggleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell" forIndexPath:indexPath];
+        
+        // Configure the cell...
+        if(indexPath.row == AUTO_LIGHTING_ROW)
+        {
+            cell.label.text = [[[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:4] objectAtIndex:3] objectForKey:@"title"];
+        }
+        else if(indexPath.row == ASSITIVE_LIGHTING_ROW)
+        {
+            cell.label.text = [[[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:4] objectAtIndex:2] objectForKey:@"title"];
+        }
+        
+        return cell;
+    }
+    else if(indexPath.section == TURN_SIGNAL_SECTION)
+    {
+        if(indexPath.row == TURN_SIGNAL_SPEED_ROW)
+        {
+            MNCarSegmentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SegmentsCell" forIndexPath:indexPath];
+            
+            // Configure the cell...
+            [cell setCommandDictionary:[[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:4] objectAtIndex:0]];
+            
+            return cell;
+        }
+        else if(indexPath.row == TURN_SIGNAL_PATTERN_ROW)
+        {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TurnSignalPatternsCell" forIndexPath:indexPath];
+            
+            return cell;
+        }
+    }
+    else if(indexPath.section == SWITCH_SETTINGS_SECTION)
+    {
+        if(indexPath.row == SWITCH_SETTINGS_ROW)
+        {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SwitchSettingsCell" forIndexPath:indexPath];
+            
+            return cell;
+        }
+    }
     
-    // Configure the cell...
-    
-    return cell;
+    return nil;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
