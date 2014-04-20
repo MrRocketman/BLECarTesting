@@ -74,6 +74,7 @@
     static NSDictionary *section3Dictionary4;
     static NSDictionary *section3Dictionary5;
     static NSDictionary *section3Dictionary6;
+    static NSDictionary *section3Dictionary7;
     static NSArray *section3Dictionaries;
     
     static NSDictionary *section4Dictionary1;
@@ -87,7 +88,6 @@
     static NSDictionary *section5Dictionary2;
     static NSDictionary *section5Dictionary3;
     static NSDictionary *section5Dictionary4;
-    static NSDictionary *section5Dictionary5;
     static NSArray *section5Dictionaries;
     
     static NSArray *commandSectionDictionaryArrays;
@@ -199,6 +199,14 @@
                                @"Exterior Lights", @"category",
                                nil];
         section3Dictionary3 = [[NSDictionary alloc] initWithObjectsAndKeys:
+                               @"C204", @"baseCommand",
+                               @2, @"numberOfStates",
+                               @[@"Off", @"On"], @"stateLabels",
+                               @"L", @"stateCommand",
+                               @"Emergency Flashers", @"title",
+                               @"Exterior Lights", @"category",
+                               nil];
+        section3Dictionary4 = [[NSDictionary alloc] initWithObjectsAndKeys:
                                @"C102", @"baseCommand",
                                @2, @"numberOfStates",
                                @[@"Off", @"On"], @"stateLabels",
@@ -206,7 +214,7 @@
                                @"Park", @"title",
                                @"Exterior Lights", @"category",
                                nil];
-        section3Dictionary4 = [[NSDictionary alloc] initWithObjectsAndKeys:
+        section3Dictionary5 = [[NSDictionary alloc] initWithObjectsAndKeys:
                                @"C103", @"baseCommand",
                                @2, @"numberOfStates",
                                @[@"Off", @"On"], @"stateLabels",
@@ -214,7 +222,7 @@
                                @"Backup", @"title",
                                @"Exterior Lights", @"category",
                                nil];
-        section3Dictionary5 = [[NSDictionary alloc] initWithObjectsAndKeys:
+        section3Dictionary6 = [[NSDictionary alloc] initWithObjectsAndKeys:
                                @"C104", @"baseCommand",
                                @2, @"numberOfStates",
                                @[@"Off", @"On"], @"stateLabels",
@@ -222,7 +230,7 @@
                                @"Tail Night", @"title",
                                @"Exterior Lights", @"category",
                                nil];
-        section3Dictionary6 = [[NSDictionary alloc] initWithObjectsAndKeys:
+        section3Dictionary7 = [[NSDictionary alloc] initWithObjectsAndKeys:
                                @"C105", @"baseCommand",
                                @2, @"numberOfStates",
                                @[@"Off", @"On"], @"stateLabels",
@@ -230,7 +238,7 @@
                                @"License Plate", @"title",
                                @"Exterior Lights", @"category",
                                nil];
-        section3Dictionaries = @[section3Dictionary1, section3Dictionary2, section3Dictionary3, section3Dictionary4, section3Dictionary5, section3Dictionary6];
+        section3Dictionaries = @[section3Dictionary1, section3Dictionary2, section3Dictionary3, section3Dictionary4, section3Dictionary5, section3Dictionary6, section3Dictionary7];
         
         // Interior Lights
         section4Dictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -313,15 +321,7 @@
                                @"Automatic Lighting", @"title",
                                @"Miscellaneous", @"category",
                                nil];
-        section5Dictionary5 = [[NSDictionary alloc] initWithObjectsAndKeys:
-                               @"C204", @"baseCommand",
-                               @2, @"numberOfStates",
-                               @[@"Off", @"On"], @"stateLabels",
-                               @"L", @"stateCommand",
-                               @"Emergency Flashers", @"title",
-                               @"Miscellaneous", @"category",
-                               nil];
-        section5Dictionaries = @[section5Dictionary1, section5Dictionary2, section5Dictionary3, section5Dictionary4, section5Dictionary5];
+        section5Dictionaries = @[section5Dictionary1, section5Dictionary2, section5Dictionary3, section5Dictionary4];
         
         commandSectionDictionaryArrays = @[section1Dictionaries, section2Dictionaries, section3Dictionaries, section4Dictionaries, section5Dictionaries];
     });
