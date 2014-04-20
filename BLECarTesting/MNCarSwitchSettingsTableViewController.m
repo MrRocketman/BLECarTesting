@@ -39,6 +39,15 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     interiorLightsSection = -1;
+    NSArray *commandSectionNames = [MNBluetoothManager commandSectionNames];
+    for(int i = 0; i < [commandSectionNames count]; i ++)
+    {
+        NSRange lightRange = [commandSectionNames[i] rangeOfString:@"Interior Lights"];
+        if(lightRange.location != NSNotFound)
+        {
+            interiorLightsSection = i;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,17 +67,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSArray *commandSectionNames = [MNBluetoothManager commandSectionNames];
-    for(int i = 0; i < [commandSectionNames count]; i ++)
-    {
-        NSRange lightRange = [commandSectionNames[i] rangeOfString:@"Interior Lights"];
-        if(lightRange.location != NSNotFound)
-        {
-            interiorLightsSection = i;
-            break;
-        }
-    }
-    
     return [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:interiorLightsSection] count];
 }
 

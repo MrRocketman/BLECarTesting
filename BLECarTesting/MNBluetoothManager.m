@@ -279,7 +279,7 @@
                                @5, @"numberOfStates",
                                @[@"Basic", @"Sequence", @"Chase", @"-Sequence", @"OneByOne"], @"stateLabels",
                                @"S", @"stateCommand",
-                               @"Turn Signal Pattern", @"title",
+                               @"Turn Signal Patterns", @"title",
                                nil];
         section5Dictionary3 = [[NSDictionary alloc] initWithObjectsAndKeys:
                                @"C202", @"baseCommand",

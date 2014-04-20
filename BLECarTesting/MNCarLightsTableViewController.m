@@ -39,6 +39,17 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSArray *commandSectionNames = [MNBluetoothManager commandSectionNames];
+    for(int i = 0; i < [commandSectionNames count]; i ++)
+    {
+        NSRange lightRange = [commandSectionNames[i] rangeOfString:@"Light"];
+        if(lightRange.location != NSNotFound)
+        {
+            indexesOfLightSections[numberOfLightsSections] = i;
+            numberOfLightsSections ++;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,18 +63,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    numberOfLightsSections = 0;
-    NSArray *commandSectionNames = [MNBluetoothManager commandSectionNames];
-    for(int i = 0; i < [commandSectionNames count]; i ++)
-    {
-        NSRange lightRange = [commandSectionNames[i] rangeOfString:@"Light"];
-        if(lightRange.location != NSNotFound)
-        {
-            indexesOfLightSections[numberOfLightsSections] = i;
-            numberOfLightsSections ++;
-        }
-    }
-    
     return numberOfLightsSections;
 }
 
