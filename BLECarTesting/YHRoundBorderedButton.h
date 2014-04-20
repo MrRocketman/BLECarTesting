@@ -10,6 +10,10 @@
 
 @interface YHRoundBorderedButton : UIButton
 
+@property(assign, nonatomic) int buttonPressedCommandState;
+@property(assign, nonatomic) int buttonNormalCommandState;
+@property(readwrite, nonatomic) NSDictionary *command;
+
 @property(assign, nonatomic) BOOL isToggleButton;
 @property(assign, nonatomic) BOOL isCircleButton;
 @property(assign, nonatomic) float borderWidth;

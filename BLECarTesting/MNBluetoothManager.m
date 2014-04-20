@@ -361,6 +361,66 @@
 
 #pragma mark - BLE Methods
 
+- (void)writeCommandToArduino:(NSDictionary *)command withState:(int)state andFactoryState:(int)factory
+{
+    // Command example
+    /*NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
+     @"numberOfStates" : @2,
+     @"stateLabels" : @[@"Close", @"Open"],
+     @"stateCommand" : @"S",
+     @"factoryCommand" : @"F",
+     @"title" : @"Under Dash",
+     @"category" : @"Interior Lights"};*/
+    
+    
+    if(command != nil)
+    {
+        NSString *string = [NSString stringWithFormat:@"%@ %@%d %@%d", command[@"baseCommand"], command[@"stateCommand"], state, command[@"factoryCommand"], factory];
+        
+        [self writeStringToArduino:string];
+    }
+}
+
+- (void)writeCommandToArduino:(NSDictionary *)command withState:(int)state
+{
+    // Command example
+    /*NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
+     @"numberOfStates" : @2,
+     @"stateLabels" : @[@"Close", @"Open"],
+     @"stateCommand" : @"S",
+     @"factoryCommand" : @"F",
+     @"title" : @"Under Dash",
+     @"category" : @"Interior Lights"};*/
+    
+    
+    if(command != nil)
+    {
+        NSString *string = [NSString stringWithFormat:@"%@ %@%d", command[@"baseCommand"], command[@"stateCommand"], state];
+        
+        [self writeStringToArduino:string];
+    }
+}
+
+- (void)writeCommandToArduino:(NSDictionary *)command withFactoryState:(int)factory
+{
+    // Command example
+    /*NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
+                                   @"numberOfStates" : @2,
+                                   @"stateLabels" : @[@"Close", @"Open"],
+                                   @"stateCommand" : @"S",
+                                   @"factoryCommand" : @"F",
+                                   @"title" : @"Under Dash",
+                                   @"category" : @"Interior Lights"};*/
+    
+    
+    if(command != nil)
+    {
+        NSString *string = [NSString stringWithFormat:@"%@ %@%d", command[@"baseCommand"], command[@"factoryCommand"], factory];
+        
+        [self writeStringToArduino:string];
+    }
+}
+
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color
 {
     [[self consoleDelegate] writeDebugStringToConsole:string color:color];

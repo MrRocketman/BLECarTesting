@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class YHRoundBorderedButton;
+
 @interface MNCarIgnitionViewController : UIViewController
 
-@property(strong, nonatomic) IBOutlet UIButton *ignitionButton;
+@property(strong, nonatomic) IBOutlet YHRoundBorderedButton *ignitionButton;
 
 - (IBAction)ignitionButtonPress:(id)sender;
 

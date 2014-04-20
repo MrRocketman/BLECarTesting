@@ -7,6 +7,7 @@
 //
 
 #import "YHRoundBorderedButton.h"
+#import "MNBluetoothManager.h"
 
 @interface YHRoundBorderedButton()
 
@@ -69,6 +70,9 @@
 
 - (void)setup
 {
+    self.buttonPressedCommandState = 1;
+    self.buttonNormalCommandState = 0;
+    
     [self setTitleColor:[self tintColor] forState:UIControlStateNormal];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [self setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
@@ -115,17 +119,25 @@
             {
                 self.layer.backgroundColor = [[self tintColor] CGColor];
                 self.touchBegan = NO;
+                
+                // send BLE command
+                [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonPressedCommandState];
             }
             if(self.touchEnded && !self.isOn)
             {
                 self.layer.backgroundColor = [[UIColor clearColor] CGColor];
                 self.touchEnded = NO;
+                
+                // send BLE command
+                [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonNormalCommandState];
             }
         }
         else
         {
-            
             self.layer.backgroundColor = highlighted ? [[self tintColor] CGColor] : [[UIColor clearColor] CGColor];
+            
+            // send BLE command
+            [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:(highlighted ? self.buttonPressedCommandState : self.buttonNormalCommandState)];
         }
     }];
 }
@@ -146,6 +158,7 @@
     {
         self.isOn = !self.isOn;
         self.touchBegan = YES;
+        self.touchEnded = NO;
         self.highlighted = self.isOn;
     }
 }
@@ -156,6 +169,7 @@
     
     if(self.isToggleButton)
     {
+        self.touchBegan = NO;
         self.touchEnded = YES;
         self.highlighted = self.isOn;
     }

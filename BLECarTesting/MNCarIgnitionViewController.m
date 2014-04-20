@@ -7,6 +7,8 @@
 //
 
 #import "MNCarIgnitionViewController.h"
+#import "YHRoundBorderedButton.h"
+#import "MNBluetoothManager.h"
 
 @interface MNCarIgnitionViewController ()
 
@@ -27,6 +29,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Set the ignitionButton data
+    self.ignitionButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Ignition"];
+    self.ignitionButton.buttonPressedCommandState = 2;
 }
 
 - (void)didReceiveMemoryWarning

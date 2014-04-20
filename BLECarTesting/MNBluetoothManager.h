@@ -69,6 +69,10 @@ typedef enum
 - (int)commandsCountForCategory:(NSString *)category;
 
 // BLE
+- (void)writeCommandToArduino:(NSDictionary *)command withState:(int)state andFactoryState:(int)factory;
+- (void)writeCommandToArduino:(NSDictionary *)command withState:(int)state;
+- (void)writeCommandToArduino:(NSDictionary *)command withFactoryState:(int)factory;
+
 - (void)writeStringToArduino:(NSString *)string;
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color;
 - (void)writeDebugStringToConsole:(NSString *)string;
