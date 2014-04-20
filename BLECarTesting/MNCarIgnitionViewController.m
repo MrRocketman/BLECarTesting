@@ -37,7 +37,7 @@
 
 - (IBAction)ignitionButtonPress:(id)sender
 {
-    self.ignitionButton.highlighted = !self.ignitionButton.highlighted;
+    
 }
 
 /*

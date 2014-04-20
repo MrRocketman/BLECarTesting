@@ -156,18 +156,8 @@
 				1AB9EDD019035A9700F4FC42 /* Terminal Tab */,
 				1AB9EDD119035AA100F4FC42 /* Controls Tab */,
 				1AB9EDD219035AAA00F4FC42 /* Car Tab */,
-				1AA718C718FF61B6002C19C8 /* Table Cells */,
 			);
 			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		1AA718C718FF61B6002C19C8 /* Table Cells */ = {
-			isa = PBXGroup;
-			children = (
-				1AB9EDEE19036B9600F4FC42 /* Controls Tab Cells */,
-				1AB9EDED19036B8F00F4FC42 /* Car Tab Cells */,
-			);
-			name = "Table Cells";
 			sourceTree = "<group>";
 		};
 		1AB9EDD019035A9700F4FC42 /* Terminal Tab */ = {
@@ -184,6 +174,7 @@
 			children = (
 				1AA718C118FF6158002C19C8 /* MNBLEControlsTableViewController.h */,
 				1AA718C218FF6158002C19C8 /* MNBLEControlsTableViewController.m */,
+				1AB9EDEE19036B9600F4FC42 /* Table View Cells */,
 			);
 			name = "Controls Tab";
 			sourceTree = "<group>";
@@ -205,11 +196,13 @@
 				1AB9EDE019035B8200F4FC42 /* MNCarTurnSignalPatternsTableViewController.m */,
 				1AB9EDE219035BBC00F4FC42 /* MNCarSwitchSettingsTableViewController.h */,
 				1AB9EDE319035BBC00F4FC42 /* MNCarSwitchSettingsTableViewController.m */,
+				1AB9EDEF19046EF800F4FC42 /* Buttons */,
+				1AB9EDED19036B8F00F4FC42 /* Table View Cells */,
 			);
 			name = "Car Tab";
 			sourceTree = "<group>";
 		};
-		1AB9EDED19036B8F00F4FC42 /* Car Tab Cells */ = {
+		1AB9EDED19036B8F00F4FC42 /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
 				1AB9EDE6190364E800F4FC42 /* MNCarToggleTableViewCell.h */,
@@ -217,16 +210,25 @@
 				1AB9EDEA19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.h */,
 				1AB9EDEB19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m */,
 			);
-			name = "Car Tab Cells";
+			name = "Table View Cells";
 			sourceTree = "<group>";
 		};
-		1AB9EDEE19036B9600F4FC42 /* Controls Tab Cells */ = {
+		1AB9EDEE19036B9600F4FC42 /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
 				1AA718C418FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.h */,
 				1AA718C518FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.m */,
 			);
-			name = "Controls Tab Cells";
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		1AB9EDEF19046EF800F4FC42 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				1AA718D11902444A002C19C8 /* YHRoundBorderedButton.h */,
+				1AA718D21902444A002C19C8 /* YHRoundBorderedButton.m */,
+			);
+			name = Buttons;
 			sourceTree = "<group>";
 		};
 		1AC3959F18EB78F600B30E4B = {
@@ -268,8 +270,6 @@
 				1AC395BB18EB78F600B30E4B /* MNAppDelegate.m */,
 				1AA718BC18FF4795002C19C8 /* MNBluetoothManager.h */,
 				1AA718BD18FF4795002C19C8 /* MNBluetoothManager.m */,
-				1AA718D11902444A002C19C8 /* YHRoundBorderedButton.h */,
-				1AA718D21902444A002C19C8 /* YHRoundBorderedButton.m */,
 				1AA718C018FF4C32002C19C8 /* ViewControllers */,
 				1AA718BF18FF4C25002C19C8 /* Interface */,
 				1AC395F818EB80D400B30E4B /* Categories */,
