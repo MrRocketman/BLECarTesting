@@ -32,6 +32,7 @@ typedef enum
 + (id)sharedBluetoothManager;
 + (NSArray *)commandSectionNames;
 + (NSArray *)commandSectionDictionaryArrays;
++ (void)sectionAndIndexForCommandTitle:(NSString *)title section:(int *)section index:(int *)index;
 
 // Console Delegate declaration
 @property(strong, nonatomic) id <MNBluetoothManagerConsoleDelegate> consoleDelegate;
