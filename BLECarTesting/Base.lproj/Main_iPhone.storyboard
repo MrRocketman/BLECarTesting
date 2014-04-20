@@ -289,10 +289,10 @@
             </objects>
             <point key="canvasLocation" x="1104" y="1298"/>
         </scene>
-        <!--View Controller - Controls-->
+        <!--Car Controls View Controller - Controls-->
         <scene sceneID="nsF-v5-1Sr">
             <objects>
-                <viewController id="bUz-0o-Nb0" sceneMemberID="viewController">
+                <viewController id="bUz-0o-Nb0" customClass="MNCarControlsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T7P-Gj-1J0"/>
                         <viewControllerLayoutGuide type="bottom" id="30j-lm-kgR"/>
@@ -379,10 +379,10 @@
             </objects>
             <point key="canvasLocation" x="1573" y="1298"/>
         </scene>
-        <!--View Controller - Windows-->
+        <!--Car Windows View Controller - Windows-->
         <scene sceneID="4sV-FA-gNf">
             <objects>
-                <viewController id="Rq1-Nn-Ucf" sceneMemberID="viewController">
+                <viewController id="Rq1-Nn-Ucf" customClass="MNCarWindowsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="c3D-8B-hn7"/>
                         <viewControllerLayoutGuide type="bottom" id="laK-VD-uAX"/>
@@ -495,10 +495,10 @@
             </objects>
             <point key="canvasLocation" x="2105" y="545"/>
         </scene>
-        <!--Table View Controller - Lights-->
+        <!--Car Lights Table View Controller - Lights-->
         <scene sceneID="7fq-Xh-Awr">
             <objects>
-                <tableViewController id="b2y-hZ-3X4" sceneMemberID="viewController">
+                <tableViewController id="b2y-hZ-3X4" customClass="MNCarLightsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rv6-zA-KhV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -530,10 +530,10 @@
             </objects>
             <point key="canvasLocation" x="2105" y="1298"/>
         </scene>
-        <!--Table View Controller - Settings-->
+        <!--Car Settings Table View Controller - Settings-->
         <scene sceneID="a1p-h3-Iww">
             <objects>
-                <tableViewController id="Ya7-13-2Wu" sceneMemberID="viewController">
+                <tableViewController id="Ya7-13-2Wu" customClass="MNCarSettingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Z1o-PZ-S3O">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -587,10 +587,10 @@
             </objects>
             <point key="canvasLocation" x="2105" y="2074"/>
         </scene>
-        <!--Table View Controller - Switch Settings-->
+        <!--Car Switch Settings Table View Controller - Switch Settings-->
         <scene sceneID="ptx-cc-jOR">
             <objects>
-                <tableViewController id="qJ3-Pm-Qax" sceneMemberID="viewController">
+                <tableViewController id="qJ3-Pm-Qax" customClass="MNCarSwitchSettingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Uvl-y5-BLT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -622,10 +622,10 @@
             </objects>
             <point key="canvasLocation" x="2604" y="2754"/>
         </scene>
-        <!--Table View Controller - Turn Signal Patterns-->
+        <!--Car Turn Signal Patterns Table View Controller - Turn Signal Patterns-->
         <scene sceneID="7L0-Y3-4ng">
             <objects>
-                <tableViewController id="55L-cw-RpG" sceneMemberID="viewController">
+                <tableViewController id="55L-cw-RpG" customClass="MNCarTurnSignalPatternsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Gqd-U9-MQr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
