@@ -441,7 +441,7 @@
         [bufferToWriteToArduino appendString:@"\n"];
         
         // Print the string to the 'console'
-        [self writeDebugStringToConsole:bufferToWriteToArduino color:[UIColor blueColor]];
+        [self writeDebugStringToConsole:[NSString stringWithFormat:@"%@\n", string] color:[UIColor blueColor]];
         
         // Handle the connecting to, writing, and disconnecting from the BLE UART device
         [self writeArduinoBuffer:nil];
