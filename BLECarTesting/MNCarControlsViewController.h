@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class YHRoundBorderedButton;
+
 @interface MNCarControlsViewController : UIViewController
+
+@property(readwrite, nonatomic) IBOutlet YHRoundBorderedButton *trunkButton;
+@property(readwrite, nonatomic) IBOutlet YHRoundBorderedButton *exhaustButton;
 
 @end

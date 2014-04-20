@@ -98,7 +98,7 @@
     }
     else if(section == SWITCH_SETTINGS_SECTION)
     {
-        return @"Switch-Lighting";
+        return @"Door Ajar Settings";
     }
     
     return @"";

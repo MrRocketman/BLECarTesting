@@ -675,7 +675,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Switch Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZT-Wz-YYB">
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Light Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZT-Wz-YYB">
                                             <rect key="frame" x="20" y="11" width="210" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -699,7 +699,7 @@
             </objects>
             <point key="canvasLocation" x="2105" y="2074"/>
         </scene>
-        <!--Car Switch Settings Table View Controller - Switch Settings-->
+        <!--Car Switch Settings Table View Controller - Door Ajar Settings-->
         <scene sceneID="ptx-cc-jOR">
             <objects>
                 <tableViewController id="qJ3-Pm-Qax" customClass="MNCarSwitchSettingsTableViewController" sceneMemberID="viewController">
@@ -742,7 +742,7 @@
                             <outlet property="delegate" destination="qJ3-Pm-Qax" id="vBC-2o-65G"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Switch Settings" id="XTj-ZU-qnD"/>
+                    <navigationItem key="navigationItem" title="Door Ajar Settings" id="XTj-ZU-qnD"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJ6-UQ-OrG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
