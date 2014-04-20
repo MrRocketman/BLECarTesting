@@ -7,8 +7,13 @@
 //
 
 #import "MNCarSwitchSettingsTableViewController.h"
+#import "MNBluetoothManager.h"
+#import "MNCarToggleTableViewCell.h"
 
 @interface MNCarSwitchSettingsTableViewController ()
+{
+    int interiorLightsSection;
+}
 
 @end
 
@@ -32,6 +37,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    interiorLightsSection = -1;
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,28 +51,42 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    NSArray *commandSectionNames = [MNBluetoothManager commandSectionNames];
+    for(int i = 0; i < [commandSectionNames count]; i ++)
+    {
+        NSRange lightRange = [commandSectionNames[i] rangeOfString:@"Interior Lights"];
+        if(lightRange.location != NSNotFound)
+        {
+            interiorLightsSection = i;
+            break;
+        }
+    }
+    
+    return [[[MNBluetoothManager commandSectionDictionaryArrays] objectAtIndex:interiorLightsSection] count];
 }
 
-/*
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Set the switch on if you want the light to activate when the doors are opened";
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    NSArray *commandSectionDictionaryArrays = [MNBluetoothManager commandSectionDictionaryArrays];
     
-    // Configure the cell...
+    MNCarToggleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell" forIndexPath:indexPath];
+    
+    cell.label.text = [[[commandSectionDictionaryArrays objectAtIndex:interiorLightsSection] objectAtIndex:indexPath.row] objectForKey:@"title"];
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
