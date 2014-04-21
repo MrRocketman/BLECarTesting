@@ -7,6 +7,7 @@
 //
 
 #import "MNCarSegmentsTableViewCell.h"
+#import "MNBluetoothManager.h"
 
 @implementation MNCarSegmentsTableViewCell
 
@@ -35,27 +36,24 @@
 
 - (IBAction)segmentedControlValueChanged:(id)sender
 {
-    //[[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:@"C101 S2"];
-    
-    // String format: C01 S2
-    //[[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:[NSString stringWithFormat:@"%@ %@%d", [self.commandDictionary objectForKey:@"baseCommand"], [self.commandDictionary objectForKey:@"stateCommand"], (int)[sender selectedSegmentIndex]]];
+    [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:(int)[self.segmentedControl selectedSegmentIndex]];
 }
 
 #pragma mark - Public Methods
 
-- (void)setCommandDictionary:(NSDictionary *)commandDictionary
+- (void)setCommand:(NSDictionary *)command
 {
-    _commandDictionary = commandDictionary;
+    _command = command;
     
     // Update the segmented control
     [self.segmentedControl removeAllSegments];
-    for(int i = 0; i < [[self.commandDictionary objectForKey:@"numberOfStates"] integerValue]; i ++)
+    for(int i = 0; i < [[self.command objectForKey:@"numberOfStates"] integerValue]; i ++)
     {
-        [self.segmentedControl insertSegmentWithTitle:[[self.commandDictionary objectForKey:@"stateLabels"] objectAtIndex:i] atIndex:i animated:NO];
+        [self.segmentedControl insertSegmentWithTitle:[[self.command objectForKey:@"stateLabels"] objectAtIndex:i] atIndex:i animated:NO];
     }
     
     // Update the label
-    self.label.text = [self.commandDictionary objectForKey:@"title"];
+    self.label.text = [self.command objectForKey:@"title"];
 }
 
 @end

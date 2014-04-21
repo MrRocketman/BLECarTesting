@@ -136,7 +136,7 @@
             command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Speed"];
             
             // Configure the cell...
-            [cell setCommandDictionary:command];
+            [cell setCommand:command];
             
             return cell;
         }

@@ -9,7 +9,7 @@
 #import "MNCarLightsTableViewController.h"
 #import "MNBluetoothManager.h"
 #import "MNCarToggleTableViewCell.h"
-#import "MNBLEControlsSegmentsTableViewCell.h"
+#import "MNCarSegmentsTableViewCell.h"
 
 @interface MNCarLightsTableViewController ()
 
@@ -69,14 +69,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *category = [self.lightCategories objectAtIndex:indexPath.section];
-    NSDictionary *commandDictionaryForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
+    NSDictionary *commandForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
     
     // Headlights needs a special cell
-    if([[commandDictionaryForCell objectForKey:@"title"] isEqualToString:@"Headlights"])
+    if([[commandForCell objectForKey:@"title"] isEqualToString:@"Headlights"])
     {
-        MNBLEControlsSegmentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"segmentsCell" forIndexPath:indexPath];
+        MNCarSegmentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"segmentsCell" forIndexPath:indexPath];
         
-        [cell setCommandDictionary:commandDictionaryForCell];
+        // Set the command so it can send BLE data when pushed
+        cell.command = commandForCell;
         
         return cell;
     }
@@ -85,8 +86,8 @@
     {
         MNCarToggleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell" forIndexPath:indexPath];
         
-        // Configure the cell...
-        cell.label.text = [commandDictionaryForCell objectForKey:@"title"];
+        // Set the command so it can send BLE data when pushed
+        cell.command = commandForCell;
         
         return cell;
     }

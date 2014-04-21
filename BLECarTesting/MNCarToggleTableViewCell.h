@@ -13,6 +13,8 @@
 @property(strong, nonatomic) IBOutlet UISwitch *toggleSwitch;
 @property(strong, nonatomic) IBOutlet UILabel *label;
 
+@property(strong, nonatomic) NSDictionary *command;
+
 - (IBAction)toggleSwitchChange:(id)sender;
 
 @end

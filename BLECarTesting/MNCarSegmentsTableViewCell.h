@@ -23,6 +23,6 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (strong, nonatomic) IBOutlet UILabel *label;
 
-@property(strong, nonatomic) NSDictionary *commandDictionary;
+@property(strong, nonatomic) NSDictionary *command;
 
 @end

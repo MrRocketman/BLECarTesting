@@ -7,6 +7,7 @@
 //
 
 #import "MNCarToggleTableViewCell.h"
+#import "MNBluetoothManager.h"
 
 @implementation MNCarToggleTableViewCell
 
@@ -33,7 +34,15 @@
 
 - (IBAction)toggleSwitchChange:(id)sender
 {
+    [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:(self.toggleSwitch.isOn ? 1 : 0)];
+}
+
+- (void)setCommand:(NSDictionary *)command
+{
+    _command = command;
     
+    // Update the label
+    self.label.text = [self.command objectForKey:@"title"];
 }
 
 @end

@@ -423,6 +423,7 @@
 
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color
 {
+    NSLog(@"%@", string);
     [[self consoleDelegate] writeDebugStringToConsole:string color:color];
 }
 
