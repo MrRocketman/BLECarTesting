@@ -33,6 +33,10 @@
     // Set the ignitionButton data
     self.ignitionButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Ignition"];
     self.ignitionButton.buttonPressedCommandState = 2;
+    
+    // Set the battery data
+    self.batteryButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Ignition"];
+    self.batteryButton.buttonPressedCommandState = 1;
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,7 +47,24 @@
 
 - (IBAction)ignitionButtonPress:(id)sender
 {
-    
+    if(self.batteryButton.isHighlighted)
+    {
+        // Push the battery button, but tell it not to send a command when it is released
+        self.batteryButton.buttonNormalCommandState = -999;
+        [self.batteryButton buttonPressed:NO];
+        self.batteryButton.buttonNormalCommandState = 0;
+    }
+}
+
+- (IBAction)batteryButtonPress:(id)sender
+{
+    if(self.ignitionButton.isHighlighted && sender != nil)
+    {
+        // Push the ignition button, but tell it not to send a command when it is released
+        self.ignitionButton.buttonNormalCommandState = -999;
+        [self.ignitionButton buttonPressed:NO];
+        self.ignitionButton.buttonNormalCommandState = 0;
+    }
 }
 
 /*

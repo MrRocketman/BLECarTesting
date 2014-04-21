@@ -13,7 +13,9 @@
 @interface MNCarIgnitionViewController : UIViewController
 
 @property(strong, nonatomic) IBOutlet YHRoundBorderedButton *ignitionButton;
+@property(strong, nonatomic) IBOutlet YHRoundBorderedButton *batteryButton;
 
-- (IBAction)ignitionButtonPress:(id)sender;
+- (IBAction)ignitionButtonPress:(id)sender; // Need this action so we can toggle the battery button
+- (IBAction)batteryButtonPress:(id)sender; // Need this action so we can toggle the ignition button
 
 @end

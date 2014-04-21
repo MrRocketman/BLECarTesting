@@ -82,13 +82,6 @@
     [self refreshBorderColor];
 }
 
-- (void)setPlusIconVisibility:(BOOL)show
-{
-    self.plusIconVisible = show;
-    
-    // TODO
-}
-
 - (void)setTintColor:(UIColor *)tintColor
 {
     [super setTintColor:tintColor];
@@ -108,6 +101,24 @@
     self.layer.borderColor = [self isEnabled] ? [[self tintColor] CGColor] : [[UIColor grayColor] CGColor];
 }
 
+- (void)buttonPressed:(BOOL)pressed
+{
+    if(pressed)
+    {
+        self.isOn = YES;
+        self.touchBegan = YES;
+        self.touchEnded = NO;
+        self.highlighted = self.isOn;
+    }
+    else
+    {
+        self.isOn = NO;
+        self.touchBegan = YES;
+        self.touchEnded = NO;
+        self.highlighted = self.isOn;
+    }
+}
+
 - (void)setHighlighted:(BOOL)highlighted
 {
     [super setHighlighted:highlighted];
@@ -121,15 +132,21 @@
                 self.touchBegan = NO;
                 
                 // send BLE command
-                [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonPressedCommandState];
+                if(self.buttonNormalCommandState != -999)
+                {
+                    [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonPressedCommandState];
+                }
             }
-            if(self.touchEnded && !self.isOn)
+            if(self.touchBegan && !self.isOn)
             {
                 self.layer.backgroundColor = [[UIColor clearColor] CGColor];
                 self.touchEnded = NO;
                 
                 // send BLE command
-                [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonNormalCommandState];
+                if(self.buttonNormalCommandState != -999)
+                {
+                    [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonNormalCommandState];
+                }
             }
         }
         else
@@ -137,7 +154,14 @@
             self.layer.backgroundColor = highlighted ? [[self tintColor] CGColor] : [[UIColor clearColor] CGColor];
             
             // send BLE command
-            [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:(highlighted ? self.buttonPressedCommandState : self.buttonNormalCommandState)];
+            if(self.buttonNormalCommandState != -999 && highlighted)
+            {
+                [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonNormalCommandState];
+            }
+            if(self.buttonNormalCommandState != -999 && !highlighted)
+            {
+                [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonPressedCommandState];
+            }
         }
     }];
 }

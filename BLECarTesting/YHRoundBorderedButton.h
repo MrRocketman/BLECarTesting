@@ -10,14 +10,14 @@
 
 @interface YHRoundBorderedButton : UIButton
 
-@property(assign, nonatomic) int buttonPressedCommandState;
-@property(assign, nonatomic) int buttonNormalCommandState;
+@property(assign, nonatomic) int buttonPressedCommandState; // Set to -999 to disable command sending
+@property(assign, nonatomic) int buttonNormalCommandState; // Set to -999 to disable command sending
 @property(readwrite, nonatomic) NSDictionary *command;
 
 @property(assign, nonatomic) BOOL isToggleButton;
 @property(assign, nonatomic) BOOL isCircleButton;
 @property(assign, nonatomic) float borderWidth;
 
-- (void)setPlusIconVisibility:(BOOL)show;
+- (void)buttonPressed:(BOOL)pressed;
 
 @end
