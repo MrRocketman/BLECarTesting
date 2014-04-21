@@ -20,8 +20,8 @@
     NSMutableString *bufferToWriteToArduino;
 }
 
-@property(readwrite, nonatomic) NSArray *commandDictionariesArray;
-@property(readwrite, nonatomic) NSArray *commandCategories;
+@property(strong, nonatomic) NSArray *commandDictionariesArray;
+@property(strong, nonatomic) NSArray *commandCategories;
 
 @end
 

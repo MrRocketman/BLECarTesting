@@ -11,8 +11,8 @@
 
 @interface MNCarTurnSignalPatternsTableViewController ()
 
-@property(readwrite, nonatomic) NSIndexPath *previouslySelectedIndexPath;
-@property(readwrite, nonatomic) NSDictionary *turnSignalPatternsCommand;
+@property(strong, nonatomic) NSIndexPath *previouslySelectedIndexPath;
+@property(strong, nonatomic) NSDictionary *turnSignalPatternsCommand;
 
 @end
 

@@ -13,7 +13,7 @@
 
 @interface MNCarLightsTableViewController ()
 
-@property(readwrite, nonatomic) NSArray *lightCategories;
+@property(strong, nonatomic) NSArray *lightCategories;
 
 @end
 

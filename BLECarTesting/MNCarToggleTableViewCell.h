@@ -10,8 +10,8 @@
 
 @interface MNCarToggleTableViewCell : UITableViewCell
 
-@property(readwrite, nonatomic) IBOutlet UISwitch *toggleSwitch;
-@property(readwrite, nonatomic) IBOutlet UILabel *label;
+@property(strong, nonatomic) IBOutlet UISwitch *toggleSwitch;
+@property(strong, nonatomic) IBOutlet UILabel *label;
 
 - (IBAction)toggleSwitchChange:(id)sender;
 

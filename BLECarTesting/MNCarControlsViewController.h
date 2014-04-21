@@ -12,7 +12,7 @@
 
 @interface MNCarControlsViewController : UIViewController
 
-@property(readwrite, nonatomic) IBOutlet YHRoundBorderedButton *trunkButton;
-@property(readwrite, nonatomic) IBOutlet YHRoundBorderedButton *exhaustButton;
+@property(strong, nonatomic) IBOutlet YHRoundBorderedButton *trunkButton;
+@property(strong, nonatomic) IBOutlet YHRoundBorderedButton *exhaustButton;
 
 @end
