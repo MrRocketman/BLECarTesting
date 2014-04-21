@@ -78,6 +78,11 @@
     
     self.previouslySelectedIndexPath = indexPath;
     
+    NSDictionary *command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Patterns"];
+    [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:command withState:(int)indexPath.row];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 #pragma mark TODO: Segue back to the settings view here
 }
 
