@@ -521,10 +521,12 @@
                         <outlet property="bothButton" destination="VEe-Hl-r5h" id="lqu-LO-gaf"/>
                         <outlet property="leftBottomButton" destination="ajD-SJ-apy" id="SpI-ga-3jJ"/>
                         <outlet property="leftDownButton" destination="hIm-sm-Mo2" id="xI7-TL-MBi"/>
+                        <outlet property="leftLabel" destination="a9d-34-XhX" id="jbb-fg-h0T"/>
                         <outlet property="leftTopButton" destination="MeE-72-ibw" id="qXV-aP-8Ky"/>
                         <outlet property="leftUpButton" destination="8l4-OG-DEC" id="sSa-AB-f6M"/>
                         <outlet property="rightBottomButton" destination="QQr-tg-7nm" id="rxa-e7-Dbb"/>
                         <outlet property="rightDownButton" destination="Fms-y8-lWu" id="yan-zH-aF5"/>
+                        <outlet property="rightLabel" destination="Zld-Cq-Vvp" id="3pC-mH-vNW"/>
                         <outlet property="rightTopButton" destination="bUT-Wb-30S" id="1D2-ST-xFQ"/>
                         <outlet property="rightUpButton" destination="zUn-1V-5MQ" id="s0H-rZ-obQ"/>
                     </connections>

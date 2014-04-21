@@ -11,6 +11,12 @@
 #import "MNBluetoothManager.h"
 
 @interface MNCarWindowsViewController ()
+{
+    float originalLeftButtonsCenterX;
+    float originalRightButtonsCenterX;
+    float originalLeftLabelCenterX;
+    float originalRightLabelCenterX;
+}
 
 @end
 
@@ -29,6 +35,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    originalLeftButtonsCenterX = self.leftTopButton.center.x;
+    originalRightButtonsCenterX = self.rightTopButton.center.x;
+    originalLeftLabelCenterX = self.leftLabel.center.x;
+    originalRightLabelCenterX = self.rightLabel.center.x;
     
     [self setSingleWindowCommands];
 }
@@ -51,7 +62,11 @@
     self.leftBottomButton.buttonPressedCommandState = 1;
     self.leftBottomButton.buttonNormalCommandState = -999;
     
+    // Move the buttons apart
     [UIView animateWithDuration:0.50 animations:^{
+        self.leftLabel.alpha = 1.0;
+        self.rightLabel.alpha = 1.0;
+        
         self.rightTopButton.alpha = 1.0;
         self.rightUpButton.alpha = 1.0;
         self.rightDownButton.alpha = 1.0;
@@ -60,6 +75,40 @@
         self.rightUpButton.enabled = YES;
         self.rightDownButton.enabled = YES;
         self.rightBottomButton.enabled = YES;
+        
+        CGPoint newCenterPoint = self.rightLabel.center;
+        newCenterPoint.x = originalRightLabelCenterX;
+        self.rightLabel.center = newCenterPoint;
+        
+        newCenterPoint = self.leftLabel.center;
+        newCenterPoint.x = originalLeftLabelCenterX;
+        self.leftLabel.center = newCenterPoint;
+        
+        newCenterPoint = self.rightTopButton.center;
+        newCenterPoint.x = originalRightButtonsCenterX;
+        self.rightTopButton.center = newCenterPoint;
+        newCenterPoint = self.rightUpButton.center;
+        newCenterPoint.x = originalRightButtonsCenterX;
+        self.rightUpButton.center = newCenterPoint;
+        newCenterPoint = self.rightDownButton.center;
+        newCenterPoint.x = originalRightButtonsCenterX;
+        self.rightDownButton.center = newCenterPoint;
+        newCenterPoint = self.rightBottomButton.center;
+        newCenterPoint.x = originalRightButtonsCenterX;
+        self.rightBottomButton.center = newCenterPoint;
+        
+        newCenterPoint = self.leftTopButton.center;
+        newCenterPoint.x = originalLeftButtonsCenterX;
+        self.leftTopButton.center = newCenterPoint;
+        newCenterPoint = self.leftUpButton.center;
+        newCenterPoint.x = originalLeftButtonsCenterX;
+        self.leftUpButton.center = newCenterPoint;
+        newCenterPoint = self.leftDownButton.center;
+        newCenterPoint.x = originalLeftButtonsCenterX;
+        self.leftDownButton.center = newCenterPoint;
+        newCenterPoint = self.leftBottomButton.center;
+        newCenterPoint.x = originalLeftButtonsCenterX;
+        self.leftBottomButton.center = newCenterPoint;
     }];
     
     self.rightTopButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Right Window"];
@@ -85,7 +134,11 @@
     self.leftBottomButton.buttonPressedCommandState = 1;
     self.leftBottomButton.buttonNormalCommandState = -999;
     
+    // Move the buttons together
     [UIView animateWithDuration:0.25 animations:^{
+        self.leftLabel.alpha = 0.0;
+        self.rightLabel.alpha = 0.0;
+        
         self.rightTopButton.alpha = 0.0;
         self.rightUpButton.alpha = 0.0;
         self.rightDownButton.alpha = 0.0;
@@ -94,6 +147,40 @@
         self.rightUpButton.enabled = NO;
         self.rightDownButton.enabled = NO;
         self.rightBottomButton.enabled = NO;
+        
+        CGPoint newCenterPoint = self.rightLabel.center;
+        newCenterPoint.x = self.bothButton.center.x;
+        self.rightLabel.center = newCenterPoint;
+        
+        newCenterPoint = self.leftLabel.center;
+        newCenterPoint.x = self.bothButton.center.x;
+        self.leftLabel.center = newCenterPoint;
+        
+        newCenterPoint = self.rightTopButton.center;
+        newCenterPoint.x = self.bothButton.center.x;
+        self.rightTopButton.center = newCenterPoint;
+        newCenterPoint = self.rightUpButton.center;
+        newCenterPoint.x = self.bothButton.center.x;
+        self.rightUpButton.center = newCenterPoint;
+        newCenterPoint = self.rightDownButton.center;
+        newCenterPoint.x = self.bothButton.center.x;
+        self.rightDownButton.center = newCenterPoint;
+        newCenterPoint = self.rightBottomButton.center;
+        newCenterPoint.x = self.bothButton.center.x;
+        self.rightBottomButton.center = newCenterPoint;
+        
+        newCenterPoint = self.leftTopButton.center;
+        newCenterPoint.x = self.bothButton.center.x;
+        self.leftTopButton.center = newCenterPoint;
+        newCenterPoint = self.leftUpButton.center;
+        newCenterPoint.x = self.bothButton.center.x;
+        self.leftUpButton.center = newCenterPoint;
+        newCenterPoint = self.leftDownButton.center;
+        newCenterPoint.x = self.bothButton.center.x;
+        self.leftDownButton.center = newCenterPoint;
+        newCenterPoint = self.leftBottomButton.center;
+        newCenterPoint.x = self.bothButton.center.x;
+        self.leftBottomButton.center = newCenterPoint;
     }];
 }
 
