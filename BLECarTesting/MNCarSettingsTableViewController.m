@@ -106,7 +106,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *command;
+    NSDictionary *commandForCell;
     
     if(indexPath.section == LIGHTS_SECTION)
     {
@@ -114,16 +114,16 @@
         
         if(indexPath.row == AUTO_LIGHTING_ROW)
         {
-            command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Automatic Lighting"];
+            commandForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Automatic Lighting"];
             
         }
         else if(indexPath.row == ASSITIVE_LIGHTING_ROW)
         {
-            command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Assistive Lighting"];
+            commandForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Assistive Lighting"];
         }
         
-        // Configure the cell...
-        cell.label.text = [command objectForKey:@"title"];
+        // Set the command so it can send BLE data when pushed
+        cell.command = commandForCell;
         
         return cell;
     }
@@ -133,10 +133,10 @@
         {
             MNCarSegmentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SegmentsCell" forIndexPath:indexPath];
             
-            command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Speed"];
+            commandForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Speed"];
             
-            // Configure the cell...
-            [cell setCommand:command];
+            // Set the command so it can send BLE data when pushed
+            cell.command = commandForCell;
             
             return cell;
         }
