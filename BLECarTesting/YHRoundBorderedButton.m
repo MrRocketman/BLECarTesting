@@ -113,8 +113,8 @@
     else
     {
         self.isOn = NO;
-        self.touchBegan = YES;
-        self.touchEnded = NO;
+        self.touchEnded = YES;
+        self.touchBegan = NO;
         self.highlighted = self.isOn;
     }
 }
