@@ -7,6 +7,8 @@
 //
 
 #import "MNCarControlsViewController.h"
+#import "YHRoundBorderedButton.h"
+#import "MNBluetoothManager.h"
 
 @interface MNCarControlsViewController ()
 
@@ -27,6 +29,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.trunkButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Trunk"];
+    self.exhaustButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Exhaust"];
 }
 
 - (void)didReceiveMemoryWarning

@@ -67,8 +67,8 @@
                                       @"title" : @"Door Locks",
                                       @"category" : @"Controls"};
         NSDictionary *dictionary3 = @{@"baseCommand" : @"C51",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Close", @"Open"],
+                                      @"numberOfStates" : @3,
+                                      @"stateLabels" : @[@"Close", @"Open", @"Stop"],
                                       @"stateCommand" : @"S",
                                       @"title" : @"Trunk",
                                       @"category" : @"Controls"};

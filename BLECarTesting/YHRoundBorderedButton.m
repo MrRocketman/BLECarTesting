@@ -137,7 +137,7 @@
                     [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonPressedCommandState];
                 }
             }
-            if(self.touchBegan && !self.isOn)
+            if(self.touchEnded && !self.isOn)
             {
                 self.layer.backgroundColor = [[UIColor clearColor] CGColor];
                 self.touchEnded = NO;

@@ -391,6 +391,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Controls" id="rX3-xf-DOP"/>
+                    <connections>
+                        <outlet property="exhaustButton" destination="rVP-VM-Jbi" id="hJS-qB-Xmc"/>
+                        <outlet property="trunkButton" destination="zgr-tA-eCC" id="nJh-h8-CwW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RRb-jv-uCm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
