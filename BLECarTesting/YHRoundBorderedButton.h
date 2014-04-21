@@ -18,6 +18,8 @@
 @property(assign, nonatomic) BOOL isCircleButton;
 @property(assign, nonatomic) float borderWidth;
 
+
+@property(readonly, nonatomic) BOOL isOn;
 - (void)buttonPressed:(BOOL)pressed;
 
 @end

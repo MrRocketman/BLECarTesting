@@ -432,6 +432,9 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isToggleButton" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="bothButtonChanged:" destination="Rq1-Nn-Ucf" eventType="touchUpInside" id="8Nn-h5-Mfu"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIm-sm-Mo2" customClass="YHRoundBorderedButton">
                                 <rect key="frame" x="20" y="323" width="93" height="58"/>
@@ -514,6 +517,17 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Windows" id="PX4-Kd-4ir"/>
+                    <connections>
+                        <outlet property="bothButton" destination="VEe-Hl-r5h" id="lqu-LO-gaf"/>
+                        <outlet property="leftBottomButton" destination="ajD-SJ-apy" id="SpI-ga-3jJ"/>
+                        <outlet property="leftDownButton" destination="hIm-sm-Mo2" id="xI7-TL-MBi"/>
+                        <outlet property="leftTopButton" destination="MeE-72-ibw" id="qXV-aP-8Ky"/>
+                        <outlet property="leftUpButton" destination="8l4-OG-DEC" id="sSa-AB-f6M"/>
+                        <outlet property="rightBottomButton" destination="QQr-tg-7nm" id="rxa-e7-Dbb"/>
+                        <outlet property="rightDownButton" destination="Fms-y8-lWu" id="yan-zH-aF5"/>
+                        <outlet property="rightTopButton" destination="bUT-Wb-30S" id="1D2-ST-xFQ"/>
+                        <outlet property="rightUpButton" destination="zUn-1V-5MQ" id="s0H-rZ-obQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1g1-ur-mBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

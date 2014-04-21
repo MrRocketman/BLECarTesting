@@ -154,11 +154,11 @@
             self.layer.backgroundColor = highlighted ? [[self tintColor] CGColor] : [[UIColor clearColor] CGColor];
             
             // send BLE command
-            if(self.buttonNormalCommandState != -999 && highlighted)
+            if(self.buttonNormalCommandState != -999 && !highlighted)
             {
                 [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonNormalCommandState];
             }
-            if(self.buttonNormalCommandState != -999 && !highlighted)
+            if(self.buttonPressedCommandState != -999 && highlighted)
             {
                 [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonPressedCommandState];
             }

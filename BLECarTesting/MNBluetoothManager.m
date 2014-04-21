@@ -82,7 +82,7 @@
                                       @"numberOfStates" : @3,
                                       @"stateLabels" : @[@"Stop", @"Up", @"Down"],
                                       @"stateCommand" : @"S",
-                                      @"title" : @"Left Window",
+                                      @"title" : @"Left Window Move",
                                       @"category" : @"Controls"};
         NSDictionary *dictionary6 = @{@"baseCommand" : @"C54",
                                       @"numberOfStates" : @2,
@@ -94,7 +94,7 @@
                                       @"numberOfStates" : @3,
                                       @"stateLabels" : @[@"Stop", @"Up", @"Down"],
                                       @"stateCommand" : @"S",
-                                      @"title" : @"Right Window",
+                                      @"title" : @"Right Window Move",
                                       @"category" : @"Controls"};
         NSDictionary *dictionary8 = @{@"baseCommand" : @"C56",
                                       @"numberOfStates" : @2,
@@ -106,7 +106,7 @@
                                       @"numberOfStates" : @3,
                                       @"stateLabels" : @[@"Stop", @"Up", @"Down"],
                                       @"stateCommand" : @"S",
-                                      @"title" : @"Both Windows",
+                                      @"title" : @"Both Windows Move",
                                       @"category" : @"Controls"};
         NSDictionary *dictionary10 = @{@"baseCommand" : @"C58",
                                       @"numberOfStates" : @2,
