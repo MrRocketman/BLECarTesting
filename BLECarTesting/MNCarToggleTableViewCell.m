@@ -34,7 +34,14 @@
 
 - (IBAction)toggleSwitchChange:(id)sender
 {
-    [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:(self.toggleSwitch.isOn ? 1 : 0)];
+    if(self.command[@"factoryCommand"] != nil)
+    {
+        [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withFactoryState:(self.toggleSwitch.isOn ? 1 : 0)];
+    }
+    else
+    {
+        [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:(self.toggleSwitch.isOn ? 1 : 0)];
+    }
 }
 
 - (void)setCommand:(NSDictionary *)command
