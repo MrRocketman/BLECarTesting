@@ -54,6 +54,15 @@
         [self.batteryButton buttonPressed:NO];
         self.batteryButton.buttonNormalCommandState = 0;
     }
+    
+    if(self.ignitionButton.isOn)
+    {
+        self.batteryButton.hidden = YES;
+    }
+    else
+    {
+        self.batteryButton.hidden = NO;
+    }
 }
 
 - (IBAction)batteryButtonPress:(id)sender
