@@ -51,21 +51,16 @@
     self.leftBottomButton.buttonPressedCommandState = 1;
     self.leftBottomButton.buttonNormalCommandState = -999;
     
-    [UIView animateWithDuration:0.25 animations:^{
+    [UIView animateWithDuration:0.50 animations:^{
         self.rightTopButton.alpha = 1.0;
         self.rightUpButton.alpha = 1.0;
         self.rightDownButton.alpha = 1.0;
         self.rightBottomButton.alpha = 1.0;
+        self.rightTopButton.enabled = YES;
+        self.rightUpButton.enabled = YES;
+        self.rightDownButton.enabled = YES;
+        self.rightBottomButton.enabled = YES;
     }];
-    
-    double delayInMilliseconds = 250;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.rightTopButton.hidden = NO;
-        self.rightUpButton.hidden = NO;
-        self.rightDownButton.hidden = NO;
-        self.rightBottomButton.hidden = NO;
-    });
     
     self.rightTopButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Right Window"];
     self.rightTopButton.buttonPressedCommandState = 0;
@@ -95,16 +90,11 @@
         self.rightUpButton.alpha = 0.0;
         self.rightDownButton.alpha = 0.0;
         self.rightBottomButton.alpha = 0.0;
+        self.rightTopButton.enabled = NO;
+        self.rightUpButton.enabled = NO;
+        self.rightDownButton.enabled = NO;
+        self.rightBottomButton.enabled = NO;
     }];
-    
-    double delayInMilliseconds = 250;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        self.rightTopButton.hidden = YES;
-        self.rightUpButton.hidden = YES;
-        self.rightDownButton.hidden = YES;
-        self.rightBottomButton.hidden = YES;
-    });
 }
 
 - (IBAction)bothButtonChanged:(id)sender
