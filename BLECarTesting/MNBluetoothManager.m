@@ -548,13 +548,13 @@
         
         [newData getBytes:&data length:dataLength];
         
-        for (int i = 0; i<dataLength; i++)
+        for (int i = 0; i < dataLength; i ++)
         {
-            if ((data[i] <= 0x1f) || (data[i] >= 0x80)) //null characters
+            // If it's in the null character range
+            if ((data[i] <= 0x1f) || (data[i] >= 0x80))
             {
-                if ((data[i] != 0x9) && //0x9 == TAB
-                    (data[i] != 0xa) && //0xA == NL
-                    (data[i] != 0xd)) //0xD == CR
+                // If it's not a 0x9 == TAB, 0xA == \n, 0xD == \r
+                if ((data[i] != 0x9) && (data[i] != 0xa) && (data[i] != 0xd))
                 {
                     data[i] = 0xA9;
                 }
@@ -618,9 +618,9 @@
             [self.bluetoothPeripheral discoverCharacteristics:@[characteristicID] forService:service];
         }
         
-        // Subscribe to the characteristic if we arent' yet
+        // Subscribe to the rx characteristic if we arent' yet
         CBCharacteristic *characteristic = service.characteristics[characteristicUUIDIndex];
-        if(!characteristic.isNotifying)
+        if(!characteristic.isNotifying && [self compareID:characteristic.UUID toID:RX_CHARACTERISTIC_UUID])
         {
             [self.bluetoothPeripheral setNotifyValue:YES forCharacteristic:characteristic];
         }
@@ -631,6 +631,7 @@
 
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
 {
+    NSLog(@"Center Manager Restoring From Background");
     // Get a pointer back to a connected UART device
     NSArray *peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey];
     
@@ -647,14 +648,16 @@
     if(central.state == CBCentralManagerStatePoweredOn)
     {
         self.connectionStatus = ConnectionStatusScanning;
-        NSLog(@"Scanning for BLE devices");
-        [self writeDebugStringToConsole:@"Scanning for BLE devices"];
+        NSLog(@"Bluetooth Powered On");
+        [self writeDebugStringToConsole:@"Bluetooth Powered On"];
         
         // Get connected peripherals by other apps
         NSArray *connectedPeripherals = [self.centralBluetoothManager retrieveConnectedPeripheralsWithServices:@[UART_SERVICE_UUID]];
         // Skip scanning if UART is already connected
         if([connectedPeripherals count] > 0)
         {
+            NSLog(@"Connecting to BLE from another app");
+            [self writeDebugStringToConsole:@"Connecting to BLE from another app"];
             //connect to first peripheral in array
             CBPeripheral *peripheral = [connectedPeripherals objectAtIndex:0];
             
@@ -669,6 +672,8 @@
         // Restoring peripheral from background
         else if(self.bluetoothPeripheral != nil)
         {
+            NSLog(@"Restoring BLE from background");
+            [self writeDebugStringToConsole:@"Restoring BLE from background"];
             // Make sure we have the SERVICES and CHARACTERISTICS (in case we were shut down in the middle of discovery)
             if(self.bluetoothPeripheral.state == CBPeripheralStateConnected)
             {
@@ -681,6 +686,8 @@
         //Look for available Bluetooth LE devices
         else
         {
+            NSLog(@"First time scan");
+            [self writeDebugStringToConsole:@"First time scan"];
             [self.centralBluetoothManager scanForPeripheralsWithServices:@[UART_SERVICE_UUID] options:nil];
         }
     }
@@ -710,7 +717,7 @@
 
 - (void)centralManager:(CBCentralManager*)central didDiscoverPeripheral:(CBPeripheral*)peripheral advertisementData:(NSDictionary*)advertisementData RSSI:(NSNumber*)RSSI
 {
-    NSLog(@"Did discover peripheral %@", peripheral.name);
+    NSLog(@"Discovered: %@", peripheral.name);
     [self writeDebugStringToConsole:[NSString stringWithFormat:@"Discovered: %@", peripheral.name]];
     
     // Stop scanning for any new devices since we found one
@@ -733,15 +740,15 @@
         // We already discovered the services for the peripheral. Just pass along the peripheral.
         if(self.bluetoothPeripheral.services)
         {
-            NSLog(@"Did connect to existing peripheral %@", peripheral.name);
+            NSLog(@"Already found services for: %@", peripheral.name);
+            [self writeDebugStringToConsole:[NSString stringWithFormat:@"Already found services for: %@", peripheral.name]];
             [self peripheral:peripheral didDiscoverServices:nil]; //already discovered services, DO NOT re-discover. Just pass along the peripheral.
         }
         // We need to discover the services for the peripheral
         else
         {
-            NSLog(@"Did connect peripheral %@", peripheral.name);
-            NSLog(@"Starting service discovery for %@", self.bluetoothPeripheral.name);
-            [self writeDebugStringToConsole:[NSString stringWithFormat:@"Connecting To: %@", peripheral.name]];
+            NSLog(@"Finding services for: %@", self.bluetoothPeripheral.name);
+            [self writeDebugStringToConsole:[NSString stringWithFormat:@"Finding services for: %@", self.bluetoothPeripheral.name]];
             
             self.connectionStatus = ConnectionStatusConnecting;
             // Try to discover the services for the peripheral
@@ -754,14 +761,9 @@
 {
     if ([self.bluetoothPeripheral isEqual:peripheral])
     {
-        NSLog(@"Did disconnect peripheral %@", peripheral.name);
-        [self writeDebugStringToConsole:[NSString stringWithFormat:@"Disconnected From: %@", peripheral.name] color:[UIColor redColor]];
+        NSLog(@"Disconnected From: %@", self.bluetoothPeripheral.name);
+        [self writeDebugStringToConsole:[NSString stringWithFormat:@"Disconnected From: %@", self.bluetoothPeripheral.name] color:[UIColor redColor]];
         
-        // If status was connected, then disconnect was unexpected by the user
-        if(self.connectionStatus == ConnectionStatusConnected)
-        {
-            NSLog(@"BLE peripheral has disconnected");
-        }
         self.connectionStatus = ConnectionStatusDisconnected;
         self.bluetoothPeripheral = nil;
         
@@ -789,7 +791,8 @@
             // Discovered the UART_SERVICE_UUID
             else if([self compareID:service.UUID toID:UART_SERVICE_UUID])
             {
-                NSLog(@"Found correct service");
+                NSLog(@"Found UART service");
+                [self writeDebugStringToConsole:@"Found UART Service"];
                 
                 // Now try to discover the tx and rx characteristics
                 [self.bluetoothPeripheral discoverCharacteristics:@[TX_CHARACTERISTIC_UUID, RX_CHARACTERISTIC_UUID] forService:service];
@@ -819,6 +822,7 @@
             if([self compareID:characteristic.UUID toID:RX_CHARACTERISTIC_UUID])
             {
                 NSLog(@"Found RX Characteristic");
+                [self writeDebugStringToConsole:@"Found RX Characteristic"];
                 self.rxCharacteristic = characteristic;
                 
                 [self.bluetoothPeripheral setNotifyValue:YES forCharacteristic:self.rxCharacteristic];
@@ -826,11 +830,13 @@
             else if([self compareID:characteristic.UUID toID:TX_CHARACTERISTIC_UUID])
             {
                 NSLog(@"Found TX Characteristic");
+                [self writeDebugStringToConsole:@"Found TX Characteristic"];
                 self.txCharacteristic = characteristic;
             }
             else if([self compareID:characteristic.UUID toID:HARDWARE_REVISION_STRING_UUID])
             {
                 NSLog(@"Found Hardware Revision String Characteristic");
+                [self writeDebugStringToConsole:@"Found Hardware Revision String Characteristic"];
                 [self.bluetoothPeripheral readValueForCharacteristic:characteristic];
                 
                 //Once hardware revision string is read connection will be complete …
@@ -869,6 +875,7 @@
             // Once hardware revision string is read, connection to Bluefruit is complete
             NSString *hwRevisionString = [hwRevision substringToIndex:hwRevision.length - 2];
             NSLog(@"HW Revision: %@", hwRevisionString);
+            [self writeDebugStringToConsole:[NSString stringWithFormat:@"HW Revision: %@", hwRevisionString]];
             
             self.connectionStatus = ConnectionStatusConnected;
             [self writeDebugStringToConsole:@"Connected!" color:[UIColor greenColor]];

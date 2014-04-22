@@ -40,22 +40,24 @@
 
 - (void)BLEConnectionStatusChange:(NSNotification *)notification
 {
-    NSLog(@"Conneciton status change");
-    
     if([notification.object integerValue] == ConnectionStatusConnected)
     {
+        NSLog(@"Conneciton status: Connected");
         [self.navigationBar setBarTintColor:[UIColor whiteColor]]; // greenColor
     }
     else if([notification.object integerValue] == ConnectionStatusConnecting)
     {
+        NSLog(@"Conneciton status: Connectiing/Finding Services");
         [self.navigationBar setBarTintColor:[UIColor blueColor]];
     }
     else if([notification.object integerValue] == ConnectionStatusScanning)
     {
+        NSLog(@"Conneciton status: Scanning");
         [self.navigationBar setBarTintColor:[UIColor redColor]];
     }
     else if([notification.object integerValue] == ConnectionStatusDisconnected)
     {
+        NSLog(@"Conneciton status: Disconnected");
         [self.navigationBar setBarTintColor:[UIColor redColor]];
     }
 }
