@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "UARTPeripheral.h"
 #import "MNBluetoothManager.h"
 
 @interface MNBLETerminalViewController : UIViewController <UITextFieldDelegate, MNBluetoothManagerConsoleDelegate>

@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-#import "UARTPeripheral.h"
-
 
 // A Command is an NSDictionary like this:
 /*NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -29,6 +27,7 @@ typedef enum
 {
     ConnectionStatusDisconnected = 0,
     ConnectionStatusScanning,
+    ConnectionStatusConnecting,
     ConnectionStatusConnected,
 } ConnectionStatus;
 
@@ -40,13 +39,15 @@ typedef enum
 
 
 // Main interface
-@interface MNBluetoothManager : NSObject <CBCentralManagerDelegate, UARTPeripheralDelegate>
+@interface MNBluetoothManager : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
 
 // Singleton instance declaration
 + (MNBluetoothManager *)sharedBluetoothManager;
 
 // Console Delegate declaration
 @property(strong, nonatomic) id <MNBluetoothManagerConsoleDelegate> consoleDelegate;
+
+@property(readonly, nonatomic) ConnectionStatus connectionStatus;
 
 // Public methods
 // CommandCategories
