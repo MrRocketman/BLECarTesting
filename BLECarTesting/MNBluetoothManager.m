@@ -25,7 +25,6 @@
 
 @property CBCentralManager *centralBluetoothManager;
 @property CBPeripheral *bluetoothPeripheral;
-@property CBService *uartService;
 @property CBCharacteristic *rxCharacteristic;
 @property CBCharacteristic *txCharacteristic;
 
@@ -588,6 +587,43 @@
     return NO;
 }
 
+- (void)connectToSerivceIfNotAlreadyConnected:(CBUUID *)serviceID andCharacteristics:(NSArray *)characteristics
+{
+    // Have we discovered the SERVICE yet?
+    NSUInteger serviceUUIDIndex = [self.bluetoothPeripheral.services indexOfObjectPassingTest:^BOOL(CBService *obj, NSUInteger index, BOOL *stop)
+                                   {
+                                       return [obj.UUID isEqual:serviceID];
+                                   }];
+    // We haven't discovered the SERVICE yet
+    if (serviceUUIDIndex == NSNotFound)
+    {
+        [self.bluetoothPeripheral discoverServices:@[serviceID]];
+    }
+    
+    // Have we discovered the CHARACTERISTIC_UUID yet?
+    CBService *service = self.bluetoothPeripheral.services[serviceUUIDIndex];
+    
+    for(CBUUID *characteristicID in characteristics)
+    {
+        NSUInteger characteristicUUIDIndex = [service.characteristics indexOfObjectPassingTest:^BOOL(CBCharacteristic *obj, NSUInteger index, BOOL *stop)
+                                              {
+                                                  return [obj.UUID isEqual:characteristicID];
+                                              }];
+        // We haven't discovered the CHARACTERISTIC_UUID yet
+        if (characteristicUUIDIndex == NSNotFound)
+        {
+            [self.bluetoothPeripheral discoverCharacteristics:@[characteristicID] forService:service];
+        }
+        
+        // Subscribe to the characteristic if we arent' yet
+        CBCharacteristic *characteristic = service.characteristics[characteristicUUIDIndex];
+        if(!characteristic.isNotifying)
+        {
+            [self.bluetoothPeripheral setNotifyValue:YES forCharacteristic:characteristic];
+        }
+    }
+}
+
 #pragma mark - CBCentralManagerDelegate
 
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
@@ -627,14 +663,22 @@
             self.bluetoothPeripheral.delegate = self;
             [self.centralBluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES}];
         }
+        // Restoring peripheral from background
         else if(self.bluetoothPeripheral != nil)
         {
+            // Make sure we have the SERVICES and CHARACTERISTICS (in case we were shut down in the middle of discovery)
+            if(self.bluetoothPeripheral.state == CBPeripheralStateConnected)
+            {
+                [self connectToSerivceIfNotAlreadyConnected:UART_SERVICE_UUID andCharacteristics:@[RX_CHARACTERISTIC_UUID, TX_CHARACTERISTIC_UUID]];
+                
+                [self connectToSerivceIfNotAlreadyConnected:DEVICE_INFORMATION_SERVICE_UUID andCharacteristics:@[HARDWARE_REVISION_STRING_UUID]];
+            }
             
         }
         //Look for available Bluetooth LE devices
         else
         {
-            [self.centralBluetoothManager scanForPeripheralsWithServices:@[UART_SERVICE_UUID] options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO}];
+            [self.centralBluetoothManager scanForPeripheralsWithServices:@[UART_SERVICE_UUID] options:nil];
         }
     }
     // respond to bluetooth powered off
@@ -743,10 +787,9 @@
             else if([self compareID:service.UUID toID:UART_SERVICE_UUID])
             {
                 NSLog(@"Found correct service");
-                self.uartService = service;
                 
                 // Now try to discover the tx and rx characteristics
-                [self.bluetoothPeripheral discoverCharacteristics:@[TX_CHARACTERISTIC_UUID, RX_CHARACTERISTIC_UUID] forService:self.uartService];
+                [self.bluetoothPeripheral discoverCharacteristics:@[TX_CHARACTERISTIC_UUID, RX_CHARACTERISTIC_UUID] forService:service];
             }
             // Discovered the DEVICE_INFORMATION_SERVICE_UUID
             else if([self compareID:service.UUID toID:DEVICE_INFORMATION_SERVICE_UUID])
