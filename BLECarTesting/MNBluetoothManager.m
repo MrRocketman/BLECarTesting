@@ -631,7 +631,7 @@
 
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
 {
-    NSLog(@"Center Manager Restoring From Background");
+    NSLog(@"Central Manager Restoring From Background");
     // Get a pointer back to a connected UART device
     NSArray *peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey];
     
