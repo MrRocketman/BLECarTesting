@@ -273,12 +273,10 @@
 			children = (
 				1AC395BA18EB78F600B30E4B /* MNAppDelegate.h */,
 				1AC395BB18EB78F600B30E4B /* MNAppDelegate.m */,
-				1AA718BC18FF4795002C19C8 /* MNBluetoothManager.h */,
-				1AA718BD18FF4795002C19C8 /* MNBluetoothManager.m */,
-				1AA718C018FF4C32002C19C8 /* ViewControllers */,
-				1AA718BF18FF4C25002C19C8 /* Interface */,
-				1AC395F818EB80D400B30E4B /* Categories */,
 				1AC395EB18EB805F00B30E4B /* Bluetooth */,
+				1AA718C018FF4C32002C19C8 /* ViewControllers */,
+				1AC395F818EB80D400B30E4B /* Categories */,
+				1AA718BF18FF4C25002C19C8 /* Interface */,
 				1AC395C918EB78F600B30E4B /* Images.xcassets */,
 				1AC395B218EB78F600B30E4B /* Supporting Files */,
 			);
@@ -317,6 +315,8 @@
 		1AC395EB18EB805F00B30E4B /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
+				1AA718BC18FF4795002C19C8 /* MNBluetoothManager.h */,
+				1AA718BD18FF4795002C19C8 /* MNBluetoothManager.m */,
 				1AC395E818EB805A00B30E4B /* UARTPeripheral.h */,
 				1AC395E918EB805A00B30E4B /* UARTPeripheral.m */,
 			);

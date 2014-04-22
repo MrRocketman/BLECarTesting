@@ -512,7 +512,6 @@
     NSArray *connectedPeripherals = [bluetoothManager retrieveConnectedPeripheralsWithServices:@[UARTPeripheral.uartServiceUUID]];
     if ([connectedPeripherals count] > 0)
     {
-#pragma mark !!! Maybe delete this code
         //connect to first peripheral in array
         CBPeripheral *peripheral = [connectedPeripherals objectAtIndex:0];
         
@@ -565,7 +564,10 @@
     
     //Connect
     currentPeripheral = [[UARTPeripheral alloc] initWithPeripheral:peripheral delegate:self];
-    [bluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey: [NSNumber numberWithBool:YES]}];
+    [bluetoothManager connectPeripheral:peripheral options:@{
+                                                             CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES,
+                                                             CBConnectPeripheralOptionNotifyOnConnectionKey: @YES,
+                                                             CBConnectPeripheralOptionNotifyOnNotificationKey: @YES}];
 }
 
 
