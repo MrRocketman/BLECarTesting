@@ -572,6 +572,9 @@
 {
     NSLog(@"uart Error!!!!:%@", error);
     
+    // Cancel the connection (disconnect) - we then try to reconnect later
+    [self.centralBluetoothManager cancelPeripheralConnection:self.bluetoothPeripheral];
+    
     NSString *title = @"UART Error";
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
@@ -803,8 +806,6 @@
     {
         NSLog(@"Error discovering services");
         [self uartDidEncounterError:@"Error discovering services"];
-        
-        return;
     }
 }
 
@@ -840,8 +841,6 @@
     {
         NSLog(@"Error discovering characteristics: %@", error.description);
         [self uartDidEncounterError:@"Error discovering characteristics"];
-        
-        return;
     }
 }
 
@@ -882,8 +881,6 @@
     {
         NSLog(@"Error receiving notification for characteristic %@: %@", characteristic.description, error.description);
         [self uartDidEncounterError:@"Error receiving notification for characteristic"];
-        
-        return;
     }
 }
 
