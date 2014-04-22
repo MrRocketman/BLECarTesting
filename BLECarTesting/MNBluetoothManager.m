@@ -766,7 +766,7 @@
         self.bluetoothPeripheral = nil;
         
         // We want to be connected, try reconnecting
-        [self.centralBluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES}];
+        [self.centralBluetoothManager scanForPeripheralsWithServices:@[UART_SERVICE_UUID] options:nil];
     }
 }
 
