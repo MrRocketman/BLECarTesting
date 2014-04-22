@@ -433,7 +433,7 @@
 
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color
 {
-    NSLog(@"%@", string);
+    //NSLog(@"%@", string);
     [[self consoleDelegate] writeDebugStringToConsole:string color:color];
 }
 
@@ -446,6 +446,8 @@
 {
     if(string != nil)
     {
+        NSLog(@"Writing: %@", string);
+        
         // Add the string to our buffer
         [self.bufferToWriteToArduino appendString:string];
         // Append a '\n' to the string so the Arduino knows the command has finished
@@ -535,9 +537,11 @@
 - (void)didReceiveData:(NSData*)newData
 {
     //Debug
-    NSString *hexString = [newData hexRepresentationWithSpaces:YES];
+    //NSString *hexString = [newData hexRepresentationWithSpaces:YES];
+    //NSLog(@"Received: hex:%@", uartString, hexString);
     NSString *uartString = [[NSString alloc] initWithData:newData encoding:NSUTF8StringEncoding];
-    NSLog(@"Received: %@ hex:%@", uartString, hexString);
+    NSLog(@"Received: %@", uartString);
+    //NSLog(@"Received: %@ hex:%@", uartString, hexString);
     
     if (connectionStatus == ConnectionStatusConnected || connectionStatus == ConnectionStatusScanning)
     {
@@ -754,10 +758,6 @@
         CBService *s = [peripheral.services lastObject];
         if([self compareID:service.UUID toID:s.UUID])
         {
-            //last service discovered
-            NSLog(@"Found all characteristics");
-            
-            NSLog(@"Setu up peripheral for use");
             for(CBService *s in peripheral.services)
             {
                 for(CBCharacteristic *c in [s characteristics])
@@ -802,7 +802,7 @@
         // Received RX Data
         if(characteristic == self.rxCharacteristic)
         {
-            NSLog(@"Received: %@", [characteristic value]);
+            //NSLog(@"Received: %@", [characteristic value]);
             
             [self didReceiveData:[characteristic value]];
         }
@@ -822,6 +822,9 @@
             
             connectionStatus = ConnectionStatusConnected;
             [self writeDebugStringToConsole:@"Connected!" color:[UIColor greenColor]];
+            
+            // Send the 'password' to verify
+            [self writeStringToArduino:@"P123"];
         }
     }
     else
