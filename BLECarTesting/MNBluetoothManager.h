@@ -26,8 +26,9 @@
 typedef enum
 {
     ConnectionStatusDisconnected = 0,
-    ConnectionStatusScanning = 1,
-    ConnectionStatusConnected = 2,
+    ConnectionStatusScanning,
+    ConnectionStatusConnecting,
+    ConnectionStatusConnected,
 } ConnectionStatus;
 
 // Protocol definition

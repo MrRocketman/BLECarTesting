@@ -46,9 +46,13 @@
     {
         [self.navigationBar setBarTintColor:[UIColor whiteColor]]; // greenColor
     }
+    else if([notification.object integerValue] == ConnectionStatusConnecting)
+    {
+        [self.navigationBar setBarTintColor:[UIColor blueColor]];
+    }
     else if([notification.object integerValue] == ConnectionStatusScanning)
     {
-        [self.navigationBar setBarTintColor:[UIColor redColor]]; // blueColor
+        [self.navigationBar setBarTintColor:[UIColor redColor]];
     }
     else if([notification.object integerValue] == ConnectionStatusDisconnected)
     {
