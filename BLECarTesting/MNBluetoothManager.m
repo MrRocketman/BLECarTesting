@@ -794,6 +794,9 @@
                 NSLog(@"Found UART service");
                 [self writeDebugStringToConsole:@"Found UART Service"];
                 
+                NSLog(@"Searching for RX and TX Characteristics");
+                [self writeDebugStringToConsole:@"Searching for RX and TX Characteristics"];
+                
                 // Now try to discover the tx and rx characteristics
                 [self.bluetoothPeripheral discoverCharacteristics:@[TX_CHARACTERISTIC_UUID, RX_CHARACTERISTIC_UUID] forService:service];
             }
@@ -869,13 +872,13 @@
             const uint8_t *bytes = characteristic.value.bytes;
             for (int i = 0; i < characteristic.value.length; i++)
             {
-                hwRevision = [hwRevision stringByAppendingFormat:@"0x%x, ", bytes[i]];
+                hwRevision = [hwRevision stringByAppendingFormat:@"0x%02x, ", bytes[i]];
             }
             
             // Once hardware revision string is read, connection to Bluefruit is complete
             NSString *hwRevisionString = [hwRevision substringToIndex:hwRevision.length - 2];
-            NSLog(@"HW Revision: %@", hwRevisionString);
-            [self writeDebugStringToConsole:[NSString stringWithFormat:@"HW Revision: %@", hwRevisionString]];
+            NSLog(@"Read HW Revision Value: %@", hwRevisionString);
+            [self writeDebugStringToConsole:[NSString stringWithFormat:@"Read HW Revision Value: %@", hwRevisionString]];
             
             self.connectionStatus = ConnectionStatusConnected;
             [self writeDebugStringToConsole:@"Connected!" color:[UIColor greenColor]];
