@@ -21,6 +21,7 @@
 		1AB9EDE8190364E800F4FC42 /* MNCarToggleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDE7190364E800F4FC42 /* MNCarToggleTableViewCell.m */; };
 		1AB9EDEC19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDEB19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m */; };
 		1AB9EDF21904E30F00F4FC42 /* MNTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDF11904E30F00F4FC42 /* MNTabBarViewController.m */; };
+		1AB9EDF51906340900F4FC42 /* MNCarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDF41906340900F4FC42 /* MNCarNavigationController.m */; };
 		1AC395AC18EB78F600B30E4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AB18EB78F600B30E4B /* Foundation.framework */; };
 		1AC395AE18EB78F600B30E4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */; };
 		1AC395B018EB78F600B30E4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AF18EB78F600B30E4B /* UIKit.framework */; };
@@ -83,6 +84,8 @@
 		1AB9EDEB19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCarSegmentsTableViewCell.m; sourceTree = "<group>"; };
 		1AB9EDF01904E30F00F4FC42 /* MNTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNTabBarViewController.h; sourceTree = "<group>"; };
 		1AB9EDF11904E30F00F4FC42 /* MNTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNTabBarViewController.m; sourceTree = "<group>"; };
+		1AB9EDF31906340900F4FC42 /* MNCarNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCarNavigationController.h; sourceTree = "<group>"; };
+		1AB9EDF41906340900F4FC42 /* MNCarNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCarNavigationController.m; sourceTree = "<group>"; };
 		1AC395A818EB78F600B30E4B /* BLECarTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLECarTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC395AB18EB78F600B30E4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -184,6 +187,8 @@
 		1AB9EDD219035AAA00F4FC42 /* Car Tab */ = {
 			isa = PBXGroup;
 			children = (
+				1AB9EDF31906340900F4FC42 /* MNCarNavigationController.h */,
+				1AB9EDF41906340900F4FC42 /* MNCarNavigationController.m */,
 				1AA718CE19022D94002C19C8 /* MNCarIgnitionViewController.h */,
 				1AA718CF19022D94002C19C8 /* MNCarIgnitionViewController.m */,
 				1AB9EDCD19035A9100F4FC42 /* MNCarControlsViewController.h */,
@@ -381,6 +386,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = JamesAdams;
 				TargetAttributes = {
+					1AC395A718EB78F600B30E4B = {
+						DevelopmentTeam = R37N8LHEK7;
+					};
 					1AC395CE18EB78F600B30E4B = {
 						TestTargetID = 1AC395A718EB78F600B30E4B;
 					};
@@ -433,6 +441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AA718C318FF6158002C19C8 /* MNBLEControlsTableViewController.m in Sources */,
+				1AB9EDF51906340900F4FC42 /* MNCarNavigationController.m in Sources */,
 				1AA718D31902444A002C19C8 /* YHRoundBorderedButton.m in Sources */,
 				1AB9EDE419035BBC00F4FC42 /* MNCarSwitchSettingsTableViewController.m in Sources */,
 				1AB9EDCF19035A9100F4FC42 /* MNCarControlsViewController.m in Sources */,
@@ -587,10 +596,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BLECarTesting/BLECarTesting-Prefix.pch";
 				INFOPLIST_FILE = "BLECarTesting/BLECarTesting-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -600,10 +612,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BLECarTesting/BLECarTesting-Prefix.pch";
 				INFOPLIST_FILE = "BLECarTesting/BLECarTesting-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -46,6 +46,8 @@ typedef enum
 // Console Delegate declaration
 @property(strong, nonatomic) id <MNBluetoothManagerConsoleDelegate> consoleDelegate;
 
+@property(readonly, nonatomic) ConnectionStatus connectionStatus;
+
 // Public methods
 // CommandCategories
 - (NSArray *)commandCategories;

@@ -20,10 +20,8 @@
 
 
 @interface MNBluetoothManager()
-{
-    ConnectionStatus connectionStatus;
-    UIAlertView *currentAlertView;
-}
+
+@property(assign, nonatomic) ConnectionStatus connectionStatus;
 
 @property CBCentralManager *centralBluetoothManager;
 @property CBPeripheral *bluetoothPeripheral;
@@ -61,7 +59,7 @@
     if(self = [super init])
     {
         self.centralBluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-        connectionStatus = ConnectionStatusDisconnected;
+        self.connectionStatus = ConnectionStatusDisconnected;
         self.bufferToWriteToArduino = [[NSMutableString alloc] init];
         
         // Ignition
@@ -469,7 +467,7 @@
     if(self.bufferToWriteToArduino.length > 0)
     {
         // If we are connected, write the data
-        if(connectionStatus == ConnectionStatusConnected)
+        if(self.connectionStatus == ConnectionStatusConnected)
         {
             // Break the string up into 20 char lengths if it's too long
             do
@@ -543,7 +541,7 @@
     NSLog(@"Received: %@", uartString);
     //NSLog(@"Received: %@ hex:%@", uartString, hexString);
     
-    if (connectionStatus == ConnectionStatusConnected || connectionStatus == ConnectionStatusScanning)
+    if (self.connectionStatus == ConnectionStatusConnected || self.connectionStatus == ConnectionStatusScanning)
     {
         // convert data to string & replace characters we can't display
         int dataLength = (int)newData.length;
@@ -597,7 +595,7 @@
     // respond to bluetooth powered on
     if(central.state == CBCentralManagerStatePoweredOn)
     {
-        connectionStatus = ConnectionStatusScanning;
+        self.connectionStatus = ConnectionStatusScanning;
         NSLog(@"Scanning for BLE devices");
         [self writeDebugStringToConsole:@"Scanning for BLE devices"];
         
@@ -696,11 +694,11 @@
         [self writeDebugStringToConsole:[NSString stringWithFormat:@"Disconnected From: %@", peripheral.name] color:[UIColor redColor]];
         
         // If status was connected, then disconnect was unexpected by the user
-        if(connectionStatus == ConnectionStatusConnected)
+        if(self.connectionStatus == ConnectionStatusConnected)
         {
             NSLog(@"BLE peripheral has disconnected");
         }
-        connectionStatus = ConnectionStatusDisconnected;
+        self.connectionStatus = ConnectionStatusDisconnected;
         
         // We want to be connected, try reconnecting
         [self.centralBluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES}];
@@ -820,7 +818,7 @@
             NSString *hwRevisionString = [hwRevision substringToIndex:hwRevision.length - 2];
             NSLog(@"HW Revision: %@", hwRevisionString);
             
-            connectionStatus = ConnectionStatusConnected;
+            self.connectionStatus = ConnectionStatusConnected;
             [self writeDebugStringToConsole:@"Connected!" color:[UIColor greenColor]];
             
             // Send the 'password' to verify
@@ -843,6 +841,16 @@
     
     // Access the RSSI
     //self.bluetoothPeripheral.RSSI
+}
+
+#pragma mark - Private Methods
+
+- (void)setConnectionStatus:(ConnectionStatus)connectionStatus
+{
+    _connectionStatus = connectionStatus;
+    
+    // Post notification here
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"BLEConnectionStatusChange" object:[NSNumber numberWithInt:connectionStatus]];
 }
 
 

@@ -219,10 +219,10 @@
             </objects>
             <point key="canvasLocation" x="612" y="577"/>
         </scene>
-        <!--Navigation Controller - Car-->
+        <!--Car Navigation Controller - Car-->
         <scene sceneID="chJ-fm-3dE">
             <objects>
-                <navigationController definesPresentationContext="YES" id="cOh-3H-GtI" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="cOh-3H-GtI" customClass="MNCarNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Car" id="qw7-cz-uhb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="I6O-T6-ObB">
                         <autoresizingMask key="autoresizingMask"/>
