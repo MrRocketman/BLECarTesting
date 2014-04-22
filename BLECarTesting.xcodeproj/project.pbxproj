@@ -37,7 +37,6 @@
 		1AC395DB18EB78F600B30E4B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1AC395D918EB78F600B30E4B /* InfoPlist.strings */; };
 		1AC395DD18EB78F600B30E4B /* BLECarTestingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395DC18EB78F600B30E4B /* BLECarTestingTests.m */; };
 		1AC395E718EB7B3800B30E4B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395E618EB7B3800B30E4B /* CoreBluetooth.framework */; };
-		1AC395EA18EB805A00B30E4B /* UARTPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395E918EB805A00B30E4B /* UARTPeripheral.m */; };
 		1AC395F418EB80CF00B30E4B /* CBUUID+StringExtraction.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395ED18EB80CF00B30E4B /* CBUUID+StringExtraction.m */; };
 		1AC395F518EB80CF00B30E4B /* NSData+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395EF18EB80CF00B30E4B /* NSData+hex.m */; };
 		1AC395F618EB80CF00B30E4B /* NSString+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC395F118EB80CF00B30E4B /* NSString+hex.m */; };
@@ -105,8 +104,6 @@
 		1AC395DA18EB78F600B30E4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1AC395DC18EB78F600B30E4B /* BLECarTestingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLECarTestingTests.m; sourceTree = "<group>"; };
 		1AC395E618EB7B3800B30E4B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		1AC395E818EB805A00B30E4B /* UARTPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UARTPeripheral.h; sourceTree = "<group>"; };
-		1AC395E918EB805A00B30E4B /* UARTPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UARTPeripheral.m; sourceTree = "<group>"; };
 		1AC395EC18EB80CF00B30E4B /* CBUUID+StringExtraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBUUID+StringExtraction.h"; sourceTree = "<group>"; };
 		1AC395ED18EB80CF00B30E4B /* CBUUID+StringExtraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBUUID+StringExtraction.m"; sourceTree = "<group>"; };
 		1AC395EE18EB80CF00B30E4B /* NSData+hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+hex.h"; sourceTree = "<group>"; };
@@ -317,8 +314,6 @@
 			children = (
 				1AA718BC18FF4795002C19C8 /* MNBluetoothManager.h */,
 				1AA718BD18FF4795002C19C8 /* MNBluetoothManager.m */,
-				1AC395E818EB805A00B30E4B /* UARTPeripheral.h */,
-				1AC395E918EB805A00B30E4B /* UARTPeripheral.m */,
 			);
 			name = Bluetooth;
 			sourceTree = "<group>";
@@ -443,7 +438,6 @@
 				1AB9EDCF19035A9100F4FC42 /* MNCarControlsViewController.m in Sources */,
 				1AC395B818EB78F600B30E4B /* main.m in Sources */,
 				1AC395F618EB80CF00B30E4B /* NSString+hex.m in Sources */,
-				1AC395EA18EB805A00B30E4B /* UARTPeripheral.m in Sources */,
 				1AB9EDF21904E30F00F4FC42 /* MNTabBarViewController.m in Sources */,
 				1AA718BE18FF4795002C19C8 /* MNBluetoothManager.m in Sources */,
 				1AB9EDDE19035B5100F4FC42 /* MNCarSettingsTableViewController.m in Sources */,

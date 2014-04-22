@@ -9,16 +9,29 @@
 #import "MNBluetoothManager.h"
 #import "NSString+hex.h"
 #import "NSData+hex.h"
+#import "CBUUID+StringExtraction.h"
+
+#define UART_SERVICE_UUID [CBUUID UUIDWithString:@"6e400001-b5a3-f393-e0a9-e50e24dcca9e"]
+#define TX_CHARACTERISTIC_UUID [CBUUID UUIDWithString:@"6e400002-b5a3-f393-e0a9-e50e24dcca9e"]
+#define RX_CHARACTERISTIC_UUID [CBUUID UUIDWithString:@"6e400003-b5a3-f393-e0a9-e50e24dcca9e"]
+
+#define DEVICE_INFORMATION_SERVICE_UUID [CBUUID UUIDWithString:@"180A"]
+#define HARDWARE_REVISION_STRING_UUID [CBUUID UUIDWithString:@"2A27"]
+
 
 @interface MNBluetoothManager()
 {
-    CBCentralManager *bluetoothManager;
-    UARTPeripheral *currentPeripheral;
     ConnectionStatus connectionStatus;
     UIAlertView *currentAlertView;
-    
-    NSMutableString *bufferToWriteToArduino;
 }
+
+@property CBCentralManager *centralBluetoothManager;
+@property CBPeripheral *bluetoothPeripheral;
+@property CBService *uartService;
+@property CBCharacteristic *rxCharacteristic;
+@property CBCharacteristic *txCharacteristic;
+
+@property NSMutableString *bufferToWriteToArduino;
 
 @property(strong, nonatomic) NSArray *commandDictionariesArray;
 @property(strong, nonatomic) NSArray *commandCategories;
@@ -47,9 +60,9 @@
 {
     if(self = [super init])
     {
-        bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        self.centralBluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         connectionStatus = ConnectionStatusDisconnected;
-        bufferToWriteToArduino = [[NSMutableString alloc] init];
+        self.bufferToWriteToArduino = [[NSMutableString alloc] init];
         
         // Ignition
         NSDictionary *dictionary1 = @{@"baseCommand" : @"C00",
@@ -240,9 +253,6 @@
             }
         }
         self.commandCategories = (NSArray *)unique;
-        
-        // Search for and connect to the arduino. Give the BL a second to boot up
-        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(scanForPeripherals) userInfo:nil repeats:NO];
     }
     return self;
 }
@@ -359,7 +369,7 @@
     return (int)[filteredCommands count];
 }
 
-#pragma mark - BLE Methods
+#pragma mark - Public BLE Tx Methods
 
 - (void)writeCommandToArduino:(NSDictionary *)command withState:(int)state andFactoryState:(int)factory
 {
@@ -405,12 +415,12 @@
 {
     // Command example
     /*NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
-                                   @"numberOfStates" : @2,
-                                   @"stateLabels" : @[@"Close", @"Open"],
-                                   @"stateCommand" : @"S",
-                                   @"factoryCommand" : @"F",
-                                   @"title" : @"Under Dash",
-                                   @"category" : @"Interior Lights"};*/
+     @"numberOfStates" : @2,
+     @"stateLabels" : @[@"Close", @"Open"],
+     @"stateCommand" : @"S",
+     @"factoryCommand" : @"F",
+     @"title" : @"Under Dash",
+     @"category" : @"Interior Lights"};*/
     
     
     if(command != nil)
@@ -437,9 +447,9 @@
     if(string != nil)
     {
         // Add the string to our buffer
-        [bufferToWriteToArduino appendString:string];
+        [self.bufferToWriteToArduino appendString:string];
         // Append a '\n' to the string so the Arduino knows the command has finished
-        [bufferToWriteToArduino appendString:@"\n"];
+        [self.bufferToWriteToArduino appendString:@"\n"];
         
         // Print the string to the 'console'
         [self writeDebugStringToConsole:[NSString stringWithFormat:@"%@\n", string] color:[UIColor blueColor]];
@@ -449,12 +459,12 @@
     }
 }
 
-#pragma mark - Private Methods
+#pragma mark - Private BLE Tx Methods
 
 - (void)writeArduinoBuffer:(NSTimer *)timer
 {
     // If we have data in our buffer, try to write it
-    if(bufferToWriteToArduino.length > 0)
+    if(self.bufferToWriteToArduino.length > 0)
     {
         // Connect to the BLE device if we aren't already
         if(connectionStatus == ConnectionStatusDisconnected)
@@ -469,7 +479,7 @@
             // Break the string up into 20 char lengths if it's too long
             do
             {
-                int lastCharIndex = (int)bufferToWriteToArduino.length;
+                int lastCharIndex = (int)self.bufferToWriteToArduino.length;
                 int substringIndex = lastCharIndex;
                 if(lastCharIndex > 20)
                 {
@@ -477,8 +487,8 @@
                 }
                 
                 // Write the string
-                NSString *stringToWrite = [bufferToWriteToArduino substringToIndex:substringIndex];
-                [currentPeripheral writeString:stringToWrite];
+                NSString *stringToWrite = [self.bufferToWriteToArduino substringToIndex:substringIndex];
+                [self writeString:stringToWrite];
                 
                 // Print the string to the 'console'
                 //[self writeDebugStringToConsole:stringToWrite];
@@ -487,9 +497,9 @@
                 NSRange writtenStringRange;
                 writtenStringRange.location = 0;
                 writtenStringRange.length = substringIndex;
-                [bufferToWriteToArduino deleteCharactersInRange:writtenStringRange];
+                [self.bufferToWriteToArduino deleteCharactersInRange:writtenStringRange];
                 
-            } while(bufferToWriteToArduino.length > 0);
+            } while(self.bufferToWriteToArduino.length > 0);
         }
         // We aren't connected yet so try writing the data again in a bit
         else
@@ -499,133 +509,34 @@
     }
 }
 
-#pragma mark - My Bluetooth Methods
-
-- (void)scanForPeripherals
+- (void)writeString:(NSString*)string
 {
-    //Look for available Bluetooth LE devices
-    connectionStatus = ConnectionStatusScanning;
-    NSLog(@"Scanning for BLE devices");
-    [self writeDebugStringToConsole:@"Scanning for BLE devices"];
+    // Send string to peripheral
+    NSData *data = [NSData dataWithBytes:string.UTF8String length:string.length];
     
-    // skip scanning if UART is already connected
-    NSArray *connectedPeripherals = [bluetoothManager retrieveConnectedPeripheralsWithServices:@[UARTPeripheral.uartServiceUUID]];
-    if ([connectedPeripherals count] > 0)
+    [self writeRawData:data];
+}
+
+
+- (void)writeRawData:(NSData*)data
+{
+    // Send data to peripheral
+    if ((self.txCharacteristic.properties & CBCharacteristicPropertyWriteWithoutResponse) != 0)
     {
-        //connect to first peripheral in array
-        CBPeripheral *peripheral = [connectedPeripherals objectAtIndex:0];
         
-        //Clear off any pending connections
-        [bluetoothManager cancelPeripheralConnection:peripheral];
-        
-        //Connect
-        currentPeripheral = [[UARTPeripheral alloc] initWithPeripheral:peripheral delegate:self];
-        [bluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey: [NSNumber numberWithBool:YES]}];
+        [self.bluetoothPeripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithoutResponse];
+    }
+    else if ((self.txCharacteristic.properties & CBCharacteristicPropertyWrite) != 0)
+    {
+        [self.bluetoothPeripheral writeValue:data forCharacteristic:self.txCharacteristic type:CBCharacteristicWriteWithResponse];
     }
     else
     {
-        [bluetoothManager scanForPeripheralsWithServices:@[UARTPeripheral.uartServiceUUID]
-                                                 options:@{CBCentralManagerScanOptionAllowDuplicatesKey: [NSNumber numberWithBool:NO]}];
+        NSLog(@"No write property on TX characteristic, %d.", (int)self.txCharacteristic.properties);
     }
 }
 
-- (void)disconnect
-{
-    // Disconnect Bluetooth LE device
-    connectionStatus = ConnectionStatusDisconnected;
-    
-    [bluetoothManager cancelPeripheralConnection:currentPeripheral.peripheral];
-}
-
-#pragma mark - CBCentralManagerDelegate
-
-
-- (void)centralManagerDidUpdateState:(CBCentralManager*)central
-{
-    if (central.state == CBCentralManagerStatePoweredOn)
-    {
-        // respond to bluetooth powered on
-    }
-    else if (central.state == CBCentralManagerStatePoweredOff)
-    {
-        // respond to bluetooth powered off
-    }
-}
-
-- (void)centralManager:(CBCentralManager*)central didDiscoverPeripheral:(CBPeripheral*)peripheral advertisementData:(NSDictionary*)advertisementData RSSI:(NSNumber*)RSSI
-{
-    NSLog(@"Did discover peripheral %@", peripheral.name);
-    [self writeDebugStringToConsole:[NSString stringWithFormat:@"Discovered: %@", peripheral.name]];
-    
-    [bluetoothManager stopScan];
-    
-    //Clear off any pending connections
-    [bluetoothManager cancelPeripheralConnection:peripheral];
-    
-    //Connect
-    currentPeripheral = [[UARTPeripheral alloc] initWithPeripheral:peripheral delegate:self];
-    [bluetoothManager connectPeripheral:peripheral options:@{
-                                                             CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES,
-                                                             CBConnectPeripheralOptionNotifyOnConnectionKey: @YES,
-                                                             CBConnectPeripheralOptionNotifyOnNotificationKey: @YES}];
-}
-
-
-- (void)centralManager:(CBCentralManager*)central didConnectPeripheral:(CBPeripheral*)peripheral
-{
-    if ([currentPeripheral.peripheral isEqual:peripheral])
-    {
-        if(peripheral.services)
-        {
-            NSLog(@"Did connect to existing peripheral %@", peripheral.name);
-            [currentPeripheral peripheral:peripheral didDiscoverServices:nil]; //already discovered services, DO NOT re-discover. Just pass along the peripheral.
-        }
-        else
-        {
-            NSLog(@"Did connect peripheral %@", peripheral.name);
-            [self writeDebugStringToConsole:[NSString stringWithFormat:@"Connecting To: %@", peripheral.name]];
-            [currentPeripheral didConnect];
-        }
-    }
-}
-
-
-- (void)centralManager:(CBCentralManager*)central didDisconnectPeripheral:(CBPeripheral*)peripheral error:(NSError*)error
-{
-    NSLog(@"Did disconnect peripheral %@", peripheral.name);
-    [self writeDebugStringToConsole:[NSString stringWithFormat:@"Disconnected From: %@", peripheral.name] color:[UIColor redColor]];
-    
-    // If status was connected, then disconnect was unexpected by the user
-    if (connectionStatus == ConnectionStatusConnected)
-    {
-        NSLog(@"BLE peripheral has disconnected");
-    }
-    connectionStatus = ConnectionStatusDisconnected;
-    
-    if ([currentPeripheral.peripheral isEqual:peripheral])
-    {
-        [currentPeripheral didDisconnect];
-    }
-    
-    // We want to be connected, try reconnecting
-    [self scanForPeripherals];
-}
-
-#pragma mark - UARTPeripheralDelegate
-
-// Once hardware revision string is read, connection to Bluefruit is complete
-- (void)didReadHardwareRevisionString:(NSString*)string
-{
-    NSLog(@"HW Revision: %@", string);
-    
-    connectionStatus = ConnectionStatusConnected;
-    [self writeDebugStringToConsole:@"Connected!" color:[UIColor greenColor]];
-}
-
-- (void)uartDidEncounterError:(NSString*)error
-{
-    NSLog(@"uart Error!!!!:%@", error);
-}
+#pragma mark - BLE RX Methods
 
 // Data incoming from UART peripheral
 - (void)didReceiveData:(NSData*)newData
@@ -643,12 +554,14 @@
         
         [newData getBytes:&data length:dataLength];
         
-        for (int i = 0; i<dataLength; i++) {
-            
-            if ((data[i] <= 0x1f) || (data[i] >= 0x80)) {    //null characters
+        for (int i = 0; i<dataLength; i++)
+        {
+            if ((data[i] <= 0x1f) || (data[i] >= 0x80)) //null characters
+            {
                 if ((data[i] != 0x9) && //0x9 == TAB
                     (data[i] != 0xa) && //0xA == NL
-                    (data[i] != 0xd)) { //0xD == CR
+                    (data[i] != 0xd)) //0xD == CR
+                {
                     data[i] = 0xA9;
                 }
             }
@@ -658,6 +571,265 @@
         [self writeDebugStringToConsole:uartString color:[UIColor orangeColor]];
     }
 }
+
+#pragma mark - General BLE Methods
+
+- (void)uartDidEncounterError:(NSString*)error
+{
+    NSLog(@"uart Error!!!!:%@", error);
+}
+
+- (BOOL)compareID:(CBUUID*)firstID toID:(CBUUID*)secondID
+{
+    if([[firstID representativeString] compare:[secondID representativeString]] == NSOrderedSame)
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)scanForPeripherals
+{
+    //Look for available Bluetooth LE devices
+    connectionStatus = ConnectionStatusScanning;
+    NSLog(@"Scanning for BLE devices");
+    [self writeDebugStringToConsole:@"Scanning for BLE devices"];
+    
+    // skip scanning if UART is already connected
+    NSArray *connectedPeripherals = [self.centralBluetoothManager retrieveConnectedPeripheralsWithServices:@[UART_SERVICE_UUID]];
+    if([connectedPeripherals count] > 0)
+    {
+        //connect to first peripheral in array
+        CBPeripheral *peripheral = [connectedPeripherals objectAtIndex:0];
+        
+        //Clear off any pending connections
+        [self.centralBluetoothManager cancelPeripheralConnection:peripheral];
+        
+        //Connect
+        self.bluetoothPeripheral = peripheral;
+        self.bluetoothPeripheral.delegate = self;
+        [self.centralBluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES}];
+    }
+    else
+    {
+        [self.centralBluetoothManager scanForPeripheralsWithServices:@[UART_SERVICE_UUID] options:@{CBCentralManagerScanOptionAllowDuplicatesKey : @NO}];
+    }
+}
+
+- (void)disconnect
+{
+    // Disconnect Bluetooth LE device
+    [self.centralBluetoothManager cancelPeripheralConnection:self.bluetoothPeripheral];
+}
+
+#pragma mark - CBCentralManagerDelegate
+
+- (void)centralManagerDidUpdateState:(CBCentralManager*)central
+{
+    if (central.state == CBCentralManagerStatePoweredOn)
+    {
+        // respond to bluetooth powered on
+        [self scanForPeripherals];
+    }
+    else if (central.state == CBCentralManagerStatePoweredOff)
+    {
+        // respond to bluetooth powered off
+    }
+}
+
+- (void)centralManager:(CBCentralManager*)central didDiscoverPeripheral:(CBPeripheral*)peripheral advertisementData:(NSDictionary*)advertisementData RSSI:(NSNumber*)RSSI
+{
+    NSLog(@"Did discover peripheral %@", peripheral.name);
+    [self writeDebugStringToConsole:[NSString stringWithFormat:@"Discovered: %@", peripheral.name]];
+    
+    [self.centralBluetoothManager stopScan];
+    
+    //Clear off any pending connections
+    [self.centralBluetoothManager cancelPeripheralConnection:peripheral];
+    
+    //Connect
+    self.bluetoothPeripheral = peripheral;
+    self.bluetoothPeripheral.delegate = self;
+    [self.centralBluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey: @YES, CBConnectPeripheralOptionNotifyOnConnectionKey: @YES, CBConnectPeripheralOptionNotifyOnNotificationKey: @YES}];
+}
+
+
+- (void)centralManager:(CBCentralManager*)central didConnectPeripheral:(CBPeripheral*)peripheral
+{
+    if ([self.bluetoothPeripheral isEqual:peripheral])
+    {
+        if(self.bluetoothPeripheral.services)
+        {
+            NSLog(@"Did connect to existing peripheral %@", peripheral.name);
+            [self peripheral:peripheral didDiscoverServices:nil]; //already discovered services, DO NOT re-discover. Just pass along the peripheral.
+        }
+        else
+        {
+            NSLog(@"Did connect peripheral %@", peripheral.name);
+            [self writeDebugStringToConsole:[NSString stringWithFormat:@"Connecting To: %@", peripheral.name]];
+            
+            //Respond to peripheral connection
+            if(self.bluetoothPeripheral.services)
+            {
+                printf("Skipping service discovery for %s\r\n", [self.bluetoothPeripheral.name UTF8String]);
+                [self peripheral:self.bluetoothPeripheral didDiscoverServices:nil]; //already discovered services, DO NOT re-discover. Just pass along the peripheral.
+                return;
+            }
+            
+            NSLog(@"Starting service discovery for %@", self.bluetoothPeripheral.name);
+            
+            [self.bluetoothPeripheral discoverServices:@[UART_SERVICE_UUID, DEVICE_INFORMATION_SERVICE_UUID]];
+        }
+    }
+}
+
+
+- (void)centralManager:(CBCentralManager*)central didDisconnectPeripheral:(CBPeripheral*)peripheral error:(NSError*)error
+{
+    NSLog(@"Did disconnect peripheral %@", peripheral.name);
+    [self writeDebugStringToConsole:[NSString stringWithFormat:@"Disconnected From: %@", peripheral.name] color:[UIColor redColor]];
+    
+    // If status was connected, then disconnect was unexpected by the user
+    if (connectionStatus == ConnectionStatusConnected)
+    {
+        NSLog(@"BLE peripheral has disconnected");
+    }
+    connectionStatus = ConnectionStatusDisconnected;
+    
+    if ([self.bluetoothPeripheral isEqual:peripheral])
+    {
+        // Respond to peripheral disconnection
+    }
+    
+    // We want to be connected, try reconnecting
+    [self scanForPeripherals];
+}
+
+#pragma mark - CBPeripheralDelegate Methods
+
+- (void)peripheral:(CBPeripheral*)peripheral didDiscoverServices:(NSError*)error
+{
+    // Respond to finding a new service on peripheral
+    NSLog(@"Did Discover Services");
+    
+    if(!error)
+    {
+        for(CBService *s in [peripheral services])
+        {
+            if(s.characteristics)
+            {
+                //already discovered characteristic before, DO NOT do it again
+                [self peripheral:peripheral didDiscoverCharacteristicsForService:s error:nil];
+            }
+            else if([self compareID:s.UUID toID:UART_SERVICE_UUID])
+            {
+                NSLog(@"Found correct service");
+                self.uartService = s;
+                
+                [self.bluetoothPeripheral discoverCharacteristics:@[TX_CHARACTERISTIC_UUID, RX_CHARACTERISTIC_UUID] forService:self.uartService];
+            }
+            else if([self compareID:s.UUID toID:DEVICE_INFORMATION_SERVICE_UUID])
+            {
+                [self.bluetoothPeripheral discoverCharacteristics:@[HARDWARE_REVISION_STRING_UUID] forService:s];
+            }
+        }
+    }
+    else
+    {
+        NSLog(@"Error discovering services");
+        [self uartDidEncounterError:@"Error discovering services"];
+        
+        return;
+    }
+}
+
+- (void)peripheral:(CBPeripheral*)peripheral didDiscoverCharacteristicsForService:(CBService*)service error:(NSError*)error
+{
+    // Respond to finding a new characteristic on service
+    if(!error)
+    {
+        CBService *s = [peripheral.services lastObject];
+        if([self compareID:service.UUID toID:s.UUID])
+        {
+            //last service discovered
+            NSLog(@"Found all characteristics");
+            
+            NSLog(@"Setu up peripheral for use");
+            for (CBService *s in peripheral.services)
+            {
+                for (CBCharacteristic *c in [s characteristics])
+                {
+                    if ([self compareID:c.UUID toID:RX_CHARACTERISTIC_UUID])
+                    {
+                        NSLog(@"Found RX Characteristic");
+                        self.rxCharacteristic = c;
+                        
+                        [self.bluetoothPeripheral setNotifyValue:YES forCharacteristic:self.rxCharacteristic];
+                    }
+                    else if ([self compareID:c.UUID toID:TX_CHARACTERISTIC_UUID])
+                    {
+                        NSLog(@"Found TX Characteristic");
+                        self.txCharacteristic = c;
+                    }
+                    else if ([self compareID:c.UUID toID:HARDWARE_REVISION_STRING_UUID])
+                    {
+                        NSLog(@"Found Hardware Revision String Characteristic");
+                        [self.bluetoothPeripheral readValueForCharacteristic:c];
+                        
+                        //Once hardware revision string is read connection will be complete …
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        NSLog(@"Error discovering characteristics: %@", error.description);
+        [self uartDidEncounterError:@"Error discovering characteristics"];
+        
+        return;
+    }
+}
+
+- (void)peripheral:(CBPeripheral*)peripheral didUpdateValueForCharacteristic:(CBCharacteristic*)characteristic error:(NSError*)error
+{
+    // Respond to value change on peripheral
+    if (!error)
+    {
+        if (characteristic == self.rxCharacteristic)
+        {
+            NSLog(@"Received: %@", [characteristic value]);
+            
+            [self didReceiveData:[characteristic value]];
+        }
+        else if([self compareID:characteristic.UUID toID:HARDWARE_REVISION_STRING_UUID])
+        {
+            NSString *hwRevision = @"";
+            const uint8_t *bytes = characteristic.value.bytes;
+            for (int i = 0; i < characteristic.value.length; i++)
+            {
+                hwRevision = [hwRevision stringByAppendingFormat:@"0x%x, ", bytes[i]];
+            }
+            
+            // Once hardware revision string is read, connection to Bluefruit is complete
+            NSString *hwRevisionString = [hwRevision substringToIndex:hwRevision.length - 2];
+            NSLog(@"HW Revision: %@", hwRevisionString);
+            
+            connectionStatus = ConnectionStatusConnected;
+            [self writeDebugStringToConsole:@"Connected!" color:[UIColor greenColor]];
+        }
+    }
+    else
+    {
+        NSLog(@"Error receiving notification for characteristic %@: %@", characteristic.description, error.description);
+        [self uartDidEncounterError:@"Error receiving notification for characteristic"];
+        
+        return;
+    }
+}
+
+#pragma mark - System Bluetooth On/Off Notifications
 
 // Respond to system's bluetooth disabled
 - (void)alertBluetoothPowerOff
