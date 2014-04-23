@@ -365,9 +365,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gK4-ro-POP" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="20" y="81" width="133" height="116"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gK4-ro-POP" customClass="YHRoundBorderedButton">
+                                <rect key="frame" x="20" y="84" width="133" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="Id8-6L-K63"/>
+                                    <constraint firstAttribute="width" constant="133" id="wTv-Ot-LDo"/>
+                                </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Windows">
                                     <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -377,8 +381,8 @@
                                     <segue destination="Rq1-Nn-Ucf" kind="push" id="g1U-JJ-Oxq"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVP-VM-Jbi" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="20" y="210" width="133" height="116"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVP-VM-Jbi" customClass="YHRoundBorderedButton">
+                                <rect key="frame" x="20" y="238" width="133" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Exhaust">
@@ -389,9 +393,12 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isToggleButton" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qs-Qd-fxX" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="26" y="449" width="274" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qs-Qd-fxX" customClass="YHRoundBorderedButton">
+                                <rect key="frame" x="20" y="450" width="280" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Gc3-Le-G3y"/>
+                                </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Settings">
                                     <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -401,9 +408,12 @@
                                     <segue destination="Ya7-13-2Wu" kind="push" id="8US-V0-BBJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ze4-bw-vjt" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="26" y="391" width="274" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ze4-bw-vjt" customClass="YHRoundBorderedButton">
+                                <rect key="frame" x="20" y="392" width="280" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="nqb-ib-CoV"/>
+                                </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Lights">
                                     <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -413,8 +423,8 @@
                                     <segue destination="b2y-hZ-3X4" kind="push" id="Uvj-Te-HPm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rET-qV-yLh" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="167" y="210" width="133" height="116"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rET-qV-yLh" customClass="YHRoundBorderedButton">
+                                <rect key="frame" x="167" y="238" width="133" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="No Dothing :)">
@@ -422,8 +432,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgr-tA-eCC" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="167" y="81" width="133" height="116"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgr-tA-eCC" customClass="YHRoundBorderedButton">
+                                <rect key="frame" x="167" y="84" width="133" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Trunk">
@@ -436,6 +446,29 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gK4-ro-POP" firstAttribute="centerX" secondItem="rVP-VM-Jbi" secondAttribute="centerX" id="0NB-G6-qAQ"/>
+                            <constraint firstItem="rET-qV-yLh" firstAttribute="centerY" secondItem="rVP-VM-Jbi" secondAttribute="centerY" id="1qt-fY-fW2"/>
+                            <constraint firstItem="rVP-VM-Jbi" firstAttribute="top" secondItem="gK4-ro-POP" secondAttribute="bottom" constant="20" id="AhG-dS-Fgo"/>
+                            <constraint firstItem="gK4-ro-POP" firstAttribute="width" secondItem="rET-qV-yLh" secondAttribute="width" id="BPB-Rl-KhN"/>
+                            <constraint firstItem="ze4-bw-vjt" firstAttribute="top" secondItem="rVP-VM-Jbi" secondAttribute="bottom" constant="20" id="CW7-ed-OeD"/>
+                            <constraint firstItem="6Qs-Qd-fxX" firstAttribute="top" secondItem="ze4-bw-vjt" secondAttribute="bottom" constant="8" id="Caq-rb-Zg4"/>
+                            <constraint firstItem="gK4-ro-POP" firstAttribute="width" secondItem="rVP-VM-Jbi" secondAttribute="width" id="EFR-F6-Ijk"/>
+                            <constraint firstItem="30j-lm-kgR" firstAttribute="top" secondItem="6Qs-Qd-fxX" secondAttribute="bottom" constant="20" id="GKf-kd-3OP"/>
+                            <constraint firstItem="6Qs-Qd-fxX" firstAttribute="leading" secondItem="KZc-1F-QLR" secondAttribute="leading" constant="20" id="MR1-nZ-zo3"/>
+                            <constraint firstAttribute="trailing" secondItem="ze4-bw-vjt" secondAttribute="trailing" constant="20" id="O3k-rL-ioN"/>
+                            <constraint firstAttribute="trailing" secondItem="6Qs-Qd-fxX" secondAttribute="trailing" constant="20" id="OK2-Ds-02v"/>
+                            <constraint firstItem="gK4-ro-POP" firstAttribute="leading" secondItem="KZc-1F-QLR" secondAttribute="leading" constant="20" id="bf9-gD-vo3"/>
+                            <constraint firstItem="rET-qV-yLh" firstAttribute="centerX" secondItem="zgr-tA-eCC" secondAttribute="centerX" id="g0Z-zq-DVw"/>
+                            <constraint firstItem="ze4-bw-vjt" firstAttribute="leading" secondItem="KZc-1F-QLR" secondAttribute="leading" constant="20" id="gu6-Iw-PtH"/>
+                            <constraint firstItem="gK4-ro-POP" firstAttribute="width" secondItem="zgr-tA-eCC" secondAttribute="width" id="ipA-eq-tty"/>
+                            <constraint firstItem="gK4-ro-POP" firstAttribute="height" secondItem="rVP-VM-Jbi" secondAttribute="height" id="lyf-Pp-Xw7"/>
+                            <constraint firstItem="gK4-ro-POP" firstAttribute="height" secondItem="rET-qV-yLh" secondAttribute="height" id="njW-52-Wue"/>
+                            <constraint firstItem="gK4-ro-POP" firstAttribute="top" secondItem="T7P-Gj-1J0" secondAttribute="bottom" constant="20" id="nr6-4d-LDg"/>
+                            <constraint firstAttribute="trailing" secondItem="zgr-tA-eCC" secondAttribute="trailing" constant="20" id="rk3-OE-F48"/>
+                            <constraint firstItem="gK4-ro-POP" firstAttribute="height" secondItem="zgr-tA-eCC" secondAttribute="height" id="wsU-fz-wLz"/>
+                            <constraint firstItem="gK4-ro-POP" firstAttribute="centerY" secondItem="zgr-tA-eCC" secondAttribute="centerY" id="wtb-WX-X3B"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Controls" id="rX3-xf-DOP"/>
                     <connections>
