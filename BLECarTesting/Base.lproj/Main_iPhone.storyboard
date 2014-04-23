@@ -14,11 +14,11 @@
                         <viewControllerLayoutGuide type="bottom" id="cpm-b7-67g"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2VE-Yg-loa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26r-Qz-Tfv">
-                                <rect key="frame" x="0.0" y="153" width="320" height="346"/>
+                                <rect key="frame" x="0.0" y="153" width="320" height="258"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <attributedString key="attributedText"/>
@@ -117,7 +117,7 @@
             <objects>
                 <tableViewController id="FEY-DG-bvg" customClass="MNBLEControlsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zg5-4V-hDH">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -272,11 +272,11 @@
                         <viewControllerLayoutGuide type="bottom" id="yq0-vC-tXj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jgH-fP-UvT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqO-My-zT6" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="20" y="79" width="280" height="286"/>
+                                <rect key="frame" x="63" y="79" width="194" height="198"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="286" id="FWp-jz-fay"/>
@@ -295,7 +295,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18x-rD-ed9" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="231" y="340" width="69" height="69"/>
+                                <rect key="frame" x="231" y="252" width="69" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="69" id="9Xs-3O-KlG"/>
@@ -314,7 +314,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4U-Hn-ZdI" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="40" y="417" width="240" height="82"/>
+                                <rect key="frame" x="40" y="329" width="240" height="82"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="82" id="THd-bL-AYp"/>
@@ -362,15 +362,15 @@
                         <viewControllerLayoutGuide type="bottom" id="30j-lm-kgR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KZc-1F-QLR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gK4-ro-POP" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="20" y="84" width="133" height="134"/>
+                                <rect key="frame" x="20" y="84" width="135" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="Id8-6L-K63"/>
-                                    <constraint firstAttribute="width" constant="133" id="wTv-Ot-LDo"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="160" id="Id8-6L-K63"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="160" id="wTv-Ot-LDo"/>
                                 </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Windows">
@@ -382,7 +382,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rVP-VM-Jbi" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="20" y="238" width="133" height="134"/>
+                                <rect key="frame" x="20" y="192" width="135" height="87"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Exhaust">
@@ -394,7 +394,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qs-Qd-fxX" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="20" y="450" width="280" height="50"/>
+                                <rect key="frame" x="20" y="359" width="280" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Gc3-Le-G3y"/>
@@ -409,7 +409,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ze4-bw-vjt" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="20" y="392" width="280" height="50"/>
+                                <rect key="frame" x="20" y="299" width="280" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="nqb-ib-CoV"/>
@@ -424,7 +424,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rET-qV-yLh" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="167" y="238" width="133" height="134"/>
+                                <rect key="frame" x="165" y="192" width="135" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="No Dothing :)">
@@ -433,7 +433,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgr-tA-eCC" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="167" y="84" width="133" height="134"/>
+                                <rect key="frame" x="165" y="84" width="135" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Trunk">
@@ -452,7 +452,7 @@
                             <constraint firstItem="rVP-VM-Jbi" firstAttribute="top" secondItem="gK4-ro-POP" secondAttribute="bottom" constant="20" id="AhG-dS-Fgo"/>
                             <constraint firstItem="gK4-ro-POP" firstAttribute="width" secondItem="rET-qV-yLh" secondAttribute="width" id="BPB-Rl-KhN"/>
                             <constraint firstItem="ze4-bw-vjt" firstAttribute="top" secondItem="rVP-VM-Jbi" secondAttribute="bottom" constant="20" id="CW7-ed-OeD"/>
-                            <constraint firstItem="6Qs-Qd-fxX" firstAttribute="top" secondItem="ze4-bw-vjt" secondAttribute="bottom" constant="8" id="Caq-rb-Zg4"/>
+                            <constraint firstItem="6Qs-Qd-fxX" firstAttribute="top" secondItem="ze4-bw-vjt" secondAttribute="bottom" constant="10" id="Caq-rb-Zg4"/>
                             <constraint firstItem="gK4-ro-POP" firstAttribute="width" secondItem="rVP-VM-Jbi" secondAttribute="width" id="EFR-F6-Ijk"/>
                             <constraint firstItem="30j-lm-kgR" firstAttribute="top" secondItem="6Qs-Qd-fxX" secondAttribute="bottom" constant="20" id="GKf-kd-3OP"/>
                             <constraint firstItem="6Qs-Qd-fxX" firstAttribute="leading" secondItem="KZc-1F-QLR" secondAttribute="leading" constant="20" id="MR1-nZ-zo3"/>
@@ -465,6 +465,7 @@
                             <constraint firstItem="gK4-ro-POP" firstAttribute="height" secondItem="rVP-VM-Jbi" secondAttribute="height" id="lyf-Pp-Xw7"/>
                             <constraint firstItem="gK4-ro-POP" firstAttribute="height" secondItem="rET-qV-yLh" secondAttribute="height" id="njW-52-Wue"/>
                             <constraint firstItem="gK4-ro-POP" firstAttribute="top" secondItem="T7P-Gj-1J0" secondAttribute="bottom" constant="20" id="nr6-4d-LDg"/>
+                            <constraint firstItem="zgr-tA-eCC" firstAttribute="leading" secondItem="gK4-ro-POP" secondAttribute="trailing" constant="10" id="oYj-pi-s0z"/>
                             <constraint firstAttribute="trailing" secondItem="zgr-tA-eCC" secondAttribute="trailing" constant="20" id="rk3-OE-F48"/>
                             <constraint firstItem="gK4-ro-POP" firstAttribute="height" secondItem="zgr-tA-eCC" secondAttribute="height" id="wsU-fz-wLz"/>
                             <constraint firstItem="gK4-ro-POP" firstAttribute="centerY" secondItem="zgr-tA-eCC" secondAttribute="centerY" id="wtb-WX-X3B"/>
@@ -489,7 +490,7 @@
                         <viewControllerLayoutGuide type="bottom" id="laK-VD-uAX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9uj-jq-McW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8l4-OG-DEC" customClass="YHRoundBorderedButton">
@@ -620,7 +621,7 @@
             <objects>
                 <tableViewController id="b2y-hZ-3X4" customClass="MNCarLightsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="rv6-zA-KhV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -701,7 +702,7 @@
             <objects>
                 <tableViewController id="Ya7-13-2Wu" customClass="MNCarSettingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Z1o-PZ-S3O">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -821,7 +822,7 @@
             <objects>
                 <tableViewController id="qJ3-Pm-Qax" customClass="MNCarSwitchSettingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Uvl-y5-BLT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -870,7 +871,7 @@
             <objects>
                 <tableViewController id="55L-cw-RpG" customClass="MNCarTurnSignalPatternsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Gqd-U9-MQr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -934,6 +935,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>
