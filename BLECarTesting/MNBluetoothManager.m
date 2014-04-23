@@ -33,6 +33,8 @@
 @property(strong, nonatomic) NSArray *commandDictionariesArray;
 @property(strong, nonatomic) NSArray *commandCategories;
 
+@property(assign, nonatomic) BOOL isRestoringFromBackground;
+
 @end
 
 
@@ -632,6 +634,8 @@
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary *)dict
 {
     NSLog(@"Central Manager Restoring From Background");
+    self.isRestoringFromBackground = YES;
+    
     // Get a pointer back to a connected UART device
     NSArray *peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey];
     
@@ -670,7 +674,7 @@
             [self.centralBluetoothManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey : @YES}];
         }
         // Restoring peripheral from background
-        else if(self.bluetoothPeripheral != nil)
+        else if(self.isRestoringFromBackground)
         {
             NSLog(@"Restoring BLE from background");
             [self writeDebugStringToConsole:@"Restoring BLE from background"];
@@ -682,6 +686,7 @@
                 [self connectToSerivceIfNotAlreadyConnected:DEVICE_INFORMATION_SERVICE_UUID andCharacteristics:@[HARDWARE_REVISION_STRING_UUID]];
             }
             
+            self.isRestoringFromBackground = NO;
         }
         //Look for available Bluetooth LE devices
         else
@@ -765,10 +770,9 @@
         [self writeDebugStringToConsole:[NSString stringWithFormat:@"Disconnected From: %@", self.bluetoothPeripheral.name] color:[UIColor redColor]];
         
         self.connectionStatus = ConnectionStatusDisconnected;
-        self.bluetoothPeripheral = nil;
         
         // We want to be connected, try reconnecting
-        [self.centralBluetoothManager scanForPeripheralsWithServices:@[UART_SERVICE_UUID] options:nil];
+        [self.centralBluetoothManager connectPeripheral:self.bluetoothPeripheral options:nil];
     }
 }
 
