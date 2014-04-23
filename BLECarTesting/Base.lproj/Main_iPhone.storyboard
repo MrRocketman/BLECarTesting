@@ -276,10 +276,9 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqO-My-zT6" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="20" y="79" width="280" height="286"/>
+                                <rect key="frame" x="21" y="79" width="280" height="286"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="286" id="FWp-jz-fay"/>
                                     <constraint firstAttribute="width" secondItem="yqO-My-zT6" secondAttribute="height" multiplier="140:143" id="Kqb-G0-yzQ"/>
                                 </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -295,7 +294,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18x-rD-ed9" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="231" y="340" width="69" height="69"/>
+                                <rect key="frame" x="232" y="340" width="69" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="69" id="9Xs-3O-KlG"/>
@@ -314,7 +313,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4U-Hn-ZdI" customClass="YHRoundBorderedButton">
-                                <rect key="frame" x="40" y="417" width="240" height="82"/>
+                                <rect key="frame" x="40" y="417" width="241" height="82"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="82" id="THd-bL-AYp"/>
