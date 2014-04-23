@@ -88,6 +88,7 @@
         
         // Set the command so it can send BLE data when pushed
         cell.command = commandForCell;
+        cell.shouldSendFactoryCommand = NO;
         
         return cell;
     }

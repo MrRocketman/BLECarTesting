@@ -14,6 +14,7 @@
 @property(strong, nonatomic) IBOutlet UILabel *label;
 
 @property(strong, nonatomic) NSDictionary *command;
+@property(assign, nonatomic) BOOL shouldSendFactoryCommand;
 
 - (IBAction)toggleSwitchChange:(id)sender;
 
