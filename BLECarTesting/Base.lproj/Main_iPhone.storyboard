@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Terminal View Controller - First-->
@@ -16,28 +17,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26r-Qz-Tfv">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26r-Qz-Tfv">
                                 <rect key="frame" x="0.0" y="153" width="320" height="346"/>
                                 <autoresizingMask key="autoresizingMask" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Terminal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XG-nV-gj8">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terminal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XG-nV-gj8">
                                 <rect key="frame" x="20" y="124" width="115" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="115" id="jkc-IP-MJE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Send To Arduino" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nce-DV-6Wd">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send To Arduino" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nce-DV-6Wd">
                                 <rect key="frame" x="20" y="28" width="136" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="136" id="Uml-fi-5e9"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ttA-cj-nd7">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ttA-cj-nd7">
                                 <rect key="frame" x="20" y="57" width="226" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -47,9 +54,12 @@
                                     <outlet property="delegate" destination="CZ4-MO-1fc" id="ViL-6S-6eo"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gf-UD-OdC">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gf-UD-OdC">
                                 <rect key="frame" x="254" y="57" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="qnA-C8-nfU"/>
+                                </constraints>
                                 <state key="normal" title="Send">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -57,7 +67,7 @@
                                     <action selector="sendButtonPress:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="JOE-ON-JGS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UR-M8-yuu">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UR-M8-yuu">
                                 <rect key="frame" x="254" y="120" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Clear">
@@ -67,7 +77,7 @@
                                     <action selector="clearTextViewButtonPress:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="e1b-Tb-k9p"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-iR-1jK">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-iR-1jK">
                                 <rect key="frame" x="122" y="95" width="77" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Kill App">
@@ -79,6 +89,27 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cpm-b7-67g" firstAttribute="top" secondItem="26r-Qz-Tfv" secondAttribute="bottom" constant="20" id="4T2-ai-ImX"/>
+                            <constraint firstItem="ttA-cj-nd7" firstAttribute="top" secondItem="6gf-UD-OdC" secondAttribute="top" id="8cL-sB-YGN"/>
+                            <constraint firstItem="9UR-M8-yuu" firstAttribute="trailing" secondItem="6gf-UD-OdC" secondAttribute="trailing" id="A25-jJ-O94"/>
+                            <constraint firstItem="26r-Qz-Tfv" firstAttribute="centerX" secondItem="0Ki-iR-1jK" secondAttribute="centerX" id="BgP-z9-s1H"/>
+                            <constraint firstAttribute="trailing" secondItem="6gf-UD-OdC" secondAttribute="trailing" constant="20" symbolic="YES" id="K26-vX-XXR"/>
+                            <constraint firstItem="Nce-DV-6Wd" firstAttribute="leading" secondItem="ttA-cj-nd7" secondAttribute="leading" id="LZB-yk-Rva"/>
+                            <constraint firstAttribute="trailing" secondItem="26r-Qz-Tfv" secondAttribute="trailing" id="MXM-iy-NEu"/>
+                            <constraint firstItem="Nce-DV-6Wd" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" constant="20" symbolic="YES" id="cdL-RB-a1s"/>
+                            <constraint firstItem="9UR-M8-yuu" firstAttribute="baseline" secondItem="7XG-nV-gj8" secondAttribute="baseline" id="eJk-dt-0TY"/>
+                            <constraint firstItem="26r-Qz-Tfv" firstAttribute="top" secondItem="0Ki-iR-1jK" secondAttribute="bottom" constant="28" id="ePq-lN-TOj"/>
+                            <constraint firstItem="ttA-cj-nd7" firstAttribute="leading" secondItem="7XG-nV-gj8" secondAttribute="leading" id="jf1-QZ-UT5"/>
+                            <constraint firstItem="ttA-cj-nd7" firstAttribute="top" secondItem="Nce-DV-6Wd" secondAttribute="bottom" constant="8" symbolic="YES" id="kez-Wb-CPC"/>
+                            <constraint firstItem="9UR-M8-yuu" firstAttribute="leading" secondItem="0Ki-iR-1jK" secondAttribute="trailing" constant="55" id="kh7-oD-Rap"/>
+                            <constraint firstItem="Nce-DV-6Wd" firstAttribute="top" secondItem="g2S-H1-0Jg" secondAttribute="bottom" constant="8" id="liM-kn-M4Q"/>
+                            <constraint firstItem="0Ki-iR-1jK" firstAttribute="top" secondItem="ttA-cj-nd7" secondAttribute="bottom" constant="8" symbolic="YES" id="loV-Qf-vNY"/>
+                            <constraint firstItem="6gf-UD-OdC" firstAttribute="leading" secondItem="ttA-cj-nd7" secondAttribute="trailing" constant="8" symbolic="YES" id="mBb-Ff-ehK"/>
+                            <constraint firstItem="26r-Qz-Tfv" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" id="o1A-b9-OLb"/>
+                            <constraint firstItem="26r-Qz-Tfv" firstAttribute="top" secondItem="7XG-nV-gj8" secondAttribute="bottom" constant="8" symbolic="YES" id="tsx-ID-3h5"/>
+                            <constraint firstItem="9UR-M8-yuu" firstAttribute="leading" secondItem="6gf-UD-OdC" secondAttribute="leading" id="yrq-YC-BRu"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Terminal" image="first" id="u1e-5L-l1D"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -257,41 +288,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqO-My-zT6" customClass="YHRoundBorderedButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqO-My-zT6" customClass="YHRoundBorderedButton">
                                 <rect key="frame" x="20" y="79" width="280" height="286"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="286" id="FWp-jz-fay"/>
+                                    <constraint firstAttribute="width" secondItem="yqO-My-zT6" secondAttribute="height" multiplier="140:143" id="Kqb-G0-yzQ"/>
+                                </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="Power">
                                     <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircleButton" value="YES"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isToggleButton" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="ignitionButtonPress:" destination="aak-d2-CHh" eventType="touchUpInside" id="XfM-sP-Yvj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18x-rD-ed9" customClass="YHRoundBorderedButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18x-rD-ed9" customClass="YHRoundBorderedButton">
                                 <rect key="frame" x="231" y="340" width="69" height="69"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="9Xs-3O-KlG"/>
+                                    <constraint firstAttribute="width" constant="69" id="UkI-yu-CJC"/>
+                                </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Battery">
                                     <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCircleButton" value="YES"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isToggleButton" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="batteryButtonPress:" destination="aak-d2-CHh" eventType="touchUpInside" id="lLc-mE-weZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4U-Hn-ZdI" customClass="YHRoundBorderedButton">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4U-Hn-ZdI" customClass="YHRoundBorderedButton">
                                 <rect key="frame" x="40" y="417" width="240" height="82"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="82" id="THd-bL-AYp"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Controls">
@@ -304,6 +344,16 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="18x-rD-ed9" secondAttribute="trailing" constant="20" id="GEt-Q6-6Id"/>
+                            <constraint firstItem="p4U-Hn-ZdI" firstAttribute="leading" secondItem="jgH-fP-UvT" secondAttribute="leading" constant="40" id="K4x-Eu-cVO"/>
+                            <constraint firstItem="yqO-My-zT6" firstAttribute="top" secondItem="7Yp-3R-Vgp" secondAttribute="bottom" constant="15" id="Oia-YZ-KSm"/>
+                            <constraint firstItem="p4U-Hn-ZdI" firstAttribute="top" secondItem="18x-rD-ed9" secondAttribute="bottom" constant="8" id="QsR-zI-hMO"/>
+                            <constraint firstAttribute="trailing" secondItem="p4U-Hn-ZdI" secondAttribute="trailing" constant="40" id="T2l-hi-gSq"/>
+                            <constraint firstItem="yq0-vC-tXj" firstAttribute="top" secondItem="p4U-Hn-ZdI" secondAttribute="bottom" constant="20" id="Zjg-kM-v5J"/>
+                            <constraint firstItem="yqO-My-zT6" firstAttribute="centerX" secondItem="p4U-Hn-ZdI" secondAttribute="centerX" id="aX6-yl-e5V"/>
+                            <constraint firstItem="p4U-Hn-ZdI" firstAttribute="top" secondItem="yqO-My-zT6" secondAttribute="bottom" constant="52" id="fER-gi-xtQ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Mustang" id="FAg-ri-HND"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>

@@ -39,6 +39,12 @@
     self.batteryButton.buttonPressedCommandState = 1;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self.ignitionButton setIsCircleButton:YES];
+    [self.batteryButton setIsCircleButton:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
