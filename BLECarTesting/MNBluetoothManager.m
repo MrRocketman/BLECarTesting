@@ -573,13 +573,10 @@
 - (void)uartDidEncounterError:(NSString*)error
 {
     NSLog(@"uart Error!!!!:%@", error);
+    [self writeDebugStringToConsole:[NSString stringWithFormat:@"uart Error!!!!:%@", error]];
     
     // Cancel the connection (disconnect) - we then try to reconnect later
     [self.centralBluetoothManager cancelPeripheralConnection:self.bluetoothPeripheral];
-    
-    NSString *title = @"UART Error";
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
 }
 
 - (BOOL)compareID:(CBUUID*)firstID toID:(CBUUID*)secondID
@@ -703,6 +700,10 @@
         NSString *message = @"You must turn on Bluetooth in Settings in order to connect to a device";
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
+        
+        self.bluetoothPeripheral = nil;
+        self.connectionStatus = ConnectionStatusDisconnected;
+        [self writeDebugStringToConsole:@"Bluetooth Powered Off" color:[UIColor redColor]];
     }
     else if(central.state == CBCentralManagerStateUnsupported)
     {
@@ -710,6 +711,8 @@
         NSString *message = @"Your iPhone does not have\nthe necessary hardware to\ncontrol the Mustang.\n\nTime for a new iPhone!";
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
+        
+        [self writeDebugStringToConsole:@"BLE not available" color:[UIColor redColor]];
     }
     else if(central.state == CBCentralManagerStateUnauthorized)
     {
@@ -717,6 +720,8 @@
         NSString *message = @"This app doesn't have permission to access the Bluetooth LE hardware. Please report to James.";
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
+        
+        [self writeDebugStringToConsole:@"No BLE Authorization" color:[UIColor redColor]];
     }
 }
 
