@@ -45,28 +45,28 @@
         NSLog(@"Conneciton status: Connected");
         [self.navigationBar setBarTintColor:[UIColor whiteColor]]; // greenColor
         
-        [self.visibleViewController.view setUserInteractionEnabled:YES];
+        //[self.visibleViewController.view setUserInteractionEnabled:YES];
     }
     else if([notification.object integerValue] == ConnectionStatusConnecting)
     {
         NSLog(@"Conneciton status: Connectiing/Finding Services");
         [self.navigationBar setBarTintColor:[UIColor blueColor]];
         
-        [self.visibleViewController.view setUserInteractionEnabled:NO];
+        //[self.visibleViewController.view setUserInteractionEnabled:NO];
     }
     else if([notification.object integerValue] == ConnectionStatusScanning)
     {
         NSLog(@"Conneciton status: Scanning");
         [self.navigationBar setBarTintColor:[UIColor redColor]];
         
-        [self.visibleViewController.view setUserInteractionEnabled:NO];
+        //[self.visibleViewController.view setUserInteractionEnabled:NO];
     }
     else if([notification.object integerValue] == ConnectionStatusDisconnected)
     {
         NSLog(@"Conneciton status: Disconnected");
         [self.navigationBar setBarTintColor:[UIColor redColor]];
         
-        [self.visibleViewController.view setUserInteractionEnabled:NO];
+        //[self.visibleViewController.view setUserInteractionEnabled:NO];
     }
 }
 

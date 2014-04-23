@@ -77,34 +77,21 @@
                                     <action selector="clearTextViewButtonPress:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="e1b-Tb-k9p"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ki-iR-1jK">
-                                <rect key="frame" x="122" y="95" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Kill App">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="killAppButtonPress:" destination="CZ4-MO-1fc" eventType="touchUpInside" id="JYA-4e-jcg"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cpm-b7-67g" firstAttribute="top" secondItem="26r-Qz-Tfv" secondAttribute="bottom" constant="20" id="4T2-ai-ImX"/>
                             <constraint firstItem="ttA-cj-nd7" firstAttribute="top" secondItem="6gf-UD-OdC" secondAttribute="top" id="8cL-sB-YGN"/>
                             <constraint firstItem="9UR-M8-yuu" firstAttribute="trailing" secondItem="6gf-UD-OdC" secondAttribute="trailing" id="A25-jJ-O94"/>
-                            <constraint firstItem="26r-Qz-Tfv" firstAttribute="centerX" secondItem="0Ki-iR-1jK" secondAttribute="centerX" id="BgP-z9-s1H"/>
                             <constraint firstAttribute="trailing" secondItem="6gf-UD-OdC" secondAttribute="trailing" constant="20" symbolic="YES" id="K26-vX-XXR"/>
                             <constraint firstItem="Nce-DV-6Wd" firstAttribute="leading" secondItem="ttA-cj-nd7" secondAttribute="leading" id="LZB-yk-Rva"/>
                             <constraint firstAttribute="trailing" secondItem="26r-Qz-Tfv" secondAttribute="trailing" id="MXM-iy-NEu"/>
                             <constraint firstItem="Nce-DV-6Wd" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" constant="20" symbolic="YES" id="cdL-RB-a1s"/>
                             <constraint firstItem="9UR-M8-yuu" firstAttribute="baseline" secondItem="7XG-nV-gj8" secondAttribute="baseline" id="eJk-dt-0TY"/>
-                            <constraint firstItem="26r-Qz-Tfv" firstAttribute="top" secondItem="0Ki-iR-1jK" secondAttribute="bottom" constant="28" id="ePq-lN-TOj"/>
                             <constraint firstItem="ttA-cj-nd7" firstAttribute="leading" secondItem="7XG-nV-gj8" secondAttribute="leading" id="jf1-QZ-UT5"/>
                             <constraint firstItem="ttA-cj-nd7" firstAttribute="top" secondItem="Nce-DV-6Wd" secondAttribute="bottom" constant="8" symbolic="YES" id="kez-Wb-CPC"/>
-                            <constraint firstItem="9UR-M8-yuu" firstAttribute="leading" secondItem="0Ki-iR-1jK" secondAttribute="trailing" constant="55" id="kh7-oD-Rap"/>
                             <constraint firstItem="Nce-DV-6Wd" firstAttribute="top" secondItem="g2S-H1-0Jg" secondAttribute="bottom" constant="8" id="liM-kn-M4Q"/>
-                            <constraint firstItem="0Ki-iR-1jK" firstAttribute="top" secondItem="ttA-cj-nd7" secondAttribute="bottom" constant="8" symbolic="YES" id="loV-Qf-vNY"/>
+                            <constraint firstItem="9UR-M8-yuu" firstAttribute="top" secondItem="6gf-UD-OdC" secondAttribute="bottom" constant="33" id="low-vS-0ia"/>
                             <constraint firstItem="6gf-UD-OdC" firstAttribute="leading" secondItem="ttA-cj-nd7" secondAttribute="trailing" constant="8" symbolic="YES" id="mBb-Ff-ehK"/>
                             <constraint firstItem="26r-Qz-Tfv" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leading" id="o1A-b9-OLb"/>
                             <constraint firstItem="26r-Qz-Tfv" firstAttribute="top" secondItem="7XG-nV-gj8" secondAttribute="bottom" constant="8" symbolic="YES" id="tsx-ID-3h5"/>

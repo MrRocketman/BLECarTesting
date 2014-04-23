@@ -49,11 +49,6 @@
     self.consoleTextView.attributedText = [[NSAttributedString alloc] initWithString:@"" attributes:nil];
 }
 
-- (IBAction)killAppButtonPress:(id)sender
-{
-    kill(getpid(), SIGKILL);
-}
-
 #pragma mark - UITextFieldDelegateMethods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

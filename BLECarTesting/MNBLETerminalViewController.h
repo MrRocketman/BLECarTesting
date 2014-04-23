@@ -14,7 +14,6 @@
 
 - (IBAction)sendButtonPress:(id)sender;
 - (IBAction)clearTextViewButtonPress:(id)sender;
-- (IBAction)killAppButtonPress:(id)sender;
 
 @property(strong, nonatomic) IBOutlet UIButton *sendButton;
 @property(strong, nonatomic) IBOutlet UITextField *sendTextField;
