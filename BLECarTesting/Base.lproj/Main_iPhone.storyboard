@@ -157,6 +157,9 @@
                                                 <segment title="Off"/>
                                                 <segment title="On"/>
                                             </segments>
+                                            <connections>
+                                                <action selector="segmentedControlValueChanged:" destination="MtG-7n-iwG" eventType="valueChanged" id="AFc-me-eCb"/>
+                                            </connections>
                                         </segmentedControl>
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="BgK-2K-atg">
                                             <rect key="frame" x="152" y="44" width="148" height="29"/>
@@ -186,6 +189,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="label" destination="o1a-Yd-z83" id="jUE-7R-aPu"/>
+                                    <outlet property="segmentedControl" destination="rwk-rc-6sp" id="znj-iA-NLH"/>
                                     <outlet property="segmentedControl2" destination="BgK-2K-atg" id="yEy-u7-7cU"/>
                                 </connections>
                             </tableViewCell>

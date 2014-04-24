@@ -68,7 +68,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *category = [[[MNBluetoothManager sharedBluetoothManager] commandCategories] objectAtIndex:indexPath.section];
-    NSDictionary *commandDictionaryForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
+    NSMutableDictionary *commandDictionaryForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
     
     MNBLEControlsSegmentsTableViewCell *cell;
     if([commandDictionaryForCell objectForKey:@"factoryCharacter"] != nil)

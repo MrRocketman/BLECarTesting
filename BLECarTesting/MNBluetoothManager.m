@@ -648,8 +648,16 @@
         if(command != nil)
         {
             // Find the new state
-            int dataValue = [self parseString:data whichHasLength:dataLength forCharacter:'D'];
+            int dataValue = [self parseString:data whichHasLength:dataLength forCharacter:[command[@"dataCharacter"] characterAtIndex:0]];
             NSLog(@"received Data:%d", dataValue);
+            
+            if(dataValue >= 0)
+            {
+                // Set the new state
+                command[@"currentState"] = @(dataValue);
+                // Tell others about it so things like the buttons can update
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"CommandStateChanged" object:nil userInfo:@{@"command": command}];
+            }
         }
     }
 }

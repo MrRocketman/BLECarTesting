@@ -24,7 +24,7 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl2;
 @property (strong, nonatomic) IBOutlet UILabel *label;
 
-@property(strong, nonatomic) NSDictionary *commandDictionary;
+@property(strong, nonatomic) NSMutableDictionary *commandDictionary;
 
 - (IBAction)segmentedControlValueChanged:(id)sender;
 - (IBAction)segmentedControl2ValueChanged:(id)sender;

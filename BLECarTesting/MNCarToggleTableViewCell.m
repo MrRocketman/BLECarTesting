@@ -16,6 +16,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.shouldSendFactoryCommand = YES;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
     }
     return self;
 }
@@ -25,6 +27,7 @@
     // Initialization code
     
     self.shouldSendFactoryCommand = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -46,9 +49,26 @@
     }
 }
 
+- (void)commandStateChanged:(NSNotification *)notification
+{
+    if(self.command == notification.userInfo[@"command"])
+    {
+        self.command = notification.userInfo[@"command"];
+    }
+}
+
 - (void)setCommand:(NSMutableDictionary *)command
 {
     _command = command;
+    
+    if([self.command[@"currentState"] integerValue])
+    {
+        [self.toggleSwitch setOn:YES animated:YES];
+    }
+    else
+    {
+        [self.toggleSwitch setOn:NO animated:YES];
+    }
     
     // Update the label
     self.label.text = [self.command objectForKey:@"title"];

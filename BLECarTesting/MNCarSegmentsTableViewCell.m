@@ -16,6 +16,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
     }
     return self;
 }
@@ -23,6 +24,7 @@
 - (void)awakeFromNib
 {
     // Initialization code
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -30,6 +32,14 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)commandStateChanged:(NSNotification *)notification
+{
+    if(self.command == notification.userInfo[@"command"])
+    {
+        self.command = notification.userInfo[@"command"];
+    }
 }
 
 #pragma mark - IBActions
@@ -51,6 +61,9 @@
     {
         [self.segmentedControl insertSegmentWithTitle:[[self.command objectForKey:@"stateLabels"] objectAtIndex:i] atIndex:i animated:NO];
     }
+    
+    // Update selected segment
+    [self.segmentedControl setSelectedSegmentIndex:[self.command[@"currentState"] integerValue]];
     
     // Update the label
     self.label.text = [self.command objectForKey:@"title"];

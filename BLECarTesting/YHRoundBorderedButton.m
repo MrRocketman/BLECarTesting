@@ -11,10 +11,10 @@
 
 @interface YHRoundBorderedButton()
 
-@property(nonatomic, assign) BOOL plusIconVisible;
 @property(assign, nonatomic) BOOL isOn;
 @property(assign, nonatomic) BOOL touchBegan;
 @property(assign, nonatomic) BOOL touchEnded;
+@property(assign, nonatomic) BOOL shouldSendCommand;
 
 @end
 
@@ -68,10 +68,36 @@
     return self;
 }
 
+- (void)setCommand:(NSMutableDictionary *)command
+{
+    _command = command;
+    
+    self.shouldSendCommand = NO;
+    if([self.command[@"currentState"] integerValue])
+    {
+        [self buttonPressed:YES];
+    }
+    else
+    {
+        [self buttonPressed:NO];
+    }
+    self.shouldSendCommand = YES;
+}
+
+- (void)commandStateChanged:(NSNotification *)notification
+{
+    if(self.command == notification.userInfo[@"command"])
+    {
+        self.command = notification.userInfo[@"command"];
+    }
+}
+
 - (void)setup
 {
     self.buttonPressedCommandState = 1;
     self.buttonNormalCommandState = 0;
+
+    self.shouldSendCommand = YES;
     
     [self setTitleColor:[self tintColor] forState:UIControlStateNormal];
     [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
@@ -80,6 +106,8 @@
     self.isCircleButton = NO;
     self.borderWidth = 1.0;
     [self refreshBorderColor];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
 }
 
 - (void)setTintColor:(UIColor *)tintColor
@@ -132,7 +160,7 @@
                 self.touchBegan = NO;
                 
                 // send BLE command
-                if(self.buttonNormalCommandState != -999)
+                if(self.buttonNormalCommandState != -999 && self.shouldSendCommand)
                 {
                     [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonPressedCommandState];
                 }
@@ -143,7 +171,7 @@
                 self.touchEnded = NO;
                 
                 // send BLE command
-                if(self.buttonNormalCommandState != -999)
+                if(self.buttonNormalCommandState != -999 && self.shouldSendCommand)
                 {
                     [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonNormalCommandState];
                 }
@@ -154,11 +182,11 @@
             self.layer.backgroundColor = highlighted ? [[self tintColor] CGColor] : [[UIColor clearColor] CGColor];
             
             // send BLE command
-            if(self.buttonNormalCommandState != -999 && !highlighted)
+            if(self.buttonNormalCommandState != -999 && !highlighted && self.shouldSendCommand)
             {
                 [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonNormalCommandState];
             }
-            if(self.buttonPressedCommandState != -999 && highlighted)
+            if(self.buttonPressedCommandState != -999 && highlighted && self.shouldSendCommand)
             {
                 [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonPressedCommandState];
             }

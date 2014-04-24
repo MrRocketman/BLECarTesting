@@ -17,6 +17,7 @@
     if (self)
     {
         // Initialization code
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
     }
     return self;
 }
@@ -24,6 +25,15 @@
 - (void)awakeFromNib
 {
     // Initialization code
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
+}
+
+- (void)commandStateChanged:(NSNotification *)notification
+{
+    if(self.commandDictionary == notification.userInfo[@"command"])
+    {
+        self.commandDictionary = notification.userInfo[@"command"];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -51,7 +61,7 @@
 
 #pragma mark - Public Methods
 
-- (void)setCommandDictionary:(NSDictionary *)commandDictionary
+- (void)setCommandDictionary:(NSMutableDictionary *)commandDictionary
 {
     _commandDictionary = commandDictionary;
     
@@ -61,6 +71,9 @@
     {
         [self.segmentedControl insertSegmentWithTitle:[[self.commandDictionary objectForKey:@"stateLabels"] objectAtIndex:i] atIndex:i animated:NO];
     }
+    
+    // Update selected segment
+    [self.segmentedControl setSelectedSegmentIndex:[self.commandDictionary[@"currentState"] integerValue]];
     
     // Update the label
     self.label.text = [self.commandDictionary objectForKey:@"title"];
