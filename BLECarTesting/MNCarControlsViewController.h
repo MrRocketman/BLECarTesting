@@ -15,4 +15,6 @@
 @property(strong, nonatomic) IBOutlet YHRoundBorderedButton *trunkButton;
 @property(strong, nonatomic) IBOutlet YHRoundBorderedButton *exhaustButton;
 
+- (IBAction)musicButtonPress:(id)sender;
+
 @end

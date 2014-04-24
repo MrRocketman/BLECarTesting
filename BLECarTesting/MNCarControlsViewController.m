@@ -40,6 +40,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)musicButtonPress:(id)sender
+{
+    NSString *stringURL = @"music:";
+    NSURL *url = [NSURL URLWithString:stringURL];
+    [[UIApplication sharedApplication] openURL:url];
+}
+
 /*
 #pragma mark - Navigation
 
