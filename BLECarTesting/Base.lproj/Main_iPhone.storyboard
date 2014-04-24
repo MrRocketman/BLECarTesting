@@ -100,7 +100,7 @@
             </objects>
             <point key="canvasLocation" x="612" y="-136"/>
         </scene>
-        <!--Controls Table View Controller - Controls-->
+        <!--Controls Table View Controller - Testing-->
         <scene sceneID="q76-Gj-DlS">
             <objects>
                 <tableViewController id="FEY-DG-bvg" customClass="MNBLEControlsTableViewController" sceneMemberID="viewController">
@@ -225,13 +225,37 @@
                                     <outlet property="segmentedControl" destination="v7e-eS-Qcb" id="82u-0x-Ym5"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="D5Z-lC-Hsu" detailTextLabel="6p1-cO-N3m" style="IBUITableViewCellStyleValue1" id="1PK-B3-glP" customClass="MNBLEControlsSegmentsTableViewCell">
+                                <rect key="frame" x="0.0" y="263" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1PK-B3-glP" id="JrP-iY-Yq6">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D5Z-lC-Hsu">
+                                            <rect key="frame" x="15" y="11" width="33" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6p1-cO-N3m">
+                                            <rect key="frame" x="261" y="11" width="44" height="21"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="FEY-DG-bvg" id="sCv-7e-dPZ"/>
                             <outlet property="delegate" destination="FEY-DG-bvg" id="CZa-f1-sWl"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Controls" image="second" id="D2A-Iu-wM3"/>
+                    <tabBarItem key="tabBarItem" title="Testing" image="second" id="D2A-Iu-wM3"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </tableViewController>

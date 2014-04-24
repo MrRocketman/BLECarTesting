@@ -66,17 +66,26 @@
     _commandDictionary = commandDictionary;
     
     // Update the segmented control
-    [self.segmentedControl removeAllSegments];
-    for(int i = 0; i < [[self.commandDictionary objectForKey:@"numberOfStates"] integerValue]; i ++)
+    if(self.segmentedControl)
     {
-        [self.segmentedControl insertSegmentWithTitle:[[self.commandDictionary objectForKey:@"stateLabels"] objectAtIndex:i] atIndex:i animated:NO];
+        [self.segmentedControl removeAllSegments];
+        for(int i = 0; i < [[self.commandDictionary objectForKey:@"numberOfStates"] integerValue]; i ++)
+        {
+            [self.segmentedControl insertSegmentWithTitle:[[self.commandDictionary objectForKey:@"stateLabels"] objectAtIndex:i] atIndex:i animated:NO];
+        }
+        
+        // Update selected segment
+        [self.segmentedControl setSelectedSegmentIndex:[self.commandDictionary[@"currentState"] integerValue]];
+        
+        // Update the label
+        self.label.text = self.commandDictionary[@"title"];
     }
-    
-    // Update selected segment
-    [self.segmentedControl setSelectedSegmentIndex:[self.commandDictionary[@"currentState"] integerValue]];
-    
-    // Update the label
-    self.label.text = [self.commandDictionary objectForKey:@"title"];
+    // Update sensor values
+    else
+    {
+        self.textLabel.text = self.commandDictionary[@"title"];
+        self.detailTextLabel.text = [NSString stringWithFormat:@"%4ld", [self.commandDictionary[@"currentState"] longValue]];
+    }
 }
 
 @end

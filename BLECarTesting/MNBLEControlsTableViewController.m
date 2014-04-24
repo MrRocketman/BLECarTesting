@@ -79,9 +79,13 @@
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"segmentBelowLabelCell" forIndexPath:indexPath];
     }
-    else
+    else if([[commandDictionaryForCell objectForKey:@"numberOfStates"] integerValue] >= 2)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"segmentByLabelCell" forIndexPath:indexPath];
+    }
+    else
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     }
     
     // Give the cell its data

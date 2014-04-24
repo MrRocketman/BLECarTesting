@@ -312,7 +312,39 @@
                                        @"currentState" : @0};
         NSMutableDictionary *mDictionary26 = [NSMutableDictionary dictionaryWithDictionary:dictionary26];
         
-        self.commandDictionariesArray = @[mDictionary1, mDictionary2, mDictionary3, mDictionary4, mDictionary5, mDictionary6, mDictionary7, mDictionary8, mDictionary9, mDictionary10, mDictionary11, mDictionary12, mDictionary13, mDictionary14, mDictionary15, mDictionary16, mDictionary17, mDictionary18, mDictionary19, mDictionary20, mDictionary21, mDictionary22, mDictionary23, mDictionary24, mDictionary25, mDictionary26];
+        // Sensor Data
+        NSDictionary *dictionary27 = @{@"baseCommand" : @"C300",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Trunk Amps",
+                                       @"category" : @"Sensors",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary27 = [NSMutableDictionary dictionaryWithDictionary:dictionary27];
+        NSDictionary *dictionary28 = @{@"baseCommand" : @"C301",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Left Window Amps",
+                                       @"category" : @"Sensors",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary28 = [NSMutableDictionary dictionaryWithDictionary:dictionary28];
+        NSDictionary *dictionary29 = @{@"baseCommand" : @"C300",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Right Window Amps",
+                                       @"category" : @"Sensors",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary29 = [NSMutableDictionary dictionaryWithDictionary:dictionary29];
+        NSDictionary *dictionary30 = @{@"baseCommand" : @"C300",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Alternator Amps",
+                                       @"category" : @"Sensors",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary30 = [NSMutableDictionary dictionaryWithDictionary:dictionary30];
+        NSDictionary *dictionary31 = @{@"baseCommand" : @"C300",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Light Sensor",
+                                       @"category" : @"Sensors",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary31 = [NSMutableDictionary dictionaryWithDictionary:dictionary31];
+        
+        self.commandDictionariesArray = @[mDictionary1, mDictionary2, mDictionary3, mDictionary4, mDictionary5, mDictionary6, mDictionary7, mDictionary8, mDictionary9, mDictionary10, mDictionary11, mDictionary12, mDictionary13, mDictionary14, mDictionary15, mDictionary16, mDictionary17, mDictionary18, mDictionary19, mDictionary20, mDictionary21, mDictionary22, mDictionary23, mDictionary24, mDictionary25, mDictionary26, mDictionary27, mDictionary28, mDictionary29, mDictionary30, mDictionary31];
         
         // Set this here because the ordering of the array is not guaranteed. Thus we can't do this calculation every time someone asks for it. Otherwise the data we would be sending them would be all over the place.
         //self.commandCategories = [self.commandDictionariesArray valueForKeyPath:@"distinctUnionOfObjects.category"];
