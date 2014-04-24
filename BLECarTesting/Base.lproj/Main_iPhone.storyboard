@@ -248,10 +248,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
+                        <outlet property="delegate" destination="NGd-kk-q5m" id="5uz-Ae-dUC"/>
                         <segue destination="aak-d2-CHh" kind="relationship" relationship="rootViewController" id="Vs5-bo-eU8"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J51-4M-GWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="NGd-kk-q5m" customClass="MNCarNavigationControllerDelegate"/>
             </objects>
             <point key="canvasLocation" x="612" y="1298"/>
         </scene>

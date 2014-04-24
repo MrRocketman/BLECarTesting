@@ -22,6 +22,7 @@
 		1AB9EDEC19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDEB19036B7A00F4FC42 /* MNCarSegmentsTableViewCell.m */; };
 		1AB9EDF21904E30F00F4FC42 /* MNTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDF11904E30F00F4FC42 /* MNTabBarViewController.m */; };
 		1AB9EDF51906340900F4FC42 /* MNCarNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AB9EDF41906340900F4FC42 /* MNCarNavigationController.m */; };
+		1AC2F70D1908EC14000CA5CE /* MNCarNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC2F70C1908EC14000CA5CE /* MNCarNavigationControllerDelegate.m */; };
 		1AC395AC18EB78F600B30E4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AB18EB78F600B30E4B /* Foundation.framework */; };
 		1AC395AE18EB78F600B30E4B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */; };
 		1AC395B018EB78F600B30E4B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC395AF18EB78F600B30E4B /* UIKit.framework */; };
@@ -86,6 +87,8 @@
 		1AB9EDF11904E30F00F4FC42 /* MNTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNTabBarViewController.m; sourceTree = "<group>"; };
 		1AB9EDF31906340900F4FC42 /* MNCarNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCarNavigationController.h; sourceTree = "<group>"; };
 		1AB9EDF41906340900F4FC42 /* MNCarNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCarNavigationController.m; sourceTree = "<group>"; };
+		1AC2F70B1908EC14000CA5CE /* MNCarNavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNCarNavigationControllerDelegate.h; sourceTree = "<group>"; };
+		1AC2F70C1908EC14000CA5CE /* MNCarNavigationControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNCarNavigationControllerDelegate.m; sourceTree = "<group>"; };
 		1AC395A818EB78F600B30E4B /* BLECarTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLECarTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC395AB18EB78F600B30E4B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1AC395AD18EB78F600B30E4B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -189,6 +192,8 @@
 			children = (
 				1AB9EDF31906340900F4FC42 /* MNCarNavigationController.h */,
 				1AB9EDF41906340900F4FC42 /* MNCarNavigationController.m */,
+				1AC2F70B1908EC14000CA5CE /* MNCarNavigationControllerDelegate.h */,
+				1AC2F70C1908EC14000CA5CE /* MNCarNavigationControllerDelegate.m */,
 				1AA718CE19022D94002C19C8 /* MNCarIgnitionViewController.h */,
 				1AA718CF19022D94002C19C8 /* MNCarIgnitionViewController.m */,
 				1AB9EDCD19035A9100F4FC42 /* MNCarControlsViewController.h */,
@@ -460,6 +465,7 @@
 				1AB9EDE8190364E800F4FC42 /* MNCarToggleTableViewCell.m in Sources */,
 				1AC395BC18EB78F600B30E4B /* MNAppDelegate.m in Sources */,
 				1AB9EDE119035B8200F4FC42 /* MNCarTurnSignalPatternsTableViewController.m in Sources */,
+				1AC2F70D1908EC14000CA5CE /* MNCarNavigationControllerDelegate.m in Sources */,
 				1AA718C618FF61B1002C19C8 /* MNBLEControlsSegmentsTableViewCell.m in Sources */,
 				1AC395F518EB80CF00B30E4B /* NSData+hex.m in Sources */,
 			);

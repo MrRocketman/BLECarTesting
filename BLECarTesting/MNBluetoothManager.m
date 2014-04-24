@@ -651,8 +651,9 @@
             if(command != nil)
             {
                 // Find the new state
+                int commandValue = [self parseString:data whichHasLength:dataLength forCharacter:[command[@"commandCharacter"] characterAtIndex:0]];
                 int dataValue = [self parseString:data whichHasLength:dataLength forCharacter:[command[@"dataCharacter"] characterAtIndex:0]];
-                NSLog(@"received Data:%d", dataValue);
+                NSLog(@"received Command:%d Data:%d", commandValue, dataValue);
                 
                 if(dataValue >= 0)
                 {
