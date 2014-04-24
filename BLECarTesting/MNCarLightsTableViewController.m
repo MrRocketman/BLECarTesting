@@ -69,7 +69,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *category = [self.lightCategories objectAtIndex:indexPath.section];
-    NSDictionary *commandForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
+    NSMutableDictionary *commandForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
     
     // Headlights needs a special cell
     if([[commandForCell objectForKey:@"title"] isEqualToString:@"Headlights"])

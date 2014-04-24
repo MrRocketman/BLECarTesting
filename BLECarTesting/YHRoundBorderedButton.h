@@ -12,7 +12,7 @@
 
 @property(assign, nonatomic) int buttonPressedCommandState; // Set to -999 to disable command sending
 @property(assign, nonatomic) int buttonNormalCommandState; // Set to -999 to disable command sending
-@property(strong, nonatomic) NSDictionary *command;
+@property(strong, nonatomic) NSMutableDictionary *command;
 
 @property(assign, nonatomic) BOOL isToggleButton;
 @property(assign, nonatomic) BOOL isCircleButton;

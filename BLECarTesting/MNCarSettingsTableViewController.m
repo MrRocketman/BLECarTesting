@@ -106,7 +106,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *commandForCell;
+    NSMutableDictionary *commandForCell;
     
     if(indexPath.section == LIGHTS_SECTION)
     {

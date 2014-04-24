@@ -13,7 +13,7 @@
 @property(strong, nonatomic) IBOutlet UISwitch *toggleSwitch;
 @property(strong, nonatomic) IBOutlet UILabel *label;
 
-@property(strong, nonatomic) NSDictionary *command;
+@property(strong, nonatomic) NSMutableDictionary *command;
 @property(assign, nonatomic) BOOL shouldSendFactoryCommand;
 
 - (IBAction)toggleSwitchChange:(id)sender;

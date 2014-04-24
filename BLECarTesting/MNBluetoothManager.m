@@ -392,7 +392,7 @@
 
 - (int)indexOfCommandWithTitle:(NSString *)title;
 {
-    NSDictionary *command = [self commandForCommandTitle:title];
+    NSMutableDictionary *command = [self commandForCommandTitle:title];
     
     if(command != nil)
     {
@@ -406,7 +406,7 @@
     return -1;
 }
 
-- (NSDictionary *)commandForCommandTitle:(NSString *)title
+- (NSMutableDictionary *)commandForCommandTitle:(NSString *)title
 {
     NSPredicate *filter = [NSPredicate predicateWithFormat:@"title CONTAINS[cd] %@", title];
     
@@ -434,7 +434,7 @@
     return nil;
 }
 
-- (NSDictionary *)commandForCategory:(NSString *)category atIndex:(int)index
+- (NSMutableDictionary *)commandForCategory:(NSString *)category atIndex:(int)index
 {
     return [[self commandsForCategory:category] objectAtIndex:index];
 }
@@ -448,10 +448,10 @@
 
 #pragma mark - Public BLE Tx Methods
 
-- (void)writeCommandToArduino:(NSDictionary *)command withState:(int)state andFactoryState:(int)factory
+- (void)writeCommandToArduino:(NSMutableDictionary *)command withState:(int)state andFactoryState:(int)factory
 {
     // Command example
-    /*NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
+    /*NSMutableDictionary *dictionary22 = @{@"baseCommand" : @"C154",
      @"numberOfStates" : @2,
      @"stateLabels" : @[@"Close", @"Open"],
      @"stateCharacter" : @"S",
@@ -468,10 +468,10 @@
     }
 }
 
-- (void)writeCommandToArduino:(NSDictionary *)command withState:(int)state
+- (void)writeCommandToArduino:(NSMutableDictionary *)command withState:(int)state
 {
     // Command example
-    /*NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
+    /*NSMutableDictionary *dictionary22 = @{@"baseCommand" : @"C154",
      @"numberOfStates" : @2,
      @"stateLabels" : @[@"Close", @"Open"],
      @"stateCharacter" : @"S",
@@ -488,10 +488,10 @@
     }
 }
 
-- (void)writeCommandToArduino:(NSDictionary *)command withFactoryState:(int)factory
+- (void)writeCommandToArduino:(NSMutableDictionary *)command withFactoryState:(int)factory
 {
     // Command example
-    /*NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
+    /*NSMutableDictionary *dictionary22 = @{@"baseCommand" : @"C154",
      @"numberOfStates" : @2,
      @"stateLabels" : @[@"Close", @"Open"],
      @"stateCharacter" : @"S",
@@ -644,7 +644,8 @@
         [self writeDebugStringToConsole:[NSString stringWithFormat:@"Received: %@", uartString] color:[UIColor orangeColor]];
         
         // Find the command for the number that was passed to us
-        if([self commandForBaseCommand:uartString] != nil)
+        NSMutableDictionary *command = [self commandForBaseCommand:uartString];
+        if(command != nil)
         {
             // Find the new state
             int dataValue = [self parseString:data whichHasLength:dataLength forCharacter:'D'];
@@ -672,7 +673,7 @@
     return value;
 }
 
-- (NSDictionary *)commandForBaseCommand:(NSString *)baseCommand
+- (NSMutableDictionary *)commandForBaseCommand:(NSString *)baseCommand
 {
     NSPredicate *filter = [NSPredicate predicateWithFormat:@"baseCommand CONTAINS[cd] %@", baseCommand];
     

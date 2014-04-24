@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-// A Command is an NSDictionary like this:
+// A Command is an NSMutableDictionary like this:
 /*NSMutableDictionary *dictionary22 = @{@"baseCommand" : @"C154",
                                @"numberOfStates" : @2,
                                @"stateLabels" : @[@"Close", @"Open"],
@@ -62,17 +62,17 @@ typedef enum
 
 // Specific Commands
 - (int)indexOfCommandWithTitle:(NSString *)title;
-- (NSDictionary *)commandForCommandTitle:(NSString *)title;
+- (NSMutableDictionary *)commandForCommandTitle:(NSString *)title;
 
 // Categories of commands
 - (NSArray *)commandsForCategory:(NSString *)category;
-- (NSDictionary *)commandForCategory:(NSString *)category atIndex:(int)index;
+- (NSMutableDictionary *)commandForCategory:(NSString *)category atIndex:(int)index;
 - (int)commandsCountForCategory:(NSString *)category;
 
 // BLE
-- (void)writeCommandToArduino:(NSDictionary *)command withState:(int)state andFactoryState:(int)factory;
-- (void)writeCommandToArduino:(NSDictionary *)command withState:(int)state;
-- (void)writeCommandToArduino:(NSDictionary *)command withFactoryState:(int)factory;
+- (void)writeCommandToArduino:(NSMutableDictionary *)command withState:(int)state andFactoryState:(int)factory;
+- (void)writeCommandToArduino:(NSMutableDictionary *)command withState:(int)state;
+- (void)writeCommandToArduino:(NSMutableDictionary *)command withFactoryState:(int)factory;
 
 - (void)writeStringToArduino:(NSString *)string;
 - (void)writeDebugStringToConsole:(NSString *)string color:(UIColor *)color;

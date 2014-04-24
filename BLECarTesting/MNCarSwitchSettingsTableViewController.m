@@ -66,7 +66,7 @@
 {
     MNCarToggleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ToggleCell" forIndexPath:indexPath];
     
-    NSDictionary *commandForCell = [[[MNBluetoothManager sharedBluetoothManager] commandsForCategory:@"Interior Lights"] objectAtIndex:indexPath.row];
+    NSMutableDictionary *commandForCell = [[[MNBluetoothManager sharedBluetoothManager] commandsForCategory:@"Interior Lights"] objectAtIndex:indexPath.row];
     cell.command = commandForCell;
     
     return cell;

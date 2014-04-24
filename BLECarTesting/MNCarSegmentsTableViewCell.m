@@ -41,7 +41,7 @@
 
 #pragma mark - Public Methods
 
-- (void)setCommand:(NSDictionary *)command
+- (void)setCommand:(NSMutableDictionary *)command
 {
     _command = command;
     
