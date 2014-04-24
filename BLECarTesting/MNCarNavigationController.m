@@ -33,6 +33,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(BLEConnectionStatusChange:) name:@"BLEConnectionStatusChange" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UIControlSwtichChange:) name:@"UIControlSwitchChange" object:nil];
+    self.navigationBar.tintColor = [UIColor blackColor];
 }
 
 - (void)didReceiveMemoryWarning

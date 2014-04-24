@@ -85,7 +85,7 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Terminal" image="first" id="u1e-5L-l1D"/>
+                    <tabBarItem key="tabBarItem" title="Terminal" image="Terminal" id="u1e-5L-l1D"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
@@ -255,7 +255,7 @@
                             <outlet property="delegate" destination="FEY-DG-bvg" id="CZa-f1-sWl"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Testing" image="second" id="D2A-Iu-wM3"/>
+                    <tabBarItem key="tabBarItem" title="Testing" image="Testing" id="D2A-Iu-wM3"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                 </tableViewController>
@@ -267,7 +267,7 @@
         <scene sceneID="chJ-fm-3dE">
             <objects>
                 <navigationController definesPresentationContext="YES" id="cOh-3H-GtI" customClass="MNCarNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Car" id="qw7-cz-uhb"/>
+                    <tabBarItem key="tabBarItem" title="Car" image="Car" id="qw7-cz-uhb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="I6O-T6-ObB">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -992,9 +992,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Car" width="40" height="40"/>
         <image name="Power" width="240" height="240"/>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="Terminal" width="40" height="40"/>
+        <image name="Testing" width="40" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

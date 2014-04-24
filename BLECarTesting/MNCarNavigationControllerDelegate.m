@@ -27,7 +27,7 @@
         
         self.doorLockCommand = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Locks"];
         
-        self.doorLockStatusItem = [[UIBarButtonItem alloc] initWithTitle:@"Lock" style:UIBarButtonItemStyleBordered target:nil action:nil];
+        self.doorLockStatusItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Locked"] style:UIBarButtonItemStyleBordered target:nil action:nil];
     }
     
     return self;
@@ -49,11 +49,11 @@
     
     if(doorLockCommand[@"currentState"])
     {
-        self.doorLockStatusItem.title = @"UnLocked";
+        self.doorLockStatusItem.image = [UIImage imageNamed:@"Unlocked"];
     }
     else
     {
-        self.doorLockStatusItem.title = @"Locked";
+        self.doorLockStatusItem.image = [UIImage imageNamed:@"Locked"];
     }
 }
 
