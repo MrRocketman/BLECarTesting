@@ -71,7 +71,7 @@
     NSDictionary *commandDictionaryForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
     
     MNBLEControlsSegmentsTableViewCell *cell;
-    if([commandDictionaryForCell objectForKey:@"factoryCommand"] != nil)
+    if([commandDictionaryForCell objectForKey:@"factoryCharacter"] != nil)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:@"twoSegmentsCell" forIndexPath:indexPath];
     }
@@ -95,7 +95,7 @@
     NSString *category = [[[MNBluetoothManager sharedBluetoothManager] commandCategories] objectAtIndex:indexPath.section];
     NSDictionary *commandDictionaryForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
     
-    if([commandDictionaryForCell objectForKey:@"factoryCommand"] != nil)
+    if([commandDictionaryForCell objectForKey:@"factoryCharacter"] != nil)
     {
         return 82;
     }
@@ -114,7 +114,7 @@
     NSString *category = [[[MNBluetoothManager sharedBluetoothManager] commandCategories] objectAtIndex:indexPath.section];
     NSDictionary *commandDictionaryForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
     
-    if([commandDictionaryForCell objectForKey:@"factoryCommand"] != nil)
+    if([commandDictionaryForCell objectForKey:@"factoryCharacter"] != nil)
     {
         return 82;
     }

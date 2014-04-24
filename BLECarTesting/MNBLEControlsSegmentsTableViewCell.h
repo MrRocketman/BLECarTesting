@@ -11,8 +11,8 @@
                                   @"C203" @"baseCommand",
                                   @2, @"numberOfStates",
                                   @[@"Off", @"On"], @"stateLabels",
-                                  @"S", @"stateCommand",
-                                  @"F", @"factoryCommand",
+                                  @"S", @"stateCharacter",
+                                  @"F", @"factoryCharacter",
                                   @"Dome", @"title",
                                   nil];*/
 

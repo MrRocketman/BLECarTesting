@@ -65,176 +65,254 @@
         
         // Ignition
         NSDictionary *dictionary1 = @{@"baseCommand" : @"C00",
-                                     @"numberOfStates" : @3,
-                                     @"stateLabels" : @[@"Off", @"Battery", @"Start"],
-                                     @"stateCommand" : @"S",
-                                     @"title" : @"Ignition",
-                                     @"category" : @"Ignition"};
+                                      @"numberOfStates" : @3,
+                                      @"stateLabels" : @[@"Off", @"Battery", @"Start"],
+                                      @"stateCharacter" : @"S",
+                                      @"dataCharacter" : @"D",
+                                      @"title" : @"Ignition",
+                                      @"category" : @"Ignition",
+                                      @"currentState" : @0};
+        NSMutableDictionary *mDictionary1 = [NSMutableDictionary dictionaryWithDictionary:dictionary1];
         
         // Controls
         NSDictionary *dictionary2 = @{@"baseCommand" : @"C50",
                                       @"numberOfStates" : @2,
                                       @"stateLabels" : @[@"Lock", @"Unlock"],
-                                      @"stateCommand" : @"S",
+                                      @"stateCharacter" : @"S",
+                                      @"dataCharacter" : @"D",
                                       @"title" : @"Door Locks",
-                                      @"category" : @"Controls"};
+                                      @"category" : @"Controls",
+                                      @"currentState" : @0};
+        NSMutableDictionary *mDictionary2 = [NSMutableDictionary dictionaryWithDictionary:dictionary2];
         NSDictionary *dictionary3 = @{@"baseCommand" : @"C51",
                                       @"numberOfStates" : @3,
                                       @"stateLabels" : @[@"Close", @"Open", @"Stop"],
-                                      @"stateCommand" : @"S",
+                                      @"stateCharacter" : @"S",
+                                      @"dataCharacter" : @"D",
                                       @"title" : @"Trunk",
-                                      @"category" : @"Controls"};
+                                      @"category" : @"Controls",
+                                      @"currentState" : @0};
+        NSMutableDictionary *mDictionary3 = [NSMutableDictionary dictionaryWithDictionary:dictionary3];
         NSDictionary *dictionary4 = @{@"baseCommand" : @"C52",
                                       @"numberOfStates" : @2,
                                       @"stateLabels" : @[@"Top", @"Bottom"],
-                                      @"stateCommand" : @"S",
+                                      @"stateCharacter" : @"S",
+                                      @"dataCharacter" : @"D",
                                       @"title" : @"Left Window",
-                                      @"category" : @"Controls"};
+                                      @"category" : @"Controls",
+                                      @"currentState" : @0};
+        NSMutableDictionary *mDictionary4 = [NSMutableDictionary dictionaryWithDictionary:dictionary4];
         NSDictionary *dictionary5 = @{@"baseCommand" : @"C53",
                                       @"numberOfStates" : @3,
                                       @"stateLabels" : @[@"Stop", @"Up", @"Down"],
-                                      @"stateCommand" : @"S",
+                                      @"stateCharacter" : @"S",
+                                      @"dataCharacter" : @"D",
                                       @"title" : @"Left Window Move",
-                                      @"category" : @"Controls"};
+                                      @"category" : @"Controls",
+                                      @"currentState" : @0};
+        NSMutableDictionary *mDictionary5 = [NSMutableDictionary dictionaryWithDictionary:dictionary5];
         NSDictionary *dictionary6 = @{@"baseCommand" : @"C54",
                                       @"numberOfStates" : @2,
                                       @"stateLabels" : @[@"Top", @"Bottom"],
-                                      @"stateCommand" : @"S",
+                                      @"stateCharacter" : @"S",
+                                      @"dataCharacter" : @"D",
                                       @"title" : @"Right Window",
-                                      @"category" : @"Controls"};
+                                      @"category" : @"Controls",
+                                      @"currentState" : @0};
+        NSMutableDictionary *mDictionary6 = [NSMutableDictionary dictionaryWithDictionary:dictionary6];
         NSDictionary *dictionary7 = @{@"baseCommand" : @"C55",
                                       @"numberOfStates" : @3,
                                       @"stateLabels" : @[@"Stop", @"Up", @"Down"],
-                                      @"stateCommand" : @"S",
+                                      @"stateCharacter" : @"S",
+                                      @"dataCharacter" : @"D",
                                       @"title" : @"Right Window Move",
-                                      @"category" : @"Controls"};
+                                      @"category" : @"Controls",
+                                      @"currentState" : @0};
+        NSMutableDictionary *mDictionary7 = [NSMutableDictionary dictionaryWithDictionary:dictionary7];
         NSDictionary *dictionary8 = @{@"baseCommand" : @"C56",
                                       @"numberOfStates" : @2,
                                       @"stateLabels" : @[@"Top", @"Bottom"],
-                                      @"stateCommand" : @"S",
+                                      @"stateCharacter" : @"S",
+                                      @"dataCharacter" : @"D",
                                       @"title" : @"Both Windows",
-                                      @"category" : @"Controls"};
+                                      @"category" : @"Controls",
+                                      @"currentState" : @0};
+        NSMutableDictionary *mDictionary8 = [NSMutableDictionary dictionaryWithDictionary:dictionary8];
         NSDictionary *dictionary9 = @{@"baseCommand" : @"C57",
                                       @"numberOfStates" : @3,
                                       @"stateLabels" : @[@"Stop", @"Up", @"Down"],
-                                      @"stateCommand" : @"S",
+                                      @"stateCharacter" : @"S",
+                                      @"dataCharacter" : @"D",
                                       @"title" : @"Both Windows Move",
-                                      @"category" : @"Controls"};
+                                      @"category" : @"Controls",
+                                      @"currentState" : @0};
+        NSMutableDictionary *mDictionary9 = [NSMutableDictionary dictionaryWithDictionary:dictionary9];
         NSDictionary *dictionary10 = @{@"baseCommand" : @"C58",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Close", @"Open"],
-                                      @"stateCommand" : @"S",
-                                      @"title" : @"Exhaust Cutouts",
-                                      @"category" : @"Controls"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Close", @"Open"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Exhaust Cutouts",
+                                       @"category" : @"Controls",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary10 = [NSMutableDictionary dictionaryWithDictionary:dictionary10];
         
         // Exterior Lights
         NSDictionary *dictionary11 = @{@"baseCommand" : @"C100",
-                                      @"numberOfStates" : @3,
-                                      @"stateLabels" : @[@"Off", @"Low", @"High"],
-                                      @"stateCommand" : @"S",
-                                      @"title" : @"Headlights",
-                                      @"category" : @"Exterior Lights"};
+                                       @"numberOfStates" : @3,
+                                       @"stateLabels" : @[@"Off", @"Low", @"High"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Headlights",
+                                       @"category" : @"Exterior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary11 = [NSMutableDictionary dictionaryWithDictionary:dictionary11];
         NSDictionary *dictionary12 = @{@"baseCommand" : @"C101",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Off", @"On"],
-                                      @"stateCommand" : @"S",
-                                      @"title" : @"Fog",
-                                      @"category" : @"Exterior Lights"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Off", @"On"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Fog",
+                                       @"category" : @"Exterior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary12 = [NSMutableDictionary dictionaryWithDictionary:dictionary12];
         NSDictionary *dictionary13 = @{@"baseCommand" : @"C106",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Off", @"On"],
-                                      @"stateCommand" : @"S",
-                                      @"title" : @"Emergency Flahsers",
-                                      @"category" : @"Exterior Lights"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Off", @"On"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Emergency Flahsers",
+                                       @"category" : @"Exterior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary13 = [NSMutableDictionary dictionaryWithDictionary:dictionary13];
         NSDictionary *dictionary14 = @{@"baseCommand" : @"C102",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Off", @"On"],
-                                      @"stateCommand" : @"S",
-                                      @"title" : @"Parking",
-                                      @"category" : @"Exterior Lights"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Off", @"On"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Parking",
+                                       @"category" : @"Exterior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary14 = [NSMutableDictionary dictionaryWithDictionary:dictionary14];
         NSDictionary *dictionary15 = @{@"baseCommand" : @"C103",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Off", @"On"],
-                                      @"stateCommand" : @"S",
-                                      @"title" : @"Backup",
-                                      @"category" : @"Exterior Lights"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Off", @"On"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Backup",
+                                       @"category" : @"Exterior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary15 = [NSMutableDictionary dictionaryWithDictionary:dictionary15];
         NSDictionary *dictionary16 = @{@"baseCommand" : @"C104",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Off", @"On"],
-                                      @"stateCommand" : @"S",
-                                      @"title" : @"Tail Dims",
-                                      @"category" : @"Exterior Lights"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Off", @"On"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Tail Dims",
+                                       @"category" : @"Exterior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary16 = [NSMutableDictionary dictionaryWithDictionary:dictionary16];
         NSDictionary *dictionary17 = @{@"baseCommand" : @"C105",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Off", @"On"],
-                                      @"stateCommand" : @"S",
-                                      @"title" : @"License Plate",
-                                      @"category" : @"Exterior Lights"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Off", @"On"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"License Plate",
+                                       @"category" : @"Exterior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary17 = [NSMutableDictionary dictionaryWithDictionary:dictionary17];
         
         // Interior Lights
         NSDictionary *dictionary18 = @{@"baseCommand" : @"C150",
                                        @"numberOfStates" : @2,
                                        @"stateLabels" : @[@"Close", @"Open"],
-                                       @"stateCommand" : @"S",
-                                       @"factoryCommand" : @"F",
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"factoryCharacter" : @"F",
                                        @"title" : @"Left Pillar",
-                                       @"category" : @"Interior Lights"};
+                                       @"category" : @"Interior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary18 = [NSMutableDictionary dictionaryWithDictionary:dictionary18];
         NSDictionary *dictionary19 = @{@"baseCommand" : @"C151",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Close", @"Open"],
-                                      @"stateCommand" : @"S",
-                                       @"factoryCommand" : @"F",
-                                      @"title" : @"Right Pillar",
-                                      @"category" : @"Interior Lights"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Close", @"Open"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"factoryCharacter" : @"F",
+                                       @"title" : @"Right Pillar",
+                                       @"category" : @"Interior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary19 = [NSMutableDictionary dictionaryWithDictionary:dictionary19];
         NSDictionary *dictionary20 = @{@"baseCommand" : @"C152",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Close", @"Open"],
-                                      @"stateCommand" : @"S",
-                                       @"factoryCommand" : @"F",
-                                      @"title" : @"Center Console",
-                                      @"category" : @"Interior Lights"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Close", @"Open"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"factoryCharacter" : @"F",
+                                       @"title" : @"Center Console",
+                                       @"category" : @"Interior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary20 = [NSMutableDictionary dictionaryWithDictionary:dictionary20];
         NSDictionary *dictionary21 = @{@"baseCommand" : @"C153",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Close", @"Open"],
-                                      @"stateCommand" : @"S",
-                                       @"factoryCommand" : @"F",
-                                      @"title" : @"Dome",
-                                      @"category" : @"Interior Lights"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Close", @"Open"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"factoryCharacter" : @"F",
+                                       @"title" : @"Dome",
+                                       @"category" : @"Interior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary21 = [NSMutableDictionary dictionaryWithDictionary:dictionary21];
         NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Close", @"Open"],
-                                      @"stateCommand" : @"S",
-                                       @"factoryCommand" : @"F",
-                                      @"title" : @"Under Dash",
-                                      @"category" : @"Interior Lights"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Close", @"Open"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"factoryCharacter" : @"F",
+                                       @"title" : @"Under Dash",
+                                       @"category" : @"Interior Lights",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary22 = [NSMutableDictionary dictionaryWithDictionary:dictionary22];
         
         // Miscellaneous
         NSDictionary *dictionary23 = @{@"baseCommand" : @"C200",
-                                      @"numberOfStates" : @3,
-                                      @"stateLabels" : @[@"Slow", @"Medium", @"Fast"],
-                                      @"stateCommand" : @"S",
-                                      @"title" : @"Turn Signal Speed",
-                                      @"category" : @"Miscellaneous"};
+                                       @"numberOfStates" : @3,
+                                       @"stateLabels" : @[@"Slow", @"Medium", @"Fast"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Turn Signal Speed",
+                                       @"category" : @"Miscellaneous",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary23 = [NSMutableDictionary dictionaryWithDictionary:dictionary23];
         NSDictionary *dictionary24 = @{@"baseCommand" : @"C201",
-                                      @"numberOfStates" : @5,
-                                      @"stateLabels" : @[@"Basic", @"Sequence", @"Chase", @"-Sequence", @"OneByOne"],
-                                      @"stateCommand" : @"S",
-                                      @"title" : @"Turn Signal Patterns",
-                                      @"category" : @"Miscellaneous"};
+                                       @"numberOfStates" : @5,
+                                       @"stateLabels" : @[@"Basic", @"Sequence", @"Chase", @"-Sequence", @"OneByOne"],
+                                       @"stateCharacter" : @"S",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Turn Signal Patterns",
+                                       @"category" : @"Miscellaneous",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary24 = [NSMutableDictionary dictionaryWithDictionary:dictionary24];
         NSDictionary *dictionary25 = @{@"baseCommand" : @"C202",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Off", @"On"],
-                                      @"stateCommand" : @"L",
-                                      @"title" : @"Assistive Lighting",
-                                      @"category" : @"Miscellaneous"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Off", @"On"],
+                                       @"stateCharacter" : @"L",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Assistive Lighting",
+                                       @"category" : @"Miscellaneous",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary25 = [NSMutableDictionary dictionaryWithDictionary:dictionary25];
         NSDictionary *dictionary26 = @{@"baseCommand" : @"C203",
-                                      @"numberOfStates" : @2,
-                                      @"stateLabels" : @[@"Off", @"On"],
-                                      @"stateCommand" : @"A",
-                                      @"title" : @"Automatic Lighting",
-                                      @"category" : @"Miscellaneous"};
+                                       @"numberOfStates" : @2,
+                                       @"stateLabels" : @[@"Off", @"On"],
+                                       @"stateCharacter" : @"A",
+                                       @"dataCharacter" : @"D",
+                                       @"title" : @"Automatic Lighting",
+                                       @"category" : @"Miscellaneous",
+                                       @"currentState" : @0};
+        NSMutableDictionary *mDictionary26 = [NSMutableDictionary dictionaryWithDictionary:dictionary26];
         
-        self.commandDictionariesArray = @[dictionary1, dictionary2, dictionary3, dictionary4, dictionary5, dictionary6, dictionary7, dictionary8, dictionary9, dictionary10, dictionary11, dictionary12, dictionary13, dictionary14, dictionary15, dictionary16, dictionary17, dictionary18, dictionary19, dictionary20, dictionary21, dictionary22, dictionary23, dictionary24, dictionary25, dictionary26];
+        self.commandDictionariesArray = @[mDictionary1, mDictionary2, mDictionary3, mDictionary4, mDictionary5, mDictionary6, mDictionary7, mDictionary8, mDictionary9, mDictionary10, mDictionary11, mDictionary12, mDictionary13, mDictionary14, mDictionary15, mDictionary16, mDictionary17, mDictionary18, mDictionary19, mDictionary20, mDictionary21, mDictionary22, mDictionary23, mDictionary24, mDictionary25, mDictionary26];
         
         // Set this here because the ordering of the array is not guaranteed. Thus we can't do this calculation every time someone asks for it. Otherwise the data we would be sending them would be all over the place.
         //self.commandCategories = [self.commandDictionariesArray valueForKeyPath:@"distinctUnionOfObjects.category"];
@@ -376,15 +454,15 @@
     /*NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
      @"numberOfStates" : @2,
      @"stateLabels" : @[@"Close", @"Open"],
-     @"stateCommand" : @"S",
-     @"factoryCommand" : @"F",
+     @"stateCharacter" : @"S",
+     @"factoryCharacter" : @"F",
      @"title" : @"Under Dash",
      @"category" : @"Interior Lights"};*/
     
     
     if(command != nil)
     {
-        NSString *string = [NSString stringWithFormat:@"%@ %@%d %@%d", command[@"baseCommand"], command[@"stateCommand"], state, command[@"factoryCommand"], factory];
+        NSString *string = [NSString stringWithFormat:@"%@ %@%d %@%d", command[@"baseCommand"], command[@"stateCharacter"], state, command[@"factoryCharacter"], factory];
         
         [self writeStringToArduino:string];
     }
@@ -396,15 +474,15 @@
     /*NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
      @"numberOfStates" : @2,
      @"stateLabels" : @[@"Close", @"Open"],
-     @"stateCommand" : @"S",
-     @"factoryCommand" : @"F",
+     @"stateCharacter" : @"S",
+     @"factoryCharacter" : @"F",
      @"title" : @"Under Dash",
      @"category" : @"Interior Lights"};*/
     
     
     if(command != nil)
     {
-        NSString *string = [NSString stringWithFormat:@"%@ %@%d", command[@"baseCommand"], command[@"stateCommand"], state];
+        NSString *string = [NSString stringWithFormat:@"%@ %@%d", command[@"baseCommand"], command[@"stateCharacter"], state];
         
         [self writeStringToArduino:string];
     }
@@ -416,15 +494,15 @@
     /*NSDictionary *dictionary22 = @{@"baseCommand" : @"C154",
      @"numberOfStates" : @2,
      @"stateLabels" : @[@"Close", @"Open"],
-     @"stateCommand" : @"S",
-     @"factoryCommand" : @"F",
+     @"stateCharacter" : @"S",
+     @"factoryCharacter" : @"F",
      @"title" : @"Under Dash",
      @"category" : @"Interior Lights"};*/
     
     
     if(command != nil)
     {
-        NSString *string = [NSString stringWithFormat:@"%@ %@%d", command[@"baseCommand"], command[@"factoryCommand"], factory];
+        NSString *string = [NSString stringWithFormat:@"%@ %@%d", command[@"baseCommand"], command[@"factoryCharacter"], factory];
         
         [self writeStringToArduino:string];
     }
@@ -535,13 +613,6 @@
 // Data incoming from UART peripheral
 - (void)didReceiveData:(NSData*)newData
 {
-    //Debug
-    //NSString *hexString = [newData hexRepresentationWithSpaces:YES];
-    //NSLog(@"Received: hex:%@", uartString, hexString);
-    NSString *uartString = [[NSString alloc] initWithData:newData encoding:NSUTF8StringEncoding];
-    NSLog(@"Received: %@", uartString);
-    //NSLog(@"Received: %@ hex:%@", uartString, hexString);
-    
     if (self.connectionStatus == ConnectionStatusConnected || self.connectionStatus == ConnectionStatusScanning)
     {
         // convert data to string & replace characters we can't display
@@ -563,9 +634,56 @@
             }
         }
         
+        //Debug
+        //NSString *hexString = [newData hexRepresentationWithSpaces:YES];
+        //NSLog(@"Received: hex:%@", uartString, hexString);
+        NSString *uartString = [[NSString alloc] initWithData:newData encoding:NSUTF8StringEncoding];
+        NSLog(@"Received: %@", uartString);
+        //NSLog(@"Received: %@ hex:%@", uartString, hexString);
         // Write the received text to the 'console'
-        [self writeDebugStringToConsole:uartString color:[UIColor orangeColor]];
+        [self writeDebugStringToConsole:[NSString stringWithFormat:@"Received: %@", uartString] color:[UIColor orangeColor]];
+        
+        // Find the command for the number that was passed to us
+        if([self commandForBaseCommand:uartString] != nil)
+        {
+            // Find the new state
+            int dataValue = [self parseString:data whichHasLength:dataLength forCharacter:'D'];
+            NSLog(@"received Data:%d", dataValue);
+        }
     }
+}
+
+// function to retrieve command character value
+- (int)parseString:(uint8_t *)string whichHasLength:(int)length forCharacter:(char)character
+{
+    int value = -1;
+    uint8_t *ptr = string;
+	
+	while(ptr && *ptr && ptr < string + length)
+    {
+        if(*ptr == character)
+        {
+            return atoi((const char *)ptr + 1);
+        }
+        
+		ptr = (uint8_t *)strchr((const char *)ptr, ' ') + 1;
+    }
+    
+    return value;
+}
+
+- (NSDictionary *)commandForBaseCommand:(NSString *)baseCommand
+{
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"baseCommand CONTAINS[cd] %@", baseCommand];
+    
+    NSArray *filteredCommands = [self.commandDictionariesArray filteredArrayUsingPredicate:filter];
+    
+    if([filteredCommands count] > 0)
+    {
+        return filteredCommands[0];
+    }
+    
+    return nil;
 }
 
 #pragma mark - General BLE Methods

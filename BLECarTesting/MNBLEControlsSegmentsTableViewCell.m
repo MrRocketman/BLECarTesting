@@ -40,7 +40,7 @@
     //[[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:@"C101 S2"];
     
     // String format: C01 S2
-    [[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:[NSString stringWithFormat:@"%@ %@%d", [self.commandDictionary objectForKey:@"baseCommand"], [self.commandDictionary objectForKey:@"stateCommand"], (int)[sender selectedSegmentIndex]]];
+    [[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:[NSString stringWithFormat:@"%@ %@%d", [self.commandDictionary objectForKey:@"baseCommand"], [self.commandDictionary objectForKey:@"stateCharacter"], (int)[sender selectedSegmentIndex]]];
 }
 
 - (IBAction)segmentedControl2ValueChanged:(id)sender

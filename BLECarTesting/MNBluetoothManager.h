@@ -10,15 +10,15 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 // A Command is an NSDictionary like this:
-/*NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              @"C154", @"baseCommand",
-                              @2, @"numberOfStates",
-                              @[@"Off", @"On"], @"stateLabels",
-                              @"S", @"stateCommand",
-                              @"F", @"factoryCommand",
-                              @"Under Dash", @"title",
-                              @"Interior Lights", @"category",
-                              nil];*/
+/*NSMutableDictionary *dictionary22 = @{@"baseCommand" : @"C154",
+                               @"numberOfStates" : @2,
+                               @"stateLabels" : @[@"Close", @"Open"],
+                               @"stateCharacter" : @"S",
+                               @"dataCharacter" : @"D",
+                               @"factoryCharacter" : @"F",
+                               @"title" : @"Under Dash",
+                               @"category" : @"Interior Lights",
+                               @"currentState" : @0};*/
 
 // A commandCategory is an NSString. It comes from the 'category' key of the command
 
