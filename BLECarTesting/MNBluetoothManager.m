@@ -643,20 +643,24 @@
         // Write the received text to the 'console'
         [self writeDebugStringToConsole:[NSString stringWithFormat:@"Received: %@", uartString] color:[UIColor orangeColor]];
         
-        // Find the command for the number that was passed to us
-        NSMutableDictionary *command = [self commandForBaseCommand:uartString];
-        if(command != nil)
+        // Only parse valid commands
+        if(data[dataLength - 1] == '\n')
         {
-            // Find the new state
-            int dataValue = [self parseString:data whichHasLength:dataLength forCharacter:[command[@"dataCharacter"] characterAtIndex:0]];
-            NSLog(@"received Data:%d", dataValue);
-            
-            if(dataValue >= 0)
+            // Find the command for the number that was passed to us
+            NSMutableDictionary *command = [self commandForBaseCommand:uartString];
+            if(command != nil)
             {
-                // Set the new state
-                command[@"currentState"] = @(dataValue);
-                // Tell others about it so things like the buttons can update
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"CommandStateChanged" object:nil userInfo:@{@"command": command}];
+                // Find the new state
+                int dataValue = [self parseString:data whichHasLength:dataLength forCharacter:[command[@"dataCharacter"] characterAtIndex:0]];
+                NSLog(@"received Data:%d", dataValue);
+                
+                if(dataValue >= 0)
+                {
+                    // Set the new state
+                    command[@"currentState"] = @(dataValue);
+                    // Tell others about it so things like the buttons can update
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"CommandStateChanged" object:nil userInfo:@{@"command": command}];
+                }
             }
         }
     }
