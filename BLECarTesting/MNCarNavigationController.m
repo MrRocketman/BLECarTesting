@@ -11,6 +11,8 @@
 
 @interface MNCarNavigationController ()
 
+@property(assign, nonatomic) BOOL isUIEnabled;
+
 @end
 
 @implementation MNCarNavigationController
@@ -30,6 +32,7 @@
     // Do any additional setup after loading the view.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(BLEConnectionStatusChange:) name:@"BLEConnectionStatusChange" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UIControlSwtichChange:) name:@"UIControlSwitchChange" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,35 +41,53 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)UIControlSwtichChange:(NSNotification *)aNotification
+{
+    if([aNotification.userInfo[@"isOn"] integerValue])
+    {
+        self.isUIEnabled = YES;
+        
+        [self.visibleViewController.view setUserInteractionEnabled:YES];
+        NSLog(@"UI Enabled");
+    }
+    else
+    {
+        self.isUIEnabled = NO;
+        
+        NSLog(@"UI Disabled");
+    }
+}
+
 - (void)BLEConnectionStatusChange:(NSNotification *)notification
 {
+    BOOL userInterfaceEnabled = NO;
+    
     if([notification.object integerValue] == ConnectionStatusConnected)
     {
         NSLog(@"Conneciton status: Connected");
         [self.navigationBar setBarTintColor:[UIColor whiteColor]]; // greenColor
         
-        [self.visibleViewController.view setUserInteractionEnabled:YES];
+        userInterfaceEnabled = YES;
     }
     else if([notification.object integerValue] == ConnectionStatusConnecting)
     {
         NSLog(@"Conneciton status: Connectiing/Finding Services");
         [self.navigationBar setBarTintColor:[UIColor blueColor]];
-        
-        [self.visibleViewController.view setUserInteractionEnabled:NO];
     }
     else if([notification.object integerValue] == ConnectionStatusScanning)
     {
         NSLog(@"Conneciton status: Scanning");
         [self.navigationBar setBarTintColor:[UIColor redColor]];
-        
-        [self.visibleViewController.view setUserInteractionEnabled:NO];
     }
     else if([notification.object integerValue] == ConnectionStatusDisconnected)
     {
         NSLog(@"Conneciton status: Disconnected");
         [self.navigationBar setBarTintColor:[UIColor redColor]];
-        
-        [self.visibleViewController.view setUserInteractionEnabled:NO];
+    }
+    
+    if(!self.isUIEnabled)
+    {
+        [self.visibleViewController.view setUserInteractionEnabled:userInterfaceEnabled];
     }
 }
 

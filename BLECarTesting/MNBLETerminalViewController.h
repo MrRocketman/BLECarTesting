@@ -14,11 +14,13 @@
 
 - (IBAction)sendButtonPress:(id)sender;
 - (IBAction)clearTextViewButtonPress:(id)sender;
+- (IBAction)controlsSwitchChange:(id)sender;
 
 @property(strong, nonatomic) IBOutlet UIButton *sendButton;
 @property(strong, nonatomic) IBOutlet UITextField *sendTextField;
 @property(strong, nonatomic) IBOutlet UITextView *consoleTextView;
 @property(strong, nonatomic) IBOutlet UIButton *clearTextViewButton;
+@property(strong, nonatomic) IBOutlet UISwitch *UIControlSwitch;
 
 
 @end

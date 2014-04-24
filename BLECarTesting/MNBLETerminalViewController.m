@@ -49,6 +49,11 @@
     self.consoleTextView.attributedText = [[NSAttributedString alloc] initWithString:@"" attributes:nil];
 }
 
+- (IBAction)controlsSwitchChange:(id)sender
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UIControlSwitchChange" object:nil userInfo:@{@"isOn" : @(self.UIControlSwitch.isOn ? 1 : 0)}];
+}
+
 #pragma mark - UITextFieldDelegateMethods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
