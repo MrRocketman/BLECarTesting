@@ -35,7 +35,7 @@
 
 - (void)commandStateChanged:(NSNotification *)notification
 {
-    NSMutableDictionary *command = notification.object[@"command"];
+    NSMutableDictionary *command = notification.userInfo[@"command"];
     
     if(command == self.doorLockCommand)
     {

@@ -679,12 +679,13 @@
         if(data[dataLength - 1] == '\n')
         {
             // Find the command for the number that was passed to us
-            NSMutableDictionary *command = [self commandForBaseCommand:uartString];
+            NSString *baseCommand = [self baseCommandForString:uartString];
+            NSMutableDictionary *command = [self commandForBaseCommand:baseCommand];
             if(command != nil)
             {
                 // Find the new state
-                int commandValue = [self parseString:data whichHasLength:dataLength forCharacter:[command[@"commandCharacter"] characterAtIndex:0]];
-                int dataValue = [self parseString:data whichHasLength:dataLength forCharacter:[command[@"dataCharacter"] characterAtIndex:0]];
+                int commandValue = [self parseString:data whichHasLength:dataLength forCharacter:@"C"];
+                int dataValue = [self parseString:data whichHasLength:dataLength forCharacter:command[@"dataCharacter"]];
                 NSLog(@"received Command:%d Data:%d", commandValue, dataValue);
                 
                 if(dataValue >= 0)
@@ -699,9 +700,51 @@
     }
 }
 
-// function to retrieve command character value
-- (int)parseString:(uint8_t *)string whichHasLength:(int)length forCharacter:(char)character
+- (NSString *)baseCommandForString:(NSString *)string
 {
+    NSArray *commandPieces = [self commandPiecesForString:string];
+    
+    if(commandPieces != nil)
+    {
+        return commandPieces[0];
+    }
+    
+    return nil;
+}
+
+- (NSArray *)commandPiecesForString:(NSString *)string
+{
+    if(string != nil)
+    {
+        // First get rid of \n
+        string = [string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        NSArray *commandPieces = [string componentsSeparatedByString:@" "];
+        
+        // Build an array of commandPieces that actually have something in them
+        NSMutableArray *validCommandPieces = [NSMutableArray new];
+        for(int i = 0; i < commandPieces.count; i ++)
+        {
+            NSString *commandPiece = (NSString *)[commandPieces objectAtIndex:i];
+            if(commandPiece.length > 0)
+            {
+                [validCommandPieces addObject:commandPieces[i]];
+            }
+        }
+        
+        // Return the array if we have any commandPices
+        if(validCommandPieces.count > 0)
+        {
+            return (NSArray *)validCommandPieces;
+        }
+    }
+    
+    return nil;
+}
+
+// function to retrieve command character value
+- (int)parseString:(uint8_t *)string whichHasLength:(int)length forCharacter:(NSString *)characterString
+{
+    char character = [characterString characterAtIndex:0];
     int value = -1;
     uint8_t *ptr = string;
 	
