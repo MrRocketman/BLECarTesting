@@ -13,6 +13,7 @@
 
 @property(strong, nonatomic) NSIndexPath *previouslySelectedIndexPath;
 @property(strong, nonatomic) NSDictionary *turnSignalPatternsCommand;
+@property(strong, nonatomic) NSIndexPath *arduinoPattern;
 
 @end
 
@@ -43,8 +44,8 @@
     // Show the checkmark for the previously selected turn signal pattern
     [self.tableView reloadData];
     NSMutableDictionary *command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Patterns"];
-    NSIndexPath *selectedCellPath = [NSIndexPath indexPathForRow:[[command objectForKey:@"currentState"] integerValue] inSection:0];
-    [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellPath];
+    self.arduinoPattern = [NSIndexPath indexPathForRow:[[command objectForKey:@"currentState"] integerValue] inSection:0];
+    [self tableView:self.tableView didSelectRowAtIndexPath:self.arduinoPattern];
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,6 +89,17 @@
     [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:command withState:(int)indexPath.row];
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    // Auto pop if the user selects a cell
+    if(indexPath != self.arduinoPattern)
+    {
+        double delayInMilliseconds = 250;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        });
+    }
     
 #pragma mark TODO: Segue back to the settings view here
 }
