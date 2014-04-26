@@ -39,6 +39,12 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.turnSignalPatternsCommand = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Patterns"];
+    
+    // Show the checkmark for the previously selected turn signal pattern
+    [self.tableView reloadData];
+    NSMutableDictionary *command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Patterns"];
+    NSIndexPath *selectedCellPath = [NSIndexPath indexPathForRow:[[command objectForKey:@"currentState"] integerValue] inSection:0];
+    [self tableView:self.tableView didSelectRowAtIndexPath:selectedCellPath];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,7 +87,7 @@
     NSMutableDictionary *command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Patterns"];
     [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:command withState:(int)indexPath.row];
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 #pragma mark TODO: Segue back to the settings view here
 }

@@ -144,6 +144,9 @@
         {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TurnSignalPatternsCell" forIndexPath:indexPath];
             
+            NSMutableDictionary *command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Turn Signal Patterns"];
+            cell.detailTextLabel.text = [[command objectForKey:@"stateLabels"] objectAtIndex:[[command objectForKey:@"currentState"] integerValue]];
+            
             return cell;
         }
     }
