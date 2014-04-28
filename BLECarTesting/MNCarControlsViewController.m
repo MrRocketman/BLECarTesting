@@ -31,6 +31,8 @@
     // Do any additional setup after loading the view.
     
     self.trunkButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Trunk"];
+    self.trunkButton.buttonPressedCommandState = 1;
+    self.trunkButton.buttonNormalCommandState = 2;
     self.exhaustButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Exhaust"];
 }
 
