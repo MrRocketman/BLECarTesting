@@ -173,7 +173,7 @@
         dictionary = @{@"baseCommand" : @"C204",
                        @"numberOfStates" : @2,
                        @"stateLabels" : @[@"Off", @"On"],
-                       @"stateCharacter" : @"A",
+                       @"stateCharacter" : @"S",
                        @"dataCharacter" : @"D",
                        @"title" : @"Horn",
                        @"category" : @"Controls",
