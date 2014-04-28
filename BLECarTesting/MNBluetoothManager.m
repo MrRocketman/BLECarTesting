@@ -109,23 +109,23 @@
                        @"category" : @"Controls",
                        @"currentState" : @0};
         mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
-        [tempCommandDictionariesArray addObject:mDictionary];
         dictionary = @{@"baseCommand" : @"C53",
-                       @"numberOfStates" : @3,
-                       @"stateLabels" : @[@"Stop", @"Up", @"Down"],
-                       @"stateCharacter" : @"S",
-                       @"dataCharacter" : @"D",
-                       @"title" : @"Left Window Move",
-                       @"category" : @"Controls",
-                       @"currentState" : @0};
-        mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
-        [tempCommandDictionariesArray addObject:mDictionary];
-        dictionary = @{@"baseCommand" : @"C54",
                        @"numberOfStates" : @3,
                        @"stateLabels" : @[@"Stop", @"Top", @"Bottom"],
                        @"stateCharacter" : @"S",
                        @"dataCharacter" : @"D",
                        @"title" : @"Right Window",
+                       @"category" : @"Controls",
+                       @"currentState" : @0};
+        mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
+        [tempCommandDictionariesArray addObject:mDictionary];
+        [tempCommandDictionariesArray addObject:mDictionary];
+        dictionary = @{@"baseCommand" : @"C54",
+                       @"numberOfStates" : @3,
+                       @"stateLabels" : @[@"Stop", @"Up", @"Down"],
+                       @"stateCharacter" : @"S",
+                       @"dataCharacter" : @"D",
+                       @"title" : @"Left Window Move",
                        @"category" : @"Controls",
                        @"currentState" : @0};
         mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
