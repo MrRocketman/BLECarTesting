@@ -47,16 +47,14 @@
 
 - (IBAction)segmentedControlValueChanged:(id)sender
 {
-    //[[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:@"C101 S2"];
-    
     // String format: C01 S2
-    [[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:[NSString stringWithFormat:@"%@ %@%d", [self.commandDictionary objectForKey:@"baseCommand"], [self.commandDictionary objectForKey:@"stateCharacter"], (int)[sender selectedSegmentIndex]]];
+    [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.commandDictionary withState:(int)[sender selectedSegmentIndex]];
 }
 
 - (IBAction)segmentedControl2ValueChanged:(id)sender
 {
     // String format: C01 F1
-    [[MNBluetoothManager sharedBluetoothManager] writeStringToArduino:[NSString stringWithFormat:@"%@ F%d", [self.commandDictionary objectForKey:@"baseCommand"], (int)[sender selectedSegmentIndex]]];
+    [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.commandDictionary withFactoryState:(int)[sender selectedSegmentIndex]];
 }
 
 #pragma mark - Public Methods
@@ -85,6 +83,16 @@
     {
         self.textLabel.text = self.commandDictionary[@"title"];
         self.detailTextLabel.text = [NSString stringWithFormat:@"%4ld", [self.commandDictionary[@"currentState"] longValue]];
+    }
+    
+    // Disable interaction for switches
+    if(self.commandDictionary[@"stateCharacter"] == nil)
+    {
+        [self.segmentedControl setEnabled:NO];
+    }
+    else
+    {
+        [self.segmentedControl setEnabled:YES];
     }
 }
 
