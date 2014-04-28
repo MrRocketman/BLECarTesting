@@ -42,6 +42,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)UIControlSwtichChange:(NSNotification *)aNotification
 {
     if([aNotification.userInfo[@"isOn"] integerValue])

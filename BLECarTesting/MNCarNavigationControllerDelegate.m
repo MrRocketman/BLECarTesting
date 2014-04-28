@@ -33,6 +33,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)commandStateChanged:(NSNotification *)notification
 {
     NSMutableDictionary *command = notification.userInfo[@"command"];

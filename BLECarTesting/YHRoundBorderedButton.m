@@ -38,6 +38,38 @@
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)setup
+{
+    self.buttonPressedCommandState = 1;
+    self.buttonNormalCommandState = 0;
+    
+    self.shouldSendCommand = YES;
+    
+    [self setTitleColor:[self tintColor] forState:UIControlStateNormal];
+    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [self setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    //[self.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
+    self.isCircleButton = NO;
+    self.borderWidth = 1.0;
+    [self refreshBorderColor];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
+}
+
 - (void)setBorderWidth:(float)borderWidth
 {
     _borderWidth = borderWidth;
@@ -57,15 +89,6 @@
     {
         self.layer.cornerRadius = 3.5;
     }
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setup];
-    }
-    return self;
 }
 
 - (void)setCommand:(NSMutableDictionary *)command
@@ -90,24 +113,6 @@
     {
         self.command = notification.userInfo[@"command"];
     }
-}
-
-- (void)setup
-{
-    self.buttonPressedCommandState = 1;
-    self.buttonNormalCommandState = 0;
-
-    self.shouldSendCommand = YES;
-    
-    [self setTitleColor:[self tintColor] forState:UIControlStateNormal];
-    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-    [self setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-    //[self.titleLabel setFont:[UIFont boldSystemFontOfSize:13]];
-    self.isCircleButton = NO;
-    self.borderWidth = 1.0;
-    [self refreshBorderColor];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
 }
 
 - (void)setTintColor:(UIColor *)tintColor

@@ -17,7 +17,6 @@
     if (self)
     {
         // Initialization code
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
     }
     return self;
 }
@@ -26,6 +25,11 @@
 {
     // Initialization code
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)commandStateChanged:(NSNotification *)notification

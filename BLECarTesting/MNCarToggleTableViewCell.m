@@ -17,7 +17,6 @@
     if (self) {
         // Initialization code
         self.shouldSendFactoryCommand = YES;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
     }
     return self;
 }
@@ -28,6 +27,11 @@
     
     self.shouldSendFactoryCommand = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
