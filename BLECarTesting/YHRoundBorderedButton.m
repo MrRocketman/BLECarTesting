@@ -73,7 +73,7 @@
     _command = command;
     
     self.shouldSendCommand = NO;
-    if([self.command[@"currentState"] integerValue])
+    if([self.command[@"currentState"] integerValue] == self.buttonPressedCommandState)
     {
         [self buttonPressed:YES];
     }
@@ -182,13 +182,17 @@
             self.layer.backgroundColor = highlighted ? [[self tintColor] CGColor] : [[UIColor clearColor] CGColor];
             
             // send BLE command
-            if(self.buttonNormalCommandState != -999 && !highlighted && self.shouldSendCommand)
+            if(self.buttonNormalCommandState != -999 && self.touchBegan && self.shouldSendCommand)
             {
                 [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonNormalCommandState];
+                self.touchBegan = NO;
+                self.touchEnded = NO;
             }
-            if(self.buttonPressedCommandState != -999 && highlighted && self.shouldSendCommand)
+            if(self.buttonPressedCommandState != -999 && self.touchEnded && self.shouldSendCommand)
             {
                 [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:self.buttonPressedCommandState];
+                self.touchBegan = NO;
+                self.touchEnded = NO;
             }
         }
     }];
@@ -206,11 +210,11 @@
 {
     [super touchesBegan:touches withEvent:event];
     
+    self.touchBegan = YES;
+    self.touchEnded = NO;
     if(self.isToggleButton)
     {
         self.isOn = !self.isOn;
-        self.touchBegan = YES;
-        self.touchEnded = NO;
         self.highlighted = self.isOn;
     }
 }
@@ -219,10 +223,10 @@
 {
     [super touchesEnded:touches withEvent:event];
     
+    self.touchBegan = NO;
+    self.touchEnded = YES;
     if(self.isToggleButton)
     {
-        self.touchBegan = NO;
-        self.touchEnded = YES;
         self.highlighted = self.isOn;
     }
 }
