@@ -53,17 +53,16 @@
 - (void)setSingleWindowCommands
 {
     self.leftTopButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Left Window"];
-    self.leftTopButton.buttonPressedCommandState = 0;
     self.leftTopButton.buttonNormalCommandState = -999;
     self.leftUpButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Left Window Move"];
     self.leftDownButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Left Window Move"];
     self.leftDownButton.buttonPressedCommandState = 2;
     self.leftBottomButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Left Window"];
-    self.leftBottomButton.buttonPressedCommandState = 1;
+    self.leftBottomButton.buttonPressedCommandState = 2;
     self.leftBottomButton.buttonNormalCommandState = -999;
     
     // Move the buttons apart
-    [UIView animateWithDuration:0.50 animations:^{
+    [UIView animateWithDuration:0.25 animations:^{
         self.leftLabel.alpha = 1.0;
         self.rightLabel.alpha = 1.0;
         
@@ -76,14 +75,17 @@
         self.rightDownButton.enabled = YES;
         self.rightBottomButton.enabled = YES;
         
+        // Move the right label
         CGPoint newCenterPoint = self.rightLabel.center;
         newCenterPoint.x = originalRightLabelCenterX;
         self.rightLabel.center = newCenterPoint;
         
+        // Move the left label
         newCenterPoint = self.leftLabel.center;
         newCenterPoint.x = originalLeftLabelCenterX;
         self.leftLabel.center = newCenterPoint;
         
+        // Move the right buttons
         newCenterPoint = self.rightTopButton.center;
         newCenterPoint.x = originalRightButtonsCenterX;
         self.rightTopButton.center = newCenterPoint;
@@ -97,6 +99,7 @@
         newCenterPoint.x = originalRightButtonsCenterX;
         self.rightBottomButton.center = newCenterPoint;
         
+        // Move the left buttons
         newCenterPoint = self.leftTopButton.center;
         newCenterPoint.x = originalLeftButtonsCenterX;
         self.leftTopButton.center = newCenterPoint;
@@ -112,26 +115,24 @@
     }];
     
     self.rightTopButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Right Window"];
-    self.rightTopButton.buttonPressedCommandState = 0;
     self.rightTopButton.buttonNormalCommandState = -999;
     self.rightUpButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Right Window Move"];
     self.rightDownButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Right Window Move"];
     self.rightDownButton.buttonPressedCommandState = 2;
     self.rightBottomButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Right Window"];
-    self.rightBottomButton.buttonPressedCommandState = 1;
+    self.rightBottomButton.buttonPressedCommandState = 2;
     self.rightBottomButton.buttonNormalCommandState = -999;
 }
 
 - (void)setBothWindowsCommands
 {
     self.leftTopButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Both Windows"];
-    self.leftTopButton.buttonPressedCommandState = 0;
     self.leftTopButton.buttonNormalCommandState = -999;
     self.leftUpButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Both Windows Move"];
     self.leftDownButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Both Windows Move"];
     self.leftDownButton.buttonPressedCommandState = 2;
     self.leftBottomButton.command = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Both Windows"];
-    self.leftBottomButton.buttonPressedCommandState = 1;
+    self.leftBottomButton.buttonPressedCommandState = 2;
     self.leftBottomButton.buttonNormalCommandState = -999;
     
     // Move the buttons together
@@ -148,14 +149,17 @@
         self.rightDownButton.enabled = NO;
         self.rightBottomButton.enabled = NO;
         
+        // Move the right label
         CGPoint newCenterPoint = self.rightLabel.center;
         newCenterPoint.x = self.bothButton.center.x;
         self.rightLabel.center = newCenterPoint;
         
+        // Move the left label
         newCenterPoint = self.leftLabel.center;
         newCenterPoint.x = self.bothButton.center.x;
         self.leftLabel.center = newCenterPoint;
         
+        // Move the right buttons
         newCenterPoint = self.rightTopButton.center;
         newCenterPoint.x = self.bothButton.center.x;
         self.rightTopButton.center = newCenterPoint;
@@ -169,6 +173,7 @@
         newCenterPoint.x = self.bothButton.center.x;
         self.rightBottomButton.center = newCenterPoint;
         
+        // Move the left buttons
         newCenterPoint = self.leftTopButton.center;
         newCenterPoint.x = self.bothButton.center.x;
         self.leftTopButton.center = newCenterPoint;
