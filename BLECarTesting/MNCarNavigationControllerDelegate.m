@@ -25,9 +25,9 @@
     {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commandStateChanged:) name:@"CommandStateChanged" object:nil];
         
-        self.doorLockCommand = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Locks"];
-        
         self.doorLockStatusItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Locked"] style:UIBarButtonItemStyleBordered target:nil action:nil];
+        
+        self.doorLockCommand = [[MNBluetoothManager sharedBluetoothManager] commandForCommandTitle:@"Locks"];
     }
     
     return self;
@@ -52,7 +52,7 @@
 {
     _doorLockCommand = doorLockCommand;
     
-    if(doorLockCommand[@"currentState"])
+    if([doorLockCommand[@"currentState"] integerValue])
     {
         self.doorLockStatusItem.image = [UIImage imageNamed:@"Unlocked"];
     }
