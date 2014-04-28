@@ -170,6 +170,16 @@
                                        @"currentState" : @0};
         mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
         [tempCommandDictionariesArray addObject:mDictionary];
+        dictionary = @{@"baseCommand" : @"C204",
+                       @"numberOfStates" : @2,
+                       @"stateLabels" : @[@"Off", @"On"],
+                       @"stateCharacter" : @"A",
+                       @"dataCharacter" : @"D",
+                       @"title" : @"Horn",
+                       @"category" : @"Controls",
+                       @"currentState" : @0};
+        mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
+        [tempCommandDictionariesArray addObject:mDictionary];
         
         // Exterior Lights
         dictionary = @{@"baseCommand" : @"C100",
@@ -327,16 +337,6 @@
                                        @"stateCharacter" : @"A",
                                        @"dataCharacter" : @"D",
                                        @"title" : @"Automatic Lighting",
-                                       @"category" : @"Miscellaneous",
-                                       @"currentState" : @0};
-        mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
-        [tempCommandDictionariesArray addObject:mDictionary];
-        dictionary = @{@"baseCommand" : @"C204",
-                                       @"numberOfStates" : @2,
-                                       @"stateLabels" : @[@"Off", @"On"],
-                                       @"stateCharacter" : @"A",
-                                       @"dataCharacter" : @"D",
-                                       @"title" : @"Horn",
                                        @"category" : @"Miscellaneous",
                                        @"currentState" : @0};
         mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
