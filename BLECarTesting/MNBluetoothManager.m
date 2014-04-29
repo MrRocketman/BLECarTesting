@@ -357,21 +357,21 @@
                        @"currentState" : @0};
         mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
         [tempCommandDictionariesArray addObject:mDictionary];
-        dictionary = @{@"baseCommand" : @"C300",
+        dictionary = @{@"baseCommand" : @"C302",
                        @"dataCharacter" : @"D",
                        @"title" : @"Right Window Amps",
                        @"category" : @"Sensors",
                        @"currentState" : @0};
         mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
         [tempCommandDictionariesArray addObject:mDictionary];
-        dictionary = @{@"baseCommand" : @"C300",
+        dictionary = @{@"baseCommand" : @"C303",
                        @"dataCharacter" : @"D",
                        @"title" : @"Alternator Amps",
                        @"category" : @"Sensors",
                        @"currentState" : @0};
         mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
         [tempCommandDictionariesArray addObject:mDictionary];
-        dictionary = @{@"baseCommand" : @"C300",
+        dictionary = @{@"baseCommand" : @"C304",
                        @"dataCharacter" : @"D",
                        @"title" : @"Light Sensor",
                        @"category" : @"Sensors",
