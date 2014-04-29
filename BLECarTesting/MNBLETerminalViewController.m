@@ -19,6 +19,11 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self scrollToBottomAnimated:NO];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -27,12 +32,16 @@
 
 #pragma mark - Private Methods
 
-- (void)scrollToBottom
+- (void)scrollToBottomAnimated:(BOOL)animated
 {
     // Scroll to the bottom
-    CGPoint p = [self.consoleTextView contentOffset];
-    [self.consoleTextView setContentOffset:p animated:NO];
-    [self.consoleTextView scrollRangeToVisible:NSMakeRange([self.consoleTextView.text length], 0)];
+    if(self.consoleTextView.text.length > 0 )
+    {
+        [self.consoleTextView scrollRangeToVisible:NSMakeRange(self.consoleTextView.text.length, 0)];
+        // This is a hack for iOS 7
+        [self.consoleTextView setScrollEnabled:NO];
+        [self.consoleTextView setScrollEnabled:YES];
+    }
 }
 
 #pragma mark - Button Actions
@@ -84,7 +93,7 @@
     self.consoleTextView.attributedText = newASCIIText;
     
     // Scroll the textView
-    [self scrollToBottom];
+    [self scrollToBottomAnimated:YES];
 }
 
 @end
