@@ -20,7 +20,7 @@
 @property(strong, nonatomic) IBOutlet UITextField *sendTextField;
 @property(strong, nonatomic) IBOutlet UITextView *consoleTextView;
 @property(strong, nonatomic) IBOutlet UIButton *clearTextViewButton;
-@property(strong, nonatomic) IBOutlet UISwitch *UIControlSwitch;
+@property(strong, nonatomic) IBOutlet UISwitch *controlsSwitch;
 
 
 @end

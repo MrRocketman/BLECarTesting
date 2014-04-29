@@ -60,7 +60,7 @@
 
 - (IBAction)controlsSwitchChange:(id)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"UIControlSwitchChange" object:nil userInfo:@{@"isOn" : @(self.UIControlSwitch.isOn ? 1 : 0)}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UIControlSwitchChange" object:nil userInfo:@{@"isOn" : @(self.controlsSwitch.isOn ? 1 : 0)}];
 }
 
 #pragma mark - UITextFieldDelegateMethods
