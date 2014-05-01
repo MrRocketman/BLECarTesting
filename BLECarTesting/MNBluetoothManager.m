@@ -7,6 +7,7 @@
 //
 
 #import "MNBluetoothManager.h"
+#import "MNBLETerminalViewController.h"
 #import "NSString+hex.h"
 #import "NSData+hex.h"
 #import "CBUUID+StringExtraction.h"
@@ -1178,8 +1179,8 @@
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
                            {
-                               self.rssiTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self.bluetoothPeripheral selector:@selector(readRSSI) userInfo:nil repeats:YES];
-                               self.rssiTimer.tolerance = 0.025;
+                               self.rssiTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self.bluetoothPeripheral selector:@selector(readRSSI) userInfo:nil repeats:YES];
+                               self.rssiTimer.tolerance = 0.1;
                            });
         }
     }
@@ -1200,7 +1201,8 @@
     {
         // Access the RSSI
         self.currentRSSI = self.bluetoothPeripheral.RSSI;
-        [self writeDebugStringToConsole:[NSString stringWithFormat:@"RSSI:%@", self.currentRSSI]];
+        //[self writeDebugStringToConsole:[NSString stringWithFormat:@"RSSI:%@", self.currentRSSI]];
+        [[(MNBLETerminalViewController *)(self.consoleDelegate) rssiLabel] setText:[NSString stringWithFormat:@"RSSI:%@", self.currentRSSI]];
     }
 }
 

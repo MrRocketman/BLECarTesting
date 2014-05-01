@@ -52,7 +52,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Controls" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57r-Qd-0v5">
-                                        <rect key="frame" x="20" y="14" width="75" height="21"/>
+                                        <rect key="frame" x="168" y="14" width="75" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="S4C-HN-z2z"/>
@@ -67,13 +67,22 @@
                                             <action selector="controlsSwitchChange:" destination="ZvS-sB-wRn" eventType="valueChanged" id="Mwe-1F-53I"/>
                                         </connections>
                                     </switch>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RSSI: -72" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ox-Ye-QPE">
+                                        <rect key="frame" x="20" y="14" width="85" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="LdD-Sn-01X" secondAttribute="trailing" constant="20" symbolic="YES" id="BbG-L8-S3i"/>
                                     <constraint firstAttribute="bottom" secondItem="LdD-Sn-01X" secondAttribute="bottom" constant="10" id="Cdm-qK-ZIq"/>
+                                    <constraint firstItem="57r-Qd-0v5" firstAttribute="leading" secondItem="5Ox-Ye-QPE" secondAttribute="trailing" constant="63" id="Dap-Ut-b9l"/>
                                     <constraint firstItem="LdD-Sn-01X" firstAttribute="centerY" secondItem="57r-Qd-0v5" secondAttribute="centerY" id="LDI-kW-vQL"/>
-                                    <constraint firstItem="57r-Qd-0v5" firstAttribute="leading" secondItem="JVl-Tv-B4G" secondAttribute="leading" constant="20" symbolic="YES" id="WV0-f3-ugp"/>
+                                    <constraint firstItem="5Ox-Ye-QPE" firstAttribute="baseline" secondItem="57r-Qd-0v5" secondAttribute="baseline" id="Moi-9j-YRw"/>
+                                    <constraint firstItem="5Ox-Ye-QPE" firstAttribute="leading" secondItem="JVl-Tv-B4G" secondAttribute="leading" constant="20" symbolic="YES" id="UAh-FW-nzq"/>
+                                    <constraint firstItem="57r-Qd-0v5" firstAttribute="leading" secondItem="JVl-Tv-B4G" secondAttribute="leading" constant="168" id="WV0-f3-ugp"/>
                                     <constraint firstItem="LdD-Sn-01X" firstAttribute="top" secondItem="JVl-Tv-B4G" secondAttribute="top" constant="9" id="ivg-aV-3w7"/>
                                 </constraints>
                             </view>
@@ -152,6 +161,7 @@
                         <outlet property="clearTextViewButton" destination="Q6U-x8-ivo" id="SMl-6h-VIB"/>
                         <outlet property="consoleTextView" destination="cus-Gw-Dfj" id="Uer-iH-hQz"/>
                         <outlet property="controlsSwitch" destination="LdD-Sn-01X" id="HbO-nf-kCh"/>
+                        <outlet property="rssiLabel" destination="5Ox-Ye-QPE" id="PaU-mW-tkt"/>
                         <outlet property="sendButton" destination="OkA-GL-wWU" id="JdD-hK-man"/>
                         <outlet property="sendTextField" destination="6XZ-fB-7ba" id="799-hM-0BO"/>
                     </connections>

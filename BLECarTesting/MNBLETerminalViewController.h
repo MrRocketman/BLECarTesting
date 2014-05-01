@@ -21,6 +21,7 @@
 @property(strong, nonatomic) IBOutlet UITextView *consoleTextView;
 @property(strong, nonatomic) IBOutlet UIButton *clearTextViewButton;
 @property(strong, nonatomic) IBOutlet UISwitch *controlsSwitch;
+@property(strong, nonatomic) IBOutlet UILabel *rssiLabel;
 
 
 @end
