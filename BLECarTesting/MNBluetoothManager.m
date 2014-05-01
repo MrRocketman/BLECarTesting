@@ -242,6 +242,16 @@
                        @"currentState" : @0};
         mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
         [tempCommandDictionariesArray addObject:mDictionary];
+        dictionary = @{@"baseCommand" : @"C107",
+                       @"numberOfStates" : @3,
+                       @"stateLabels" : @[@"Off", @"Right", @"Left"],
+                       @"stateCharacter" : @"S",
+                       @"dataCharacter" : @"D",
+                       @"title" : @"Turn Signals",
+                       @"category" : @"Exterior Lights",
+                       @"currentState" : @0};
+        mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
+        [tempCommandDictionariesArray addObject:mDictionary];
         
         // Interior Lights
         dictionary = @{@"baseCommand" : @"C150",
@@ -385,15 +395,6 @@
         [tempCommandDictionariesArray addObject:mDictionary];
         
         // Switches
-        dictionary = @{@"baseCommand" : @"C107",
-                       @"numberOfStates" : @3,
-                       @"stateLabels" : @[@"Off", @"Right", @"Left"],
-                       @"dataCharacter" : @"D",
-                       @"title" : @"Turn Signals",
-                       @"category" : @"Switches",
-                       @"currentState" : @0};
-        mDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary];
-        [tempCommandDictionariesArray addObject:mDictionary];
         dictionary = @{@"baseCommand" : @"C205",
                        @"dataCharacter" : @"D",
                        @"numberOfStates" : @4,
