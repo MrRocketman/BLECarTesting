@@ -43,10 +43,12 @@
 
 - (IBAction)toggleSwitchChange:(id)sender
 {
+    // If we are a factory switch, send a factory command
     if(self.command[@"factoryCharacter"] != nil && self.shouldSendFactoryCommand)
     {
         [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withFactoryState:(self.toggleSwitch.isOn ? 1 : 0)];
     }
+    // Else send a normal command
     else
     {
         [[MNBluetoothManager sharedBluetoothManager] writeCommandToArduino:self.command withState:(self.toggleSwitch.isOn ? 1 : 0)];
@@ -65,13 +67,29 @@
 {
     _command = command;
     
-    if([self.command[@"currentState"] integerValue])
+    // If we aren't a factory switch, update the state
+    if(self.command[@"factoryCharacter"] == nil)
     {
-        [self.toggleSwitch setOn:YES animated:YES];
+        if([self.command[@"currentState"] integerValue])
+        {
+            [self.toggleSwitch setOn:YES animated:YES];
+        }
+        else
+        {
+            [self.toggleSwitch setOn:NO animated:YES];
+        }
     }
+    // Else update the state with the factoryState
     else
     {
-        [self.toggleSwitch setOn:NO animated:YES];
+        if([self.command[@"factoryState"] integerValue])
+        {
+            [self.toggleSwitch setOn:YES animated:YES];
+        }
+        else
+        {
+            [self.toggleSwitch setOn:NO animated:YES];
+        }
     }
     
     // Update the label

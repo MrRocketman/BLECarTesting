@@ -250,6 +250,7 @@
                        @"stateCharacter" : @"S",
                        @"dataCharacter" : @"D",
                        @"factoryCharacter" : @"F",
+                       @"factoryState" : @0,
                        @"title" : @"Left Pillar",
                        @"category" : @"Interior Lights",
                        @"currentState" : @0};
@@ -261,6 +262,7 @@
                        @"stateCharacter" : @"S",
                        @"dataCharacter" : @"D",
                        @"factoryCharacter" : @"F",
+                       @"factoryState" : @0,
                        @"title" : @"Right Pillar",
                        @"category" : @"Interior Lights",
                        @"currentState" : @0};
@@ -272,6 +274,7 @@
                        @"stateCharacter" : @"S",
                        @"dataCharacter" : @"D",
                        @"factoryCharacter" : @"F",
+                       @"factoryState" : @0,
                        @"title" : @"Center Console",
                        @"category" : @"Interior Lights",
                        @"currentState" : @0};
@@ -283,6 +286,7 @@
                        @"stateCharacter" : @"S",
                        @"dataCharacter" : @"D",
                        @"factoryCharacter" : @"F",
+                       @"factoryState" : @0,
                        @"title" : @"Dome",
                        @"category" : @"Interior Lights",
                        @"currentState" : @0};
@@ -294,6 +298,7 @@
                        @"stateCharacter" : @"S",
                        @"dataCharacter" : @"D",
                        @"factoryCharacter" : @"F",
+                       @"factoryState" : @0,
                        @"title" : @"Under Dash",
                        @"category" : @"Interior Lights",
                        @"currentState" : @0};
@@ -595,6 +600,7 @@
 
 - (void)writeCommandToArduino:(NSMutableDictionary *)command withFactoryState:(int)factory
 {
+    command[@"factoryState"] = @(factory);
     [self writeCommandToArduino:command withState:-1 andFactoryState:factory];
 }
 
