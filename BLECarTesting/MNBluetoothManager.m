@@ -35,6 +35,9 @@
 
 @property(assign, nonatomic) BOOL isRestoringFromBackground;
 
+@property(strong, nonatomic) NSTimer *rssiTimer;
+@property(strong, nonatomic) NSNumber *currentRSSI;
+
 @end
 
 
@@ -1166,6 +1169,14 @@
             
             // Send the 'password' to verify
             [self writeStringToArduino:@"P123"];
+            
+            // Start updating the rssi after a 1 second delay. Update every 0.25 seconds
+            double delayInMilliseconds = 1000;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+                           {
+                               self.rssiTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self.bluetoothPeripheral selector:@selector(readRSSI) userInfo:nil repeats:YES];
+                           });
         }
     }
     else
@@ -1177,11 +1188,16 @@
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    // Call this method to update RSSI and to get into peripheralDidUpdateRSSI: error:
-    //[self.bluetoothPeripheral readRSSI];
-    
-    // Access the RSSI
-    //self.bluetoothPeripheral.RSSI
+    if(error)
+    {
+        [self writeDebugStringToConsole:[NSString stringWithFormat:@"RSSI Error:%@", error]];
+    }
+    else
+    {
+        // Access the RSSI
+        self.currentRSSI = self.bluetoothPeripheral.RSSI;
+        [self writeDebugStringToConsole:[NSString stringWithFormat:@"RSSI:%@", self.currentRSSI]];
+    }
 }
 
 #pragma mark - Private Methods
