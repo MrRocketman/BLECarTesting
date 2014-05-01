@@ -248,7 +248,6 @@
         dictionary = @{@"baseCommand" : @"C107",
                        @"numberOfStates" : @3,
                        @"stateLabels" : @[@"Off", @"Right", @"Left"],
-                       @"stateCharacter" : @"S",
                        @"dataCharacter" : @"D",
                        @"title" : @"Turn Signals",
                        @"category" : @"Exterior Lights",
@@ -1175,7 +1174,7 @@
             [self writeStringToArduino:@"P123"];
             
             // Start updating the rssi after a 1 second delay. Update every 0.25 seconds
-            double delayInMilliseconds = 1000;
+            double delayInMilliseconds = 1500;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInMilliseconds * NSEC_PER_MSEC);
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
                            {
@@ -1195,7 +1194,7 @@
 {
     if(error)
     {
-        [self writeDebugStringToConsole:[NSString stringWithFormat:@"RSSI Error:%@", error]];
+        //[self writeDebugStringToConsole:[NSString stringWithFormat:@"RSSI Error:%@", error]];
     }
     else
     {
