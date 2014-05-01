@@ -1051,6 +1051,10 @@
         
         self.connectionStatus = ConnectionStatusDisconnected;
         
+        // Remove the rssi timer
+        [self.rssiTimer invalidate];
+        self.rssiTimer = nil;
+        
         // We want to be connected, try reconnecting
         [self.centralBluetoothManager connectPeripheral:self.bluetoothPeripheral options:nil];
     }
@@ -1176,6 +1180,7 @@
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
                            {
                                self.rssiTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self.bluetoothPeripheral selector:@selector(readRSSI) userInfo:nil repeats:YES];
+                               self.rssiTimer.tolerance = 0.025;
                            });
         }
     }
