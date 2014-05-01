@@ -68,7 +68,7 @@
     _command = command;
     
     // If we aren't a factory switch, update the state
-    if(self.command[@"factoryCharacter"] == nil)
+    if(!self.shouldSendFactoryCommand)
     {
         if([self.command[@"currentState"] integerValue])
         {

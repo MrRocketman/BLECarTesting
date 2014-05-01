@@ -70,9 +70,10 @@
 {
     NSString *category = [self.lightCategories objectAtIndex:indexPath.section];
     NSMutableDictionary *commandForCell = [[MNBluetoothManager sharedBluetoothManager] commandForCategory:category atIndex:(int)indexPath.row];
+    NSString *commandTitle = commandForCell[@"title"];
     
     // Headlights needs a special cell
-    if([[commandForCell objectForKey:@"title"] isEqualToString:@"Headlights"])
+    if([commandTitle isEqualToString:@"Headlights"] || [commandTitle isEqualToString:@"Turn Signals"])
     {
         MNCarSegmentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"segmentsCell" forIndexPath:indexPath];
         
